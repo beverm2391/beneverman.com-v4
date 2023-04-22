@@ -93,7 +93,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     >
       <head />
 
-      <body className="min-h-screen bg-white dark:bg-void text-black dark:text-white motion-reduce:transform-none motion-reduce:transition-none">
+      <body className="min-h-screen bg-white dark:bg-neutral-900 text-black dark:text-white motion-reduce:transform-none motion-reduce:transition-none">
         <Providers>
           {children}
           <Analytics />

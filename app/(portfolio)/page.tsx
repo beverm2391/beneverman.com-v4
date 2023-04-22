@@ -15,6 +15,7 @@ import ExternalLink from "@/components/ExternalLink"
 import { Badge } from "@/components/badge"
 import { cn } from "@/lib/utils"
 import GradientText from "@/components/gradienttext"
+import { Indicator } from "@/components/portfolio/indicator"
 
 const content = [
   {
@@ -40,26 +41,29 @@ const content = [
   },
 ]
 
-const quotes = [
-  "Where does the drunk look for his keys? The streetlight, because that's where the light is.",
-  "Man, my code failed all the unit tests... guess I need to delete them.",
-  "I'd rather have a bottle in front of me than a frontal lobotomy.",
-]
-
 export default async function IndexPage() {
   return (
     <>
       <section className="container max-w-2xl flex flex-col gap-6 pt-6 pb-8 md:pt-10 md:pb-12 lg:pt-12 lg:pb-24">
         <div className='flex flex-col gap-8'>
-          <div className='flex flex-row items-center gap-6 p-4 border-[1px] border-slate-200 dark:border-gray-700 dark:ring-1 ring-gray-500 shadow-sm rounded-xl'>
+          <div className='flex flex-row items-center gap-6 p-0 border-[0px] border-slate-200 dark:border-gray-700 ring-gray-500 rounded-xl'>
             <HoverCard openDelay={200}>
               <HoverCardTrigger>
-                <div className='rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-[2px] hover:scale-[1.05]'>
+                {/* <div className='rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-[2px] hover:scale-[1.05]'>
                   <Image src={avatar} alt="Ben Everman" width={50} height={50}
                     className={cn(
                       'rounded-full',
                       // 'border-[2px] ring-[1px] border-blue-500 ring-blue-300',
-                      'border-[2px] border-white dark:border-black'
+                      'border-[0px] border-white dark:border-black'
+                    )}
+                  />
+                </div> */}
+                <div className='rounded-full hover:ring-2 ring-blue-500/50 transition-all'>
+                  <Image src={avatar} alt="Ben Everman" width={50} height={50}
+                    className={cn(
+                      'rounded-full',
+                      // 'border-[2px] ring-[1px] border-blue-500 ring-blue-300',
+                      'border-[0px] border-white dark:border-black'
                     )}
                   />
                 </div>
@@ -88,22 +92,28 @@ export default async function IndexPage() {
           <div>
             <p className=''>
               Hey, I'm Ben. I'm a on a mission to build technology that{' '}
-              <GradientText
-                gradient={1}
-                className='font-semibold dark:from-amber-500 dark:via-amber-400 dark:to-amber-500 text-gray-900 dark:text-transparent'
+              <span
+                className='font-semibold dark:text-gray-100 dark:underline underline-offset-2 text-gray-900'
               >
                 improves the lives of others
-              </GradientText>
+              </span>
               . I'm currently finishing up my MBA at Kennesaw State University. I'm also a full-stack developer with a focus on applied ML.
             </p>
+            <div className='flex flex-row gap-4 mt-6'>
+              <Indicator status='active'>
+                Available for Consulting
+              </Indicator>
+              <Indicator status='active'>
+                Open to Job Offers
+              </Indicator>
+            </div>
           </div>
           {/* <div className='flex flex-row justify-evenly gap-4 items-center text-center'>
-            <hr className='w-full border-slate-200 dark:border-gray-700 dark:ring-1 ring-gray-500 shadow-sm rounded-xl' />
-            <p className='text-sm italic'>showcase</p>
-            <hr className='w-full border-slate-200 dark:border-gray-700 dark:ring-1 ring-gray-500 shadow-sm rounded-xl' />
+            <hr className='w-full border-slate-200 dark:border-gray-700 border-1 rounded-xl' />
           </div> */}
           <div className='flex flex-col gap-6 my-4'>
             {content.map((item, i) => (
+              i < 2 &&
               <div key={i} className={cn(
                 'flex flex-col mb-0',
                 i % 2 === 0 && '',
@@ -146,7 +156,7 @@ export default async function IndexPage() {
                     </span>
                   </Link>
                 </div>
-                {i !== content.length - 1 && (
+                {i !== content.length - 2 && (
                   <hr className='w-full mt-4 border-slate-200 dark:border-gray-700 shadow-sm rounded-xl' />
                 )}
               </div>
