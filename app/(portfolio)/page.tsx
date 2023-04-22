@@ -134,9 +134,9 @@ export default async function IndexPage() {
                   <span
                     className={cn(
                       'text-xs px-2 py-1 transition-all rounded-lg font-medium translate-y-[0rem] shadow-sm opacity-90',
-                      // 'text-gray-600 dark:text-gray-400 border border-gray-400 dark-border-gray-600',
-                      item.type === 'Project' && 'bg-blue-500 text-white',
-                      item.type === 'Writing' && 'bg-green-500 text-white',
+                      'text-gray-600 dark:text-gray-400 border border-gray-400 dark-border-gray-600',
+                      // item.type === 'Project' && 'bg-blue-500 text-white',
+                      // item.type === 'Writing' && 'bg-green-500 text-white',
                     )}
                   >
                     {item.type}

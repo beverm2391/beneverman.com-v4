@@ -1,16 +1,8 @@
 import { DocsConfig } from "types"
+import { marketingConfig } from "./marketing"
 
 export const docsConfig: DocsConfig = {
-  mainNav: [
-    {
-      title: "Documentation",
-      href: "/docs",
-    },
-    {
-      title: "Guides",
-      href: "/guides",
-    },
-  ],
+  mainNav: marketingConfig.mainNav,
   sidebarNav: [
     {
       title: "Getting Started",

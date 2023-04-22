@@ -15,8 +15,8 @@ export const Indicator = ({status, ...props }) => {
             {props.children}
             <Circle className={cn(
                 "h-2.5 w-2.5",
-                status === 'inactive' && 'fill-red-500 dark:fill-red-600 text-red-600',
-                status === 'active' && 'fill-green-500 dark:fill-green-600 text-green-600',
+                status === 'inactive' && 'fill-red-500 text-red-600',
+                status === 'active' && 'fill-green-500 text-green-600',
                 )} />
         </div>
     )
