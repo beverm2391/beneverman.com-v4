@@ -1,6 +1,7 @@
 import {
   AlertTriangle,
   ArrowRight,
+  Code,
   Check,
   ChevronLeft,
   ChevronRight,

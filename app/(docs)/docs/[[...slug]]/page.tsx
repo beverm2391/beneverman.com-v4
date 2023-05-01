@@ -9,7 +9,8 @@ import { DashboardTableOfContents } from "@/components/toc"
 import "@/styles/mdx.css"
 import { Metadata } from "next"
 
-import { absoluteUrl } from "@/lib/utils"
+import { absoluteUrl, cn } from "@/lib/utils"
+
 
 interface DocPageProps {
   params: {
@@ -96,7 +97,9 @@ export default async function DocPage({ params }: DocPageProps) {
         <DocsPager doc={doc} />
       </div>
       <div className="hidden text-sm xl:block">
-        <div className="sticky top-16 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-10">
+        <div className={cn(
+          "top-16 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-10",
+        )}>
           <DashboardTableOfContents toc={toc} />
         </div>
       </div>

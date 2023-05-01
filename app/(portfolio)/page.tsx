@@ -99,13 +99,13 @@ export default async function IndexPage() {
               </span>
               . I'm currently finishing up my MBA at Kennesaw State University. I'm also a full-stack developer with a focus on applied ML.
             </p>
-            <div className='flex flex-row gap-4 mt-6'>
+            <div className='flex flex-row gap-4 mt-4'>
               <Indicator status='active'>
-                Available for Consulting
+                Available for new opportunities
               </Indicator>
-              <Indicator status='active'>
+              {/* <Indicator status='active'>
                 Open to Job Offers
-              </Indicator>
+              </Indicator> */}
             </div>
           </div>
           {/* <div className='flex flex-row justify-evenly gap-4 items-center text-center'>

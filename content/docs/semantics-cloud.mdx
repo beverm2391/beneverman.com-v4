@@ -1,0 +1,48 @@
+---
+title: Semantics Cloud
+description: A semantic search app that uses OpenAI Embeddings and GPT-3 to answer questions on any pdf
+---
+
+# Semantics Cloud
+
+<Callout>
+    Semantics Cloud is currently free beta. Check it out at here: [https://semantics.cloud](https://semantics.cloud)
+</Callout>
+<Callout type="info">
+    This article is a work in progress...
+</Callout>
+## What is Semantics Cloud?
+
+I've been trying to automate my homework for about a year now, and part of that includes question answering on articles, journals, and textbooks. You can use [semantics.cloud](https://semantics.cloud) to upload any pdf and then query it using natural language. It's a great way to speed up your workflow, and it's free to use! 
+
+Once I'd started to use GPT-3 and other Large Language Models (LLMs) to help speed up my schoolwork, I needed a way to "train" a model to pull only from what I provide (and not its entire knowledge base). I started by reverse engineering [this](https://github.com/openai/openai-cookbook/blob/main/examples/Question_answering_using_embeddings.ipynb) OpenAI example, and then built out my own custom API. That evolved into a full-stack app that lets me upload any pdf and start to query it within a few seconds.
+
+I'm not going to claim that this is anything revolutionary (it's just vector embeddings and GPT-3), but it does speed up my workflow, and it was a great way to grow my full-stack development skills.
+
+<Callout type='warning' icon='🤩'>
+    I'm currently working on a new version of this app that will be much more robust and have a lot more features. I'll be sure to update this article when it's ready!
+</Callout>
+
+## How does it work?
+
+Here's a quick overview of how it works.
+
+### Stack
+
+-   **Frontend**: React/Next.js
+-   **Backend**: FastAPI
+-   **Database**: MongoDB
+-   **Hosting**: Vercel, Heroku
+-   **APIs**: OpenAI
+
+### Process
+
+1.  Upload a pdf
+2.  Backend converts pdf to text
+3.  Backend uses [openai embeddings](https://platform.openai.com/docs/api-reference/embeddings) to create a vector representation of each sentence
+4. Backend stores the vector representation in the database
+5. User queries the database using natural language
+6. Backend uses [openai embeddings](https://platform.openai.com/docs/api-reference/embeddings) to create a vector representation of the query
+7. Backend uses [dot product similarity](https://help.openai.com/en/articles/6824809-embeddings-frequently-asked-questions#:~:text=OpenAI%20embeddings%20are%20normalized%20to,result%20in%20the%20identical%20rankings) (vectors are normalized so dot product is faster) to find the most similar document pages in the database.
+8. Backend uses [openai completions](https://platform.openai.com/docs/guides/completion) to answer the user's query based on the most similar document pages
+9. Backend returns the answer to the frontend via websocket (for nice real-time streaming)
