@@ -3,15 +3,19 @@ import { MarketingConfig } from "types"
 export const portfolioConfig: MarketingConfig = {
   mainNav: [
     {
-      title: "Writing",
-      href: "/blog",
+      title: "Home",
+      href: "/",
     },
+    // {
+    //   title: "Writing",
+    //   href: "/blog",
+    // },
+    // {
+    //   title: "Projects",
+    //   href: "/docs",
+    // },
     {
-      title: "Projects",
-      href: "/docs",
-    },
-    {
-      title: "Contact",
+      title: "Consulting",
       href: "/contact",
     },
   ],

@@ -14,7 +14,7 @@ export function DocsPageHeader({
   return (
     <>
       <div className={cn("space-y-4", className)} {...props}>
-        <h1 className="inline-block text-4xl font-black tracking-tight text-gray-800 dark:text-white lg:text-5xl">
+        <h1 className="inline-block text-4xl font-bold tracking-tight text-gray-800 dark:text-white lg:text-5xl">
           {heading}
         </h1>
         {text && <p className="text-xl text-slate-600 dark:text-slate-300">{text}</p>}

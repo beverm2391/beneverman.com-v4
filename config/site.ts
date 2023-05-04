@@ -9,5 +9,7 @@ export const siteConfig: SiteConfig = {
   links: {
     twitter: "https://twitter.com/beneverman",
     github: "https://github.com/beverm2391/",
+    linkedin: "https://www.linkedin.com/in/beneverman/",
   },
+  email : "evermanben@gmail.com",
 }

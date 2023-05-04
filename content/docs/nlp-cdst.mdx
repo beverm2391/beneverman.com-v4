@@ -1,0 +1,409 @@
+---
+title: NLP-CDST
+description: A Clinical Decision Support Tool for Mental Health Screening
+---
+
+# AI Mental Health Screening Tool
+*AKA NLP-CDST (Natural Language Processing Clinical Decision Support Tool)*  
+
+<Callout type="warning" icon='👾'>
+    Source Code: <a href="https://github.com/beverm2391/NLP-CDST/blob/main/NLP_CDST_v3.ipynb" className='link'>Google Colab Notebook</a>
+</Callout>
+
+**Language**: Python  
+**Models**: Sentence Transformers, GPT-3
+
+<Callout>
+    Have a dataset of case notes you're willing to share? I'm looking for more data to validate this tool. Please reach out to me at evermanben@gmail.com for collaboration.
+</Callout>
+
+## Overview
+This tool was originally intended to assist clinicians in identifying adolescent patients at risk for depression in a primary care setting. The creation of this tool was guided by the recommendations of the American Academy of Pediatrics, as outlined in their 2018 review entitled, [Guidelines for Adolescent Depression in Primary Care](https://publications.aap.org/pediatrics/article/141/3/e20174081/37626/Guidelines-for-Adolescent-Depression-in-Primary?autologincheck=redirected) (GLAD-PC). After training the tool to screen for depression, I expanded its capability to screen for a variety of mental health conditions as found in the DSM-5.
+
+## Problem
+In the GLAD-PC, Zuckerbrot et al. outline the deficits in adolescent mental health treatment, quoting, "In primary care (PC), as many as 2 in 3 youth with depression are not identified by their PC clinicians and fail to receive any kind of care (Zuckerbrot et al., 2018)."
+
+Primary care physicians are not mental health professionals but may be the “first point of contact” for mental health patients within the larger mental healthcare system.
+
+## Solution
+As an alternative, Clinical Decision Support Systems (CDSS) can be developed to relieve some of the burden placed on primary care physicians and address some of the previously identified deficiencies in adolescent depression screening and assessment.
+
+Here's the core idea that you can't miss: **AI can help clinicians make better decisions**. AI cannot replace clinicians, provide a diagnosis, etc. Its a **support** tool.. like shoes. They don't run for you, but they sure make it easier. Or NASA mission control. You get the idea. 
+
+Herein, I designed the Natural Language Processing Clinical Decision Support Tool (NLP-CDST) to be used as part of a larger CDSS. The NLP-CDST takes a short case note as input, uses Natural Language Processing (NLP) to identify relevant clinical context from the Diagnostic and Statistical Manual of Mental Disorders, Fifth Edition (DSM-5), and then provides the clinician with an actionable recommendation with respect to the selected context.
+
+## Methods
+To provide context, I took an 800-page selection from the DSM-5 and generated vector embeddings for each page with the sentence-transformers library from Hugging Face.
+
+I engineered a chain of prompts to query GPT-3. In order, I used GPT-3 to:
+
+1. Pull relevant information from the case note
+2. Generate a list of semantically relevant DSM-5 sections (by vector comparison)
+3. Match those sections with relevant case note information and generate a list of met criteria
+4. Provide a recommendation for or against further depression screening, based on met criteria
+
+## Demo
+
+The NLP-CDST would ideally live inside electronic medical record charting software, but I have been testing it as a python script with no interface. Here's an example of the tool in action:
+
+A case note is passed as input. This is a short case note that I wrote to test the tool, based on my clinical social work experience.
+
+>"John is a 15-year-old male who has been referred to the clinic for evaluation. He reports that he has been feeling worried for the past few months, and that his worry has been increasing in intensity. He describes feeling overwhelmed and unable to concentrate on tasks, and reports that he has been avoiding social situations and activities that he used to enjoy. He also reports having difficulty sleeping, and has been having frequent nightmares. He has been feeling irritable and has been having difficulty controlling his emotions. He has also been experiencing physical symptoms such as headaches, stomachaches, and muscle tension. He has been avoiding school and has been having difficulty focusing in class."
+
+**Example Recommendation:**
+
+>The patient meets enough criteria to warrant further screening for generalized anxiety disorder.
+
+**Example Output:**
+
+```text copy
+Text ordered by similarity
+Prompt Constructed: 
+
+Answer as truthfully as possible using the provided context, and if the answer is not contained within the text below, say "I don't know."
+
+Context:
+
+* 192  Anxiety Disorders  dividual’s separation anxiety (e.g., destruction of the family through fire, murder, or other catastrophe) (Criterion A7). Physical symptoms (e.g., headaches, abdominal complaints, nausea, vomiting).. end of page
+* 222  Anxiety Disorders  Generalized Anxiety Disorder  Diagnostic Criteria  300.02 (F41.1)  A. Excessive anxiety and worry  (apprehensive expectation),  occurring  more  days than not for at least 6 months... end of page
+
+Relevant Information:
+1. John, 15-year-old male
+2. feeling worried, overwhelmed, unable to concentrate, avoiding social situations, difficulty sleeping, nightmares, irritability, difficulty controlling emotions, headaches, stomachaches, muscle tension, feeling hopeless and helpless, thoughts of self-harm
+3. school avoidance, difficulty focusing in class
+
+Question:
+1. Does the patient meet any diagnostic criteria?
+2. Does the patient meets enough criteria to warrant further screening for anything. If so, specify what they should be screened for."
+
+Answer:
+1. The patient meets the diagnostic criteria for generalized anxiety disorder.
+2. The patient meets enough criteria to warrant further screening for generalized anxiety disorder.
+```
+
+**General Format:**
+
+>{'The patient {does/does not} meet enough criteria to warrant further screening for { diagnosis }.'}
+
+***What if the tool is wrong?***
+
+Great Question. In its current state it definitely will be, at least some of the time. This is why its a *Decision Support Tool*, and thus is only meant to provide the physician with information - NOT to make the decision or deliver a diagnosis. The idea is that by equipping the physician with more information, they can make a more informed, and more effective decision.
+
+Let's take a look at how it works.
+
+<p className='text-green-500 h-3'>hello</p>
+
+## How it Works
+@TODO: Add a diagram of the data flow
+
+Here's a diagram of the data flow.
+
+## Code
+
+### Setup
+
+Mount Google Drive to access drive files. Later we'll locally access the DSM-5 pdf that you can download [here](https://cdn.website-editor.net/30f11123991548a0af708722d458e476/files/uploaded/DSM%2520V.pdf).
+``` python copy
+from google.colab import drive
+drive.mount('/content/drive')
+```
+
+``` shell copy
+!pip install -U sentence-transformers openai python-dotenv
+```
+    
+``` python copy
+import pickle
+import numpy as np
+from typing import List, Tuple, Dict
+from sentence_transformers import SentenceTransformer, util
+import os
+import pandas as pd
+from transformers import GPT2TokenizerFast
+import openai
+from dotenv import load_dotenv
+```
+
+I preprocessed the DSM-5 pdf into a list of strings, one for each page. 
+Tutorial : [How to Extract Text From PDF Files in Python](/blocks/text-extraction-pdf)
+
+```python copy
+# I have already taken my context, in this case the DSM-5 and loaded the text of each page into a list. I used a pdf parser for python called pdfminer.six
+# ["Page one text", "Page two text",...]
+
+# I'm using pickle to save/load the list as binary
+
+with open("/content/drive/MyDrive/PDFs-for-Parsing/DSM-5_page_list_v1", "rb") as fp:
+    dsm_list = pickle.load(fp)
+
+# Specify the file path to store and load the encoded text and embeddings (for later)
+fpath = "/content/drive/MyDrive/PDFs-for-Parsing/DSM-5_embeddings_v1"
+```
+
+```python copy
+# Set the OpenAI API key environment variable
+# load from master.env file in My Drive
+# this gives access to the GPT- mode
+# your own API key can be obtained here: https://openai.com/api/
+
+load_dotenv("/content/drive/MyDrive/master.env")
+api_key = os.environ.get('OPENAI-API-KEY')
+openai.api_key = api_key
+```
+
+### Function Definition
+
+```python copy
+def load_embeddings(fpath : str) -> List[List[float]]:
+    # if the csv file containg our context embeddings at fpath exists, read it and convert it into list format
+    if os.path.exists(fpath):
+        with open(fpath, 'r') as f:
+        embeddings_df = pd.read_csv(fpath)
+        # convert the df back into a list of lists
+        embeddings = embeddings_df.values.tolist()
+        print("loaded embeddings")
+        return embeddings
+    else:
+        return None
+```
+
+This next function encodes each page's text into a vector embedding
+
+[https://huggingface.co/sentence-transformers/multi-qa-mpnet-base-dot-v1](https://huggingface.co/sentence-transformers/multi-qa-mpnet-base-dot-v1)
+
+>This model "maps sentences & paragraphs to a 768 dimensional dense vector space and was designed for semantic search. It has been trained on 215M (question, answer) pairs from diverse sources."
+
+### Encoding The Training Data
+
+Get a vector embedding
+```python copy
+def get_embedding(text: str) -> List[float]:
+    model = SentenceTransformer('sentence-transformers/multi-qa-mpnet-base-dot-v1')
+    embedding = model.encode(text)
+    return embedding
+```
+```python copy
+def encode_text(text_to_encode : List[str], fpath : str):
+    embeddings = load_embeddings(fpath)
+    # create empty list of n items if no embeddings
+    if embeddings == None:
+        print("No file found, creating blank list")
+        embeddings = [None for _ in text_to_encode]
+
+    failed_embeddings = []
+    embeddings_to_generate = embeddings.count(None)
+
+    if embeddings_to_generate == 0:
+        print("No embeddings to generate")
+        return embeddings
+
+    print(f"Generating {embeddings_to_generate} embeddings")
+
+    for idx, value in enumerate(text_to_encode):
+        if embeddings[idx] is None:
+        try:
+            embedding = get_embedding(value)
+            embeddings[idx] = embedding.tolist()
+            print(f"Embeddding {idx + 1} generated")
+        # if embedding fails
+        except Exception as e:
+            print(f"Embedding {idx + 1} failed")
+            failed_embeddings.append(idx)
+
+    print("Encoding Successful")
+
+    if len(failed_embeddings) > 0:
+        print(f"{len(failed_embeddings)} embeddings failed. Indexes: {failed_embeddings}")
+    else:
+        print("No embeddings failed")
+
+    # This is where we'll write the embeddings to CSV
+    temp_df_for_storage = pd.DataFrame(embeddings)
+    temp_df_for_storage.to_csv(fpath, index=False)
+
+    print("Written to csv")
+
+    return embeddings
+```
+
+<Callout>
+    The encoding process will take some time, as my section from the DSM-5 is about 800 pages. Make sure to add a GPU to your runtime if you're using Colab.
+</Callout>
+
+```python copy
+embeddings = encode_text(dsm_list, fpath)
+```
+
+### Using The Tool
+
+Get a completion from GPT-3 (for question answering)
+```python copy
+def get_response(prompt, model):
+    response = openai.Completion.create(
+        model=model,
+        prompt=prompt,
+        temperature=0,
+        max_tokens=1000,
+    )
+    return response['choices'][0]['text'].strip(" \n")
+```
+
+After the context has been embedded once, we can just load it each session.
+```python copy
+embeddings = load_embeddings(fpath)
+```
+
+Now that we have two lists, one with the DSM-5 text and one with the encoded text (vector embedding), we'll aggregate them into one data structure.
+
+```python copy
+def aggregate_text_and_embeddings(text_to_encode, embeddings) -> Dict[str , Tuple[str, List[float]]]:
+    assert embeddings is not None
+
+    text_to_encode = text_to_encode[:727]
+    embeddings = embeddings[:727]
+
+    text_and_embeddings = {}
+    for idx, text in enumerate(text_to_encode):
+        text_and_embeddings[f"Chunk {idx + 1}"] = (text, embeddings[idx])
+    return text_and_embeddings
+
+# Example
+# {"Chunk 1" : ("This is the text of chunk 1...", [.23434, .12324, .52323, ...]),
+#  "Chunk 2" : ("This is the text of chunk 2...", [.20934, .16524, .78362, ...])}
+```
+
+```python copy
+text_and_embeddings = aggregate_text_and_embeddings(dsm_list, embeddings)
+```
+`get_relevant_info` takes two inputs, case_note and instructions, and returns a string response generated by OpenAI's "text-davinci-003" language model. The function concatenates the case_note and instructions inputs into a single string prompt, which is then passed as input to the get_response function along with the model variable. The resulting response from the language model is returned as output.
+
+`get_case_note_key_terms` takes a single input, case_note, and also returns a string response generated by OpenAI's "text-davinci-003" language model. The function creates a string prompt by concatenating the case_note input with a header string, and passes this prompt to the get_response function along with the same model variable. The resulting response from the language model is then printed and returned as output.
+
+```python copy
+def get_relevant_info(case_note: str, instructions : str) -> str:
+    prompt = "Case Note:\n" + case_note + "\n" + instructions
+    model = "text-davinci-003"
+    response = get_response(prompt, model) 
+    return response
+
+def get_case_note_key_terms(case_note: str) -> str:
+    header = "summarize any symptoms of mental illness:"
+    prompt = "Case Note:" + "\n" + case_note + "\n" + header
+    # im using davinci 2 so that the response is more concise
+    model = "text-davinci-003"
+
+    response = get_response(prompt, model)
+    print("Screening for:\n" + response + "\n")
+
+    return response
+```
+
+`vector_similarity` takes two vectors and returns their dot product, which represents their similarity. You could also use cosine similarity - though in this case it doesn't matter because the vectors are already normalized.
+
+`order_by_similarity` takes a dictionary of text and embeddings, and returns a list of tuples that contains the similarity score, identifier, and text for each chunk of text in the dictionary. The list is sorted in descending order based on the similarity score between the query embedding and the text embedding.
+
+```python copy
+def vector_similarity(x: List[float], y: List[float]) -> float:
+    return np.dot(np.array(x), np.array(y))
+
+def order_by_similarity(text_and_embeddings : Dict[str, Tuple[str, List[float]]]) -> List[Tuple[float, str, str]]:
+    # get key terms from the case note
+    relevant_info = get_relevant_info(case_note, instructions)
+    # get an embedding of those key terms
+    query_embedding = get_embedding(relevant)
+
+    ordered_text = sorted([(vector_similarity(query_embedding, chunk[1]), chunk, idx) for idx, chunk in text_and_embeddings.items()], reverse=True)
+
+    print("Text ordered by similarity")
+    return ordered_text
+
+# Example
+# [(0.12398640147, "Chunk 47", "This is the text of chunk 47...")...]
+```
+
+Check tokens as to not exceed the "text-davinci-003" limit
+```python copy
+seperator = "\n* "
+
+tokenizer = GPT2TokenizerFast.from_pretrained("gpt2")
+separator_len = len(tokenizer.tokenize(seperator))
+
+f"Context separator contains {separator_len} tokens"
+```
+The build_prompt function takes a question and a dictionary of text and embeddings as input. It then orders the context text based on its similarity to a query embedding, and selects the most similar text up to a token limit. The function constructs a prompt that includes the selected context, relevant clinical information, the question, and a blank space for the answer. This is what will be passed to the `get_response` function.
+
+The order_by_similarity function is used to sort the context text by similarity to the query embedding, and the get_relevant_info function is used to obtain relevant clinical information.
+
+The output of the build_prompt function is a string that contains the constructed prompt.
+
+```python copy
+def build_prompt(question : str, text_and_embeddings : Dict[str , Tuple[str, List[float]]]) -> str:
+    # first we order the context by how simlar their embeddings are to our query embedding
+    ordered_text = order_by_similarity(text_and_embeddings)
+
+    context_list = []
+    context_tokens = 0
+    context_token_limit = 2000
+
+    # then we append the most similar context until we reach our token limit
+    for item in ordered_text:
+        text = item[1][0]
+        context_tokens += len(tokenizer.tokenize(text)) + separator_len
+        if context_tokens > context_token_limit:
+            break
+        context_list.append(seperator + text.replace("\n", " "))
+
+    # now to actually construct the prompt
+    header = """Answer as truthfully as possible using the provided context."""
+
+    # get relevant clinical information
+    relevant_info = get_relevant_info(case_note, instructions)
+
+    prompt = header + "".join(context_list) + "\n\nRelevant Information:\n" + relevant_info + "\n\nQuestion:\n" + question + "\nAnswer:"
+
+    print("Prompt Constructed: \n")
+    print(prompt)
+
+    return prompt
+```
+
+### Input 
+
+```python copy
+case_note = """
+Michael is a 15-year-old male who presents with fatigue and lack of interest in activities. He has lost weight and his parents are concerned. He denies any other symptoms. Medical history is significant for normal development. He has no known allergies and is up to date on his vaccinations. He reports that he used to be a good student but his grades have been slipping and he’s been skipping class. He used to be popular with his classmates but now he feels like he doesn’t fit in and has no friends. He denies any history of bullying. Mental status exam reveals a cooperative, well-groomed male who is alert and oriented to person, place, and time. He has a flat affect and speaks in a monotone voice. He reports feeling “down” but denies any suicidal ideation
+"""
+
+# get the relevant diagnostic info from the prompt
+question = """1. Does the patient meet any diagnostic criteria?
+2. Does the patient meets enough criteria to warrant further screening for anything. If so, specify what they should be screened for."
+"""
+```
+
+``` python copy
+question_and_relevant_info = relevant_info + "\n\nQuestion:\n" + question
+```
+
+Run the tool
+```python
+def run_tool(question, corpus):
+    prompt = build_prompt(question, corpus)
+    model = "text-davinci-003"
+
+    response = get_response(prompt, model)
+    return response
+
+output = run_tool(question, text_and_embeddings)
+print(output)
+```
+
+## Conclusion
+The NLP-CDST is a proof-of-concept for a CDST which can be used to provide actionable recommendations to primary care physicians. The tool is not yet ready for production, but with further development, it could be used to provide a more comprehensive screening for adolescent mental illness.
+
+## Next Steps
+In continuing the development of NLP-CDST, I would like to procure a dataset of electronic medical records and benchmark NLP-CDST against the actual recommendations provided by clinicians.
+
+## References
+Brown, T.B., Mann, B., Ryder, N., Subbiah, M., Kaplan, J., Dhariwal, P., Neelakantan, A., Shyam, P., Sastry, G., Askell, A., Agarwal, S., Herbert-Voss, A., Krueger, G., Henighan, T.J., Child, R., Ramesh, A., Ziegler, D.M., Wu, J., Winter, C., Hesse, C., Chen, M., Sigler, E., Litwin, M., Gray, S., Chess, B., Clark, J., Berner, C., McCandlish, S., Radford, A., Sutskever, I., & Amodei, D. (2020). Language Models are Few-Shot Learners. ArXiv, abs/2005.14165.
+
+Rachel A. Zuckerbrot, Amy Cheung, Peter S. Jensen, Ruth E.K. Stein, Danielle Laraque, GLAD-PC STEERING GROUP, Anthony Levitt, Boris Birmaher, John Campo, Greg Clarke, Graham Emslie, Miriam Kaufman, Kelly J. Kelleher, Stanley Kutcher, Michael Malus, Diane Sacks, Bruce Waslick, Barry Sarvet; Guidelines for Adolescent Depression in Primary Care (GLAD-PC): Part I. Practice Preparation, Identification, Assessment, and Initial Management. Pediatrics March 2018; 141 (3): e20174081. 10.1542/peds.2017-4081
