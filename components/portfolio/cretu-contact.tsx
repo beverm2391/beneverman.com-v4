@@ -1,4 +1,4 @@
-function ContactLink({
+function ExternalLink({
     href,
     title,
     website,
@@ -48,27 +48,27 @@ function ContactLink({
 export default function Contact() {
     return (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            <ContactLink
+            <ExternalLink
                 href="https://twitter.com/beneverman"
                 title="@beneverman"
                 website="Twitter"
             />
-            <ContactLink
+            <ExternalLink
                 href="https://github.com/beverm2301"
                 title="beverm2391"
                 website="GitHub"
             />
-            <ContactLink
+            <ExternalLink
                 href="https://linkedin.com/in/beneverman"
                 title="Ben Everman"
                 website="LinkedIn"
             />
-            <ContactLink
-                email="ben@beneverman.com"
-                title="ben@beneverman.com"
+            <ExternalLink
+                email="evermanben@gmail.com"
+                title="evermanben@gmail.com"
                 website="Email"
             />
-            <ContactLink href="#" title="Ben Everman" website="CV" />
+            <ExternalLink href="#" title="Ben Everman" website="CV" />
         </div>
     );
 }

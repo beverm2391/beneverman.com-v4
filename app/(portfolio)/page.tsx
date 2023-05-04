@@ -3,7 +3,6 @@ import Link from "next/link"
 
 import { siteConfig } from "@/config/site"
 import BigText from "@/components/BigText"
-import Contact from "@/components/portfolio/cretu-contact"
 import avatar from '@/public/images/avatar.jpg'
 
 import { Callout } from "@/components/callout"
@@ -16,6 +15,8 @@ import { Badge } from "@/components/badge"
 import { cn } from "@/lib/utils"
 import GradientText from "@/components/gradienttext"
 import { Indicator } from "@/components/portfolio/indicator"
+import { Card } from "@/components/ui/card"
+import { Links } from "@/components/portfolio/contact"
 
 const content = [
   {
@@ -99,19 +100,24 @@ export default async function IndexPage() {
               </span>
               . I'm currently finishing up my MBA at Kennesaw State University. I'm also a full-stack developer with a focus on applied ML.
             </p>
-            <div className='flex flex-row gap-4 mt-4'>
-              <Indicator status='active'>
-                Available for new opportunities
-              </Indicator>
-              {/* <Indicator status='active'>
-                Open to Job Offers
-              </Indicator> */}
+            <Separator
+              className='my-8 sm:mt-8 sm:mb-4'
+            />
+            <div className='flex flex-col sm:flex-row gap-6 sm:gap-4 mt-6 justify-between px-2 sm:p-0 sm:items-center'>
+              <div className='flex flex-col sm:flex-row gap-4'>
+                <Indicator status='active' badge={true}>
+                  Available for Consulting
+                </Indicator>
+                <Indicator status='active' badge={true}>
+                  Open to New Opportunities
+                </Indicator>
+              </div>
+              <Links
+                size='md'
+              />
             </div>
           </div>
-          {/* <div className='flex flex-row justify-evenly gap-4 items-center text-center'>
-            <hr className='w-full border-slate-200 dark:border-gray-700 border-1 rounded-xl' />
-          </div> */}
-          <div className='flex flex-col gap-6 my-4'>
+          {/* <div className='flex flex-col gap-6 my-4'>
             {content.map((item, i) => (
               i < 2 &&
               <div key={i} className={cn(
@@ -125,18 +131,10 @@ export default async function IndexPage() {
                     item.type === 'Writing' && 'font-medium text-lg',
                   )}
                   >{item.title}</h3>
-                  {/* <Badge
-                  className='text-xs'
-                  gradient={randomColor()}
-                  >
-                    {item.type}
-                  </Badge> */}
                   <span
                     className={cn(
                       'text-xs px-2 py-1 transition-all rounded-lg font-medium translate-y-[0rem] shadow-sm opacity-90',
                       'text-gray-600 dark:text-gray-400 border border-gray-400 dark-border-gray-600',
-                      // item.type === 'Project' && 'bg-blue-500 text-white',
-                      // item.type === 'Writing' && 'bg-green-500 text-white',
                     )}
                   >
                     {item.type}
@@ -161,8 +159,8 @@ export default async function IndexPage() {
                 )}
               </div>
             ))}
-          </div>
-          {/* <div className="flex flex-row items-center gap-6 p-4 border-[1.5px] border-color dark:border-gray-700 dark:ring-1 ring-gray-500  mb-4 shadow-md rounded-xl py-8 px-4">
+          </div> */}
+          {/* <div className="flex flex-row items-center gap-6 border-[1.5px] border-color dark:border-gray-500 mb-4 shadow-md rounded-xl py-6 px-6">
             <Contact />
           </div> */}
           <div>

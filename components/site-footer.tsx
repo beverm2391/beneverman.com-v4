@@ -36,7 +36,7 @@ export function SiteFooter() {
             >
               Vercel
             </ExternalLink>
-            . Illustrations by{" "}
+            {/* . Illustrations by{" "}
             <ExternalLink
               href="https://popsy.co"
               arrow={false}
@@ -45,13 +45,13 @@ export function SiteFooter() {
             >
               Popsy
             </ExternalLink>
-            .
+            . */}
           </p>
         </div>
         <p className="text-center text-sm md:text-left">
           The source code is available on{" "}
           <ExternalLink
-            href="https://www.github.com/beverm2391"
+            href="https://www.github.com/beverm2391/beneverman.com-v4"
             arrow={false}
             // underline={false}
             className="underline underline-offset-4 font-medium"
