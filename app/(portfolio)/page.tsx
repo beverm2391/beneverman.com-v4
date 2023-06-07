@@ -86,7 +86,7 @@ export default async function IndexPage() {
                 Ben Everman
               </h1>
               <h3 className='text-base text-gray-600 dark:text-gray-400'>
-                Developer, Writer, and Problem Solver
+                Developer and Problem Solver
               </h3>
             </div>
           </div>
@@ -98,73 +98,49 @@ export default async function IndexPage() {
               >
                 improves the lives of others
               </span>
-              . I'm currently finishing up my MBA at Kennesaw State University. I'm also a full-stack developer with a focus on applied ML.
+              . My unique skill set combines organizational management and software engineering to solve problems in business, medicine, and more. 
             </p>
-            <Separator
-              className='my-8 sm:mt-8 sm:mb-4'
-            />
             <div className='flex flex-col sm:flex-row gap-6 sm:gap-4 mt-6 justify-between px-2 sm:p-0 sm:items-center'>
               <div className='flex flex-col sm:flex-row gap-4'>
-                <Indicator status='active' badge={true}>
+                {/* <Indicator status='active' badge={true}>
                   Available for Consulting
-                </Indicator>
+                </Indicator> */}
                 <Indicator status='active' badge={true}>
-                  Open to New Opportunities
+                  Looking for a New Role
                 </Indicator>
               </div>
               <Links
                 size='md'
               />
             </div>
-          </div>
-          {/* <div className='flex flex-col gap-6 my-4'>
-            {content.map((item, i) => (
-              i < 2 &&
-              <div key={i} className={cn(
-                'flex flex-col mb-0',
-                i % 2 === 0 && '',
-              )}>
-                <div className='flex flex-row items-center gap-4 mb-2'>
-                  <h3 className={cn(
-                    'text-gray-900 dark:text-gray-100',
-                    item.type === 'Project' && 'font-medium text-lg',
-                    item.type === 'Writing' && 'font-medium text-lg',
-                  )}
-                  >{item.title}</h3>
-                  <span
-                    className={cn(
-                      'text-xs px-2 py-1 transition-all rounded-lg font-medium translate-y-[0rem] shadow-sm opacity-90',
-                      'text-gray-600 dark:text-gray-400 border border-gray-400 dark-border-gray-600',
-                    )}
-                  >
-                    {item.type}
-                  </span>
-                </div>
-                <p className='mb-2 text-gray-800 dark:text-gray-200'>
-                  {item.description}
-                </p>
-                <div>
-                  <Link
-                    href={item.href}
-                    className='text-slate-500 hover:text-slate-300 dark:text-slate-400 dark:hover:text-slate-200'
-                  >
-                    <span className=''>
-                      Read More
-                      <Icons.chevronRight className='inline-block w-4 h-4' />
-                    </span>
-                  </Link>
-                </div>
-                {i !== content.length - 2 && (
-                  <hr className='w-full mt-4 border-slate-200 dark:border-gray-700 shadow-sm rounded-xl' />
-                )}
-              </div>
-            ))}
-          </div> */}
-          {/* <div className="flex flex-row items-center gap-6 border-[1.5px] border-color dark:border-gray-500 mb-4 shadow-md rounded-xl py-6 px-6">
-            <Contact />
-          </div> */}
-          <div>
-            {/* <h3 className='text-xl font-medium text-gray-900 dark:text-gray-100 mb-6'>Quotes I'm Pondering...</h3> */}
+            <Separator
+              className='my-4 sm:mt-4 sm:mb-4'
+            />
+            <div className='mt-8 flex flex-col gap-4'>
+              <h3 className='text-xl font-semibold text-gray-900 dark:text-gray-100'>
+                My Skills
+              </h3>
+              <p className='leading-6'>
+                I'm a full-stack developer experienced in Python, TypeScript and React, and with some experience in Machine Learning.  Though I'm technically skilled, my greatest asset is my range. By leveraging my technical skills, my business education, and my medical knowledge, I can craft solutions to previously unsolved problems. Rock climber by trade, I'm used to bushwhacking my way through previously unexplored territory. I would be great at an early-stage startup or smaller team focused on innovation/R&D. I'd thrive in a role that required interface between management, engineering, and clinicians or specialists.
+              </p>
+            </div>
+            <div className='mt-8 flex flex-col gap-4 leading-6'>
+              <h3 className='text-xl font-semibold text-gray-900 dark:text-gray-100'>
+                What I'm Working On
+              </h3>
+              <p>
+                My biggest interest is in medicine, where I hope to build new clinical tools that improve patient outcomes. My first tool used natural language processing to aid pediatricians in screening for depression and other mental illness in adolescents. Now, I'm working on a new tool designed to help clinical geneticists pick the newest and most accurate genetic tests for their patients.
+              </p>
+              <p>
+                Meanwhile, my close friend Jake and I have a partnership called <ExternalLink href='https://www.evermanhaygood.com'>Everman - Haygood</ExternalLink> where we build open source software, and occasionally consult for clients.
+              </p>
+              <p>
+                Long term, I hope to build a company that leverages machine learning to improve mental health outcomes. An example product might be a machine learning model that collects data from an apple watch app and uses it to predict and prevent depressive episodes or suicidal ideation. As someone with a personal mental health history, this is where my true passion lies.
+              </p>
+            </div>
+            {/* <Separator
+              className='my-8 sm:mt-8 sm:mb-4'
+            /> */}
           </div>
         </div>
       </section>

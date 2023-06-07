@@ -9,43 +9,7 @@ export function SiteFooter() {
         <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
           <Icons.logo />
           <p className="text-center text-sm leading-loose md:text-left">
-            Built wth code from{" "}
-            <ExternalLink
-              href="https://cretu.dev"
-              arrow={false}
-              // underline={false}
-              className="underline underline-offset-4 font-medium"
-            >
-              Crețu
-            </ExternalLink>
-            {" & "}
-            <ExternalLink
-              href="https://twitter.com/shadcn"
-              arrow={false}
-              // underline={false}
-              className="underline underline-offset-4 font-medium"
-            >
-              Shadcn
-            </ExternalLink>
-            . Hosted on{" "}
-            <ExternalLink
-              href="https://vercel.com"
-              arrow={false}
-              // underline={false}
-              className="underline underline-offset-4 font-medium"
-            >
-              Vercel
-            </ExternalLink>
-            {/* . Illustrations by{" "}
-            <ExternalLink
-              href="https://popsy.co"
-              arrow={false}
-              // underline={false}
-              className="underline underline-offset-4 font-medium"
-            >
-              Popsy
-            </ExternalLink>
-            . */}
+            &copy; {new Date().getFullYear()} Everman - Haygood
           </p>
         </div>
         <p className="text-center text-sm md:text-left">

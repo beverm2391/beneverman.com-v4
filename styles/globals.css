@@ -67,3 +67,7 @@ a {
 .border-color {
   @apply border-slate-200 dark:border-slate-800
 }
+
+.internal-link {
+  @apply hover:text-slate-600 dark:hover:text-slate-400 underline underline-offset-2
+}
