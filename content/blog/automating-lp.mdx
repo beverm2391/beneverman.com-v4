@@ -4,7 +4,6 @@ description: How I automated my graduate economics homework with SciPy and GPT-4
 date: "2023-06-14"
 authors:
   - beneverman
-published: false
 ---
 
 <Callout>
@@ -21,7 +20,7 @@ If you just need to solve one linear programming problem, do it in Excel with th
 4. Pass the arguments to the solver function and return the solution.
 5. Take the solution and apply it in the context of the original problem with GPT-4.
 
-- **Total Runtime**: ~45 seconds.
+- **Total Runtime**: ~30-45 seconds.
 - **Accuracy**: Fine for the dev/local environment, but not production.
 
 ## An Example Problem
@@ -34,6 +33,44 @@ The demand for X in the current week is forecast to be 75 units and for Y is for
 
 Formulate the problem of deciding how much of each product to make in the current week as a linear program.
 
-## The Solution
+## The Automated Solution
 
 Remember, you can follow along with the code [here](https://www.github.com/beverm2391).
+
+Heres the output of the script, generated in about 30-45 seconds.
+
+``` text
+Analyzing problem and extracting arguments...
+Intermediate Response:
+ 1. The type of problem: Maximization (since the goal is to maximize profit)
+
+2. The objective function: Let x be the number of pizzas and y be the number of root beers. The profit function is P(x, y) = 10x + 5y.
+
+3. The constraints: 
+   - 10x + 20y ≥ 100 (minimum daily requirement for vitamin A)
+   - 30x + 10y ≥ 200 (minimum daily requirement for vitamin B)
+
+4. The variables: x (number of pizzas) and y (number of root beers)
+
+5. The bounds: x ≥ 0, y ≥ 0 (since you cannot have negative quantities of pizza or root beer)
+Unparsed args:
+ {
+    "c": [-10, -5],
+    "A_ub": [[10, 20], [30, 10]],
+    "b_ub": [100, 200],
+    "A_eq": null,
+    "b_eq": null,
+    "bounds": [[0, null], [0, null]]
+}
+Parsing args...
+Running linear optimization...
+Result: {'x': array([6., 2.]), 'fun': -70.0, 'slack': array([0., 0.]), 'success': True, 'message': 'Optimization terminated successfully. (HiGHS Status 7: Optimal)', 'nit': 2}
+Interpreting result...
+Final Response:
+
+ The result indicates that the optimal solution is to sell 6 pizzas and 2 root beers. This will maximize the profit, which is $70. The slack values of 0 for both constraints show that the minimum daily requirements for vitamins A and B are met exactly. The optimization was successful, and the optimal solution was found in 2 iterations.
+```
+
+## Problems with this
+
+Needs to be validated/tested
