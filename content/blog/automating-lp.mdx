@@ -1,0 +1,39 @@
+---
+title: Automating My Linear Programming Homework with SciPy and GPT-4
+description: How I automated my graduate economics homework with SciPy and GPT-4.
+date: "2023-06-14"
+authors:
+  - beneverman
+published: false
+---
+
+<Callout>
+  The code for this article is available [here](https://www.github.com/beverm2391)
+</Callout>
+
+## Introduction
+
+If you just need to solve one linear programming problem, do it in Excel with the [solver add-in](). This is more of a proof of concept than a practical solution. Here's the flow:
+
+1. Synthesize a linear programming problem with GPT-4 into a list of relevant variables and constraints.
+2. Turn the list of variables and constraints into a list of arguments for a solver function, output in `json` format.
+3. Parse the json into individual arguments for the solver function.
+4. Pass the arguments to the solver function and return the solution.
+5. Take the solution and apply it in the context of the original problem with GPT-4.
+
+- **Total Runtime**: ~45 seconds.
+- **Accuracy**: Fine for the dev/local environment, but not production.
+
+## An Example Problem
+
+A company makes two products (X and Y) using two machines (A and B). Each unit of X that is produced requires 50 minutes processing time on machine A and 30 minutes processing time on machine B. Each unit of Y that is produced requires 24 minutes processing time on machine A and 33 minutes processing time on machine B.
+
+At the start of the current week there are 30 units of X and 90 units of Y in stock. Available processing time on machine A is forecast to be 40 hours and on machine B is forecast to be 35 hours.
+
+The demand for X in the current week is forecast to be 75 units and for Y is forecast to be 95 units. Company policy is to maximize the combined sum of the units of X and the units of Y in stock at the end of the week.
+
+Formulate the problem of deciding how much of each product to make in the current week as a linear program.
+
+## The Solution
+
+Remember, you can follow along with the code [here](https://www.github.com/beverm2391).

@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 import { Callout } from "@/components/callout"
 import { Card } from "@/components/card"
 import ExternalLink from "./ExternalLink"
+import Link from "next/link"
 
 const components = {
   h1: ({ className, ...props }) => (
@@ -86,7 +87,7 @@ const components = {
     <ul className={cn("my-6 ml-6 list-disc text-slate-700 dark:text-slate-200", className)} {...props} />
   ),
   ol: ({ className, ...props }) => (
-    <ol className={cn("my-6 ml-6 list-decimal text-slate-700 dark:text-slate-200", className)} {...props} />
+    <ol className={cn("my-2 [&:not(:child)]:my-6 ml-6 list-decimal text-slate-700 dark:text-slate-200", className)} {...props} />
   ),
   li: ({ className, ...props }) => (
     <li className={cn("mt-2 text-slate-700 dark:text-slate-300", className)} {...props} />
@@ -168,6 +169,7 @@ const components = {
   Image,
   Callout,
   Card,
+  Link
 }
 
 interface MdxProps {

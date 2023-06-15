@@ -100,7 +100,7 @@ export default async function PostPage({ params }: PostPageProps) {
           <Icons.chevronLeft className="mr-2 h-4 w-4" />
           See all posts
         </Link>
-        <div>
+        <div className='mb-8'>
           {post.date && (
             <time dateTime={post.date} className="block text-sm text-slate-600 dark:text-slate-400">
               Published on {formatDate(post.date)}

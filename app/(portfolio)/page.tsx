@@ -45,7 +45,7 @@ const content = [
 export default async function IndexPage() {
   return (
     <>
-      <section className="container max-w-2xl flex flex-col gap-6 pt-6 pb-8 md:pt-10 md:pb-12 lg:pt-12 lg:pb-24">
+      <section className="container max-w-2xl flex flex-col gap-6 pt-6 pb-8 md:pt-10 md:pb-12 lg:pt-12 lg:pb-12">
         <div className='flex flex-col gap-8'>
           <div className='flex flex-row items-center gap-6 p-0 border-[0px] border-slate-200 dark:border-gray-700 ring-gray-500 rounded-xl'>
             <HoverCard openDelay={200}>
@@ -82,7 +82,7 @@ export default async function IndexPage() {
               </HoverCardContent>
             </HoverCard>
             <div className='flex flex-col'>
-              <h1 className='text-xl font-semibold text-gray-900 dark:text-gray-100'>
+              <h1 className='text-2xl font-semibold text-gray-900 dark:text-gray-100'>
                 Ben Everman
               </h1>
               <h3 className='text-base text-gray-600 dark:text-gray-400'>
@@ -118,18 +118,18 @@ export default async function IndexPage() {
             />
             <div className='mt-8 flex flex-col gap-4'>
               <h3 className='text-xl font-semibold text-gray-900 dark:text-gray-100'>
-                My Skills
+                More About Me
               </h3>
               <p className='leading-6'>
-                I'm a full-stack developer experienced in Python, TypeScript and React, and with some experience in Machine Learning.  Though I'm technically skilled, my greatest asset is my range. By leveraging my technical skills, my business education, and my medical knowledge, I can craft solutions to previously unsolved problems. Rock climber by trade, I'm used to bushwhacking my way through previously unexplored territory. I would be great at an early-stage startup or smaller team focused on innovation/R&D. I'd thrive in a role that required interface between management, engineering, and clinicians or specialists.
+                I'm a full-stack developer experienced in Python, TypeScript and React, and with some experience in Machine Learning.  Though I'm technically skilled, my greatest asset is my range. By leveraging my technical skills, my business education, and my unique thought process, I can craft solutions to previously unsolved problems. Rock climber by trade, I'm used to bushwhacking my way through previously unexplored territory. I would be great at an early-stage startup or smaller team focused on innovation/R&D. I'd thrive in a role that required interface between management, engineering, and clinicians or specialists.
               </p>
             </div>
-            <div className='mt-8 flex flex-col gap-4 leading-6'>
+            {/* <div className='mt-8 flex flex-col gap-4 leading-6'>
               <h3 className='text-xl font-semibold text-gray-900 dark:text-gray-100'>
                 What I'm Working On
               </h3>
               <p>
-                My biggest interest is in medicine, where I hope to build new clinical tools that improve patient outcomes. My first tool used natural language processing to aid pediatricians in screening for depression and other mental illness in adolescents. Now, I'm working on a new tool designed to help clinical geneticists pick the newest and most accurate genetic tests for their patients.
+                My biggest interest is in medicine, where I hope to build new clinical tools that improve patient outcomes. My first tool used natural language processing to aid pediatricians in screening for depression and other mental illness in adolescents. Now, I'm working on a new tool designed to help clinical geneticists pick the newest and most accurate genetic tests for their patients. I'll upload a writeup 
               </p>
               <p>
                 Meanwhile, my close friend Jake and I have a partnership called <ExternalLink href='https://www.evermanhaygood.com'>Everman - Haygood</ExternalLink> where we build open source software, and occasionally consult for clients.
@@ -137,10 +137,7 @@ export default async function IndexPage() {
               <p>
                 Long term, I hope to build a company that leverages machine learning to improve mental health outcomes. An example product might be a machine learning model that collects data from an apple watch app and uses it to predict and prevent depressive episodes or suicidal ideation. As someone with a personal mental health history, this is where my true passion lies.
               </p>
-            </div>
-            {/* <Separator
-              className='my-8 sm:mt-8 sm:mb-4'
-            /> */}
+            </div> */}
           </div>
         </div>
       </section>
