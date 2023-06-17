@@ -12,7 +12,7 @@ authors:
 
 ## Introduction
 
-If you just need to solve one linear programming problem, do it in Excel with the [solver add-in](). This is more of a proof of concept than a practical solution. Here's the flow:
+If you just need to solve one linear programming problem, do it in Excel with the [solver add-in](https://support.microsoft.com/en-us/office/load-the-solver-add-in-in-excel-612926fc-d53b-46b4-872c-e24772f078ca). This is more of a proof of concept than a practical solution. Here's the flow:
 
 1. Synthesize a linear programming problem with GPT-4 into a list of relevant variables and constraints.
 2. Turn the list of variables and constraints into a list of arguments for a solver function, output in `json` format.
@@ -25,24 +25,24 @@ If you just need to solve one linear programming problem, do it in Excel with th
 
 ## An Example Problem
 
-A company makes two products (X and Y) using two machines (A and B). Each unit of X that is produced requires 50 minutes processing time on machine A and 30 minutes processing time on machine B. Each unit of Y that is produced requires 24 minutes processing time on machine A and 33 minutes processing time on machine B.
+>A company makes two products (X and Y) using two machines (A and B). Each unit of X that is produced requires 50 minutes processing time on machine A and 30 minutes processing time on machine B. Each unit of Y that is produced requires 24 minutes processing time on machine A and 33 minutes processing time on machine B.
 
-At the start of the current week there are 30 units of X and 90 units of Y in stock. Available processing time on machine A is forecast to be 40 hours and on machine B is forecast to be 35 hours.
+>At the start of the current week there are 30 units of X and 90 units of Y in stock. Available processing time on machine A is forecast to be 40 hours and on machine B is forecast to be 35 hours.
 
-The demand for X in the current week is forecast to be 75 units and for Y is forecast to be 95 units. Company policy is to maximize the combined sum of the units of X and the units of Y in stock at the end of the week.
+>The demand for X in the current week is forecast to be 75 units and for Y is forecast to be 95 units. Company policy is to maximize the combined sum of the units of X and the units of Y in stock at the end of the week.
 
-Formulate the problem of deciding how much of each product to make in the current week as a linear program.
+>Formulate the problem of deciding how much of each product to make in the current week as a linear program.
 
 ## The Automated Solution
 
 Remember, you can follow along with the code [here](https://www.github.com/beverm2391).
 
-Heres the output of the script, generated in about 30-45 seconds.
+If I run the code on this problem, I get a detailed output with the results of each step outline above. Here's the full output of the script, generated in about 30-45 seconds.
 
 ``` text
 Analyzing problem and extracting arguments...
 Intermediate Response:
- 1. The type of problem: Maximization (since the goal is to maximize profit)
+1. The type of problem: Maximization (since the goal is to maximize profit)
 
 2. The objective function: Let x be the number of pizzas and y be the number of root beers. The profit function is P(x, y) = 10x + 5y.
 
@@ -54,7 +54,7 @@ Intermediate Response:
 
 5. The bounds: x ≥ 0, y ≥ 0 (since you cannot have negative quantities of pizza or root beer)
 Unparsed args:
- {
+{
     "c": [-10, -5],
     "A_ub": [[10, 20], [30, 10]],
     "b_ub": [100, 200],
@@ -68,9 +68,172 @@ Result: {'x': array([6., 2.]), 'fun': -70.0, 'slack': array([0., 0.]), 'success'
 Interpreting result...
 Final Response:
 
- The result indicates that the optimal solution is to sell 6 pizzas and 2 root beers. This will maximize the profit, which is $70. The slack values of 0 for both constraints show that the minimum daily requirements for vitamins A and B are met exactly. The optimization was successful, and the optimal solution was found in 2 iterations.
+The result indicates that the optimal solution is to sell 6 pizzas and 2 root beers. This will maximize the profit, which is $70. The slack values of 0 for both constraints show that the minimum daily requirements for vitamins A and B are met exactly. The optimization was successful, and the optimal solution was found in 2 iterations.
 ```
 
-## Problems with this
+## The Code
 
-Needs to be validated/tested
+OpenAI Chat API and Linear Optimization Tutorial
+
+This section provides documentation on how to use the codebase. It demonstrates how to interact with the Chat API to process user messages and generate responses using the GPT-3.5-turbo model. It also shows how to solve linear programming optimization problems using the `linear_optimization` function from the `scipy.optimize` library.
+
+### Section of code
+#### Class Chat
+The `Chat` class is used to interact with the OpenAI Chat API. It initializes the class with the given parameters, such as temperature, system message, messages, model, and max tokens. The `__call__` method processes the user message and returns the assistant's response.
+
+```python
+class Chat:
+    """
+    A class to interact with the OpenAI Chat API.
+    """
+
+    def __init__(self, temperature=0.7, system_message="You are a helpful assistant.", messages=None, model='gpt-3.5-turbo', max_tokens=2000):
+        """
+        Initialize the Chat class with the given parameters.
+        """
+        self.messages = []
+        self.messages.append({"role": "system", "content": system_message})
+        if messages is not None:
+            self.messages += [{"role": "user", "content": message}
+                              for message in messages]
+        self.model = model
+        self.temperature = temperature
+        self.max_tokens = max_tokens
+
+    def __call__(self, user_message: str):
+        """
+        Process the user message and return the assistant's response.
+        """
+
+        user_message = {"role": "user", "content": user_message}
+        self.messages.append(user_message)
+        raw_response = openai.ChatCompletion.create(
+            model=self.model,
+            messages=self.messages,
+            temperature=self.temperature,
+            max_tokens=self.max_tokens,
+        )
+        text = raw_response['choices'][0]['message']['content'].strip()
+        tokens = raw_response['usage']['total_tokens']
+        res_message = {"role": "assistant", "content": text}
+        self.messages.append(res_message)
+        res_dict = {"response": text, "messages": self.messages,
+                    "model": self.model, "temperature": self.temperature, "tokens": tokens}
+        return res_dict
+```
+
+#### Function linear_optimization
+The `linear_optimization` function solves a linear programming optimization problem using the highs algorithm. It takes the coefficients of the linear objective function to be minimized (`c`), the inequality constraint matrix (`A_ub`), the inequality constraint vector (`b_ub`), and optional equality constraint matrix (`A_eq`), equality constraint vector (`b_eq`), and bounds for each variable (`bounds`). It returns a dictionary containing the optimal solution, the minimized objective function value, and the status of the optimization.
+
+```python
+def linear_optimization(c, A_ub, b_ub, A_eq=None, b_eq=None, bounds=None):
+    """
+    Solves a linear programming optimization problem using the highs algorithm.
+
+    Parameters:
+    c (list): The coefficients of the linear objective function to be minimized.
+    A_ub (list): The inequality constraint matrix. Each row represents a constraint.
+    b_ub (list): The inequality constraint vector. Each element represents the upper bound of the corresponding constraint.
+    A_eq (list, optional): The equality constraint matrix. Each row represents a constraint.
+    b_eq (list, optional): The equality constraint vector. Each element represents the required value of the corresponding constraint.
+    bounds (list, optional): A list of bounds for each variable in the form (min, max).
+
+    Returns:
+    dict: A dictionary containing the optimal solution, the minimized objective function value, and the status of the optimization.
+    """
+    result = linprog(c, A_ub=A_ub, b_ub=b_ub, A_eq=A_eq, b_eq=b_eq, bounds=bounds, method='highs')
+
+    return {
+        'x': result.x,
+        'fun': result.fun,
+        'slack': result.slack,
+        'success': result.success,
+        'message': result.message,
+        'nit': result.nit
+    }
+```
+
+#### Function args_parser
+The `args_parser` function parses a JSON string and extracts the arguments needed for the `linear_optimization` function. It converts the JSON data into numpy arrays and returns the arguments as a tuple.
+
+```python
+def args_parser(json_string):
+    data = json.loads(json_string)
+    c = np.array(data.get("c"))
+    A_ub = np.array(data.get("A_ub"))
+    b_ub = np.array(data.get("b_ub"))
+    A_eq = np.array(data.get("A_eq")) if data.get("A_eq") is not None else None
+    b_eq = np.array(data.get("b_eq")) if data.get("b_eq") is not None else None
+    bounds = np.array(data.get("bounds")) if data.get("bounds") is not None else None
+    args = c, A_ub, b_ub, A_eq, b_eq, bounds
+    return args
+```
+
+#### Variable code_string
+The `code_string` variable contains a string representation of the `linear_optimization` function. It is used to generate the code for the tutorial.
+
+#### Variable json_schema
+The `json_schema` variable contains a string representation of the JSON schema. It provides rules and guidelines for working with JSON data.
+
+#### Variable word_problems
+The `word_problems` variable is a list of word problems that will be used as prompts in the tutorial. Each word problem represents a linear programming optimization problem.
+
+#### Variable prompt1
+The `prompt1` variable contains a formatted string that prompts the user to identify various components of the first word problem. It asks for the type of problem, the objective function, the constraints, the variables, and the bounds.
+
+#### Variable prompt2
+The `prompt2` variable contains a formatted string that provides the code to run the `linear_optimization` function and the JSON schema for the arguments. It also includes instructions for the user to output a JSON object with the required arguments.
+
+#### Function main
+The `main` function is the entry point. It performs the following steps:
+1. Extracts relevant problem data by interacting with the Chat API and processing user messages.
+2. Generates a JSON string of the arguments required for the `linear_optimization` function.
+3. Parses the JSON string to obtain the arguments.
+4. Calls the `linear_optimization` function with the parsed arguments.
+5. Interprets the result in the context of the original problem by interacting with the Chat API.
+
+```python
+def main():
+  # 1. extract relevant problem data
+  print("Analyzing problem and extracting arguments...")
+  chat = Chat(model="gpt-4", temperature=0)
+  intermediate = chat(prompt1)['response'].strip()
+  print("Intermediate Response:\n", intermediate)
+
+  # 2. generate json string of args
+  unparsed_args = chat(prompt2)['response'].strip()
+  print("Unparsed args:\n", unparsed_args)
+
+  # 3. parse the args
+  print("Parsing args...")
+  parsed_args = args_parser(unparsed_args)
+
+  # 4. pass them to the linear_optimization function
+  print("Running linear optimization...")
+  result = linear_optimization(*parsed_args)
+  print("Result:", result)
+
+  # 5. interpret the result in the context of the original problem
+  print("Interpreting result...")
+  res = chat(f"Result: {result} \n\n INSTRUCTION: Interperet the result in the context of the problem. Only use data from the above result, do not infer any other data.")['response'].strip()
+  print("Final Response:\n\n", res)
+```
+
+#### Running the main function
+The last line of code calls the `main` function to run the tutorial.
+
+```python
+main()
+```
+
+The output of the tutorial will be displayed in the console.
+
+## Problems and Limitations
+
+I would not use this in any sort of production environment yet, just because it hasn't been tested. Ideally, I could find a test dataset of word problems and solutions, but after poking around the internet for a little while I couldn't find much. 
+
+Limitations include hallucinations, particularly in the misinterpretation of context (i.e. one of the objective function coefficients has an incorrect sign) and the potential for the model to generate a solution that is not feasible (i.e. you can't have half a person).
+
+## Moving Forward
+
+My plan is to continue experimenting with extending large language model outputs with additional tooling. More experiments to come!

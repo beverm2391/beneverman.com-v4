@@ -4,7 +4,7 @@ export default function Code({ className, ...props }) {
     return (
         <code
             className={cn(
-                "relative rounded border border-color bg-gray-200 dark:bg-gray-800 py-[0.2rem] px-[0.3rem] font-mono text-sm text-slate-600 dark:text-slate-100",
+                "relative rounded border px-[0.3rem] py-[0.2rem] font-mono text-sm",
                 className
             )}
             {...props}
