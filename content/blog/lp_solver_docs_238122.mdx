@@ -1,0 +1,176 @@
+---
+title: Test Code Docs
+description: Code documentation for the test code.
+date: "2023-06-15"
+authors:
+  - beneverman
+published : false
+---
+
+## Documentation for the Code
+
+The provided code consists of several functions and a main function that executes the entire process. Below is a detailed explanation of each component of the code.
+
+---
+
+### `Chat` Class
+```python
+class Chat:
+    """
+    A class to interact with the OpenAI Chat API.
+    """
+
+    def __init__(self, temperature=0.7, system_message="You are a helpful assistant.", messages=None, model='gpt-3.5-turbo', max_tokens=2000):
+        """
+        Initialize the Chat class with the given parameters.
+        """
+        self.messages = []
+        self.messages.append({"role": "system", "content": system_message})
+        if messages is not None:
+            self.messages += [{"role": "user", "content": message}
+                              for message in messages]
+        self.model = model
+        self.temperature = temperature
+        self.max_tokens = max_tokens
+
+    def __call__(self, user_message: str):
+        """
+        Process the user message and return the assistant's response.
+        """
+
+        user_message = {"role": "user", "content": user_message}
+        self.messages.append(user_message)
+        raw_response = openai.ChatCompletion.create(
+            model=self.model,
+            messages=self.messages,
+            temperature=self.temperature,
+            max_tokens=self.max_tokens,
+        )
+        text = raw_response['choices'][0]['message']['content'].strip()
+        tokens = raw_response['usage']['total_tokens']
+        res_message = {"role": "assistant", "content": text}
+        self.messages.append(res_message)
+        res_dict = {"response": text, "messages": self.messages,
+                    "model": self.model, "temperature": self.temperature, "tokens": tokens}
+        return res_dict
+```
+
+The `Chat` class is used to interact with the OpenAI Chat API. It allows for sending user messages and receiving assistant responses. The class has the following attributes:
+
+- `messages`: A list that stores the conversation history.
+- `model`: The model to be used for generating responses.
+- `temperature`: A parameter that controls the randomness of the generated responses.
+- `max_tokens`: The maximum number of tokens allowed for each response.
+
+The class has the following methods:
+
+- `__call__(self, user_message: str)`: This method processes the user message and returns the assistant's response. It appends the user message to the `messages` list, sends the conversation history to the Chat API using the `openai.ChatCompletion.create()` function, extracts the assistant's response from the API response, appends the response to the `messages` list, and returns a response dictionary containing the assistant's response, the conversation history, the model used, the temperature, and the number of tokens used.
+
+---
+
+### `linear_optimization` Function
+```python
+def linear_optimization(c, A_ub, b_ub, A_eq=None, b_eq=None, bounds=None):
+    """
+    Solves a linear programming optimization problem using the highs algorithm.
+
+    Parameters:
+    c (list): The coefficients of the linear objective function to be minimized.
+    A_ub (list): The inequality constraint matrix. Each row represents a constraint.
+    b_ub (list): The inequality constraint vector. Each element represents the upper bound of the corresponding constraint.
+    A_eq (list, optional): The equality constraint matrix. Each row represents a constraint.
+    b_eq (list, optional): The equality constraint vector. Each element represents the required value of the corresponding constraint.
+    bounds (list, optional): A list of bounds for each variable in the form (min, max).
+
+    Returns:
+    dict: A dictionary containing the optimal solution, the minimized objective function value, and the status of the optimization.
+    """
+    result = linprog(c, A_ub=A_ub, b_ub=b_ub, A_eq=A_eq, b_eq=b_eq, bounds=bounds, method='highs')
+
+    return {
+        'x': result.x,
+        'fun': result.fun,
+        'slack': result.slack,
+        'success': result.success,
+        'message': result.message,
+        'nit': result.nit
+    }
+```
+
+The `linear_optimization` function solves a linear programming optimization problem using the HiGHS algorithm. It takes the coefficients of the linear objective function (`c`), the inequality constraint matrix (`A_ub`), the inequality constraint vector (`b_ub`), and optionally the equality constraint matrix (`A_eq`), the equality constraint vector (`b_eq`), and the variable bounds (`bounds`). It returns a dictionary containing the optimal solution (`x`), the minimized objective function value (`fun`), the slack variables (`slack`), the success status of the optimization (`success`), the message from the optimization solver (`message`), and the number of iterations (`nit`).
+
+---
+
+### `args_parser` Function
+```python
+def args_parser(json_string):
+    data = json.loads(json_string)
+    c = np.array(data.get("c"))
+    A_ub = np.array(data.get("A_ub"))
+    b_ub = np.array(data.get("b_ub"))
+    A_eq = np.array(data.get("A_eq")) if data.get("A_eq") is not None else None
+    b_eq = np.array(data.get("b_eq")) if data.get("b_eq") is not None else None
+    bounds = np.array(data.get("bounds")) if data.get("bounds") is not None else None
+    args = c, A_ub, b_ub, A_eq, b_eq, bounds
+    return args
+```
+
+The `args_parser` function takes a JSON string as input and parses it into the required arguments for the `linear_optimization` function. It converts the JSON string to a dictionary using `json.loads()`, retrieves the values for the keys "c", "A_ub", "b_ub", "A_eq", "b_eq", and "bounds" from the dictionary, and converts them to NumPy arrays. If any of the optional keys are not present in the JSON string, they are set to `None`. Finally, the function returns the parsed arguments as a tuple.
+
+---
+
+### Main function
+```python
+def main():
+    # 1. extract relevant problem data
+    print("Analyzing problem and extracting arguments...")
+    chat = Chat(model="gpt-4", temperature=0)
+    intermediate = chat(prompt1)['response'].strip()
+    print("Intermediate Response:\n", intermediate)
+
+    # 2. generate json string of args
+    unparsed_args = chat(prompt2)['response'].strip()
+    print("Unparsed args:\n", unparsed_args)
+
+    # 3. parse the args
+    print("Parsing args...")
+    parsed_args = args_parser(unparsed_args)
+
+    # 4. pass them to the linear_optimization function
+    print("Running linear optimization...")
+    result = linear_optimization(*parsed_args)
+    print("Result:", result)
+
+    # 5. interpret the result in the context of the original problem
+    print("Interpreting result...")
+    res = chat(f"Result: {result} \n\n INSTRUCTION: Interpret the result in the context of the problem. Only use data from the above result, do not infer any other data.")['response'].strip()
+    print("Final Response:\n\n", res)
+
+main()
+```
+
+The `main` function is responsible for executing the entire process. It performs the following steps:
+
+1. Extract relevant problem data:
+   - Initializes the `Chat` class with the appropriate parameters.
+   - Sends a prompt to the Chat API to analyze the problem and extract the required arguments.
+   - Prints the intermediate response.
+
+2. Generate JSON string of args:
+   - Sends a prompt to the Chat API to generate a JSON string containing the required arguments for the `linear_optimization` function.
+   - Prints the unparsed arguments.
+
+3. Parse the args:
+   - Calls the `args_parser` function to parse the unparsed arguments into the required format.
+
+4. Pass them to the `linear_optimization` function:
+   - Calls the `linear_optimization` function with the parsed arguments.
+   - Prints the result.
+
+5. Interpret the result in the context of the original problem:
+   - Sends a prompt to the Chat API to interpret the result in the context of the original problem.
+   - Prints the final response.
+
+---
+
+In conclusion, the provided code interacts with the OpenAI Chat API to analyze a given word problem, extract the required arguments for a linear programming optimization problem, solve the optimization problem using the `linear_optimization` function, and interpret the result in the context of the original problem.

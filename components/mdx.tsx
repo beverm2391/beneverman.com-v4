@@ -5,7 +5,7 @@ import { useMDXComponent } from "next-contentlayer/hooks"
 import { cn } from "@/lib/utils"
 import { Callout } from "@/components/callout"
 import { Card } from "@/components/card"
-import Code from "@/components/code"
+import { Code } from "@/components/code"
 import ExternalLink from "./ExternalLink"
 import Link from "next/link"
 

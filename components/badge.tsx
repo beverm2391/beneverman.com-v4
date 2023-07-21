@@ -25,7 +25,7 @@ export function Badge({ children, ...props }: any) {
     const randomGradient = gradients[Math.floor(Math.random() * gradients.length)]
 
     return (
-        <p
+        <span
             {...props}
             className={cn('px-2 py-1 transition-all rounded-lg text-white font-medium translate-y-[.2rem] shadow-sm',
                 props.color ? props.color :
@@ -35,6 +35,6 @@ export function Badge({ children, ...props }: any) {
             )}
         >
             {children}
-        </p>
+        </span>
     )
 }
