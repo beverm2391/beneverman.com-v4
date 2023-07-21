@@ -74,7 +74,7 @@ export default async function IndexPage() {
                 <p className='leading-6'>
                   I'm currently working to help found a startup {' '}
                   <div className='relative inline-block'>
-                    <div className='absolute inset-0 bg-rose-200 rounded-[8px'></div>
+                    <div className='absolute inset-0 bg-rose-200 rounded-[8px]'></div>
                     <Badge className='font-semibold text-sm py-1 px-2 max-w-max max-h-max inline-block translate-y-[0rem] dark:translate-[0rem] bg-rose-600'>
                       QuantHive
                     </Badge>
