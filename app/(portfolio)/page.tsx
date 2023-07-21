@@ -45,7 +45,7 @@ export default async function IndexPage() {
           </div>
           <div>
             <p className=''>
-              Hey, I'm Ben. I'm a on a mission to build technology that{' '}
+              Hey, I'm Ben. I'm on a mission to build technology that{' '}
               <span
                 className='font-semibold dark:text-gray-100 dark:underline underline-offset-2 text-gray-900'
               >
