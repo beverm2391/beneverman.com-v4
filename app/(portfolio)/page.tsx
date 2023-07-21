@@ -99,7 +99,7 @@ export default async function IndexPage() {
                     </Badge>{' '}? My friends and I host a by-weekly{' '}
                     <Badge className='font-semibold text-sm py-[.1rem] px-2 max-w-max max-h-max inline-block translate-y-[-0.1rem] dark:translate-y-[-0.1rem] bg-orange-600'>
                       Hack Night{' '}
-                    </Badge>{' '} for tech and non-technical alike. Join our <ExternalLink href='https://leafboats.stuiod/invite'>Slack</ExternalLink> channel or reach out to get connected.
+                    </Badge>{' '} for tech and non-technical alike. Join our <ExternalLink href='https://leafboats.studio/invite'>Slack</ExternalLink> channel or reach out to get connected.
                   </div>
                 </Card>
               </div>
