@@ -73,12 +73,10 @@ export default async function IndexPage() {
               <Card className='flex flex-col gap-4 p-4 dark:border-zinc-500'>
                 <p className='leading-6'>
                   I'm currently working to help found a startup {' '}
-                  <div className='relative inline-block'>
-                    <div className='absolute inset-0 bg-rose-200 rounded-[8px]'></div>
-                    <Badge className='font-semibold text-sm py-1 px-2 max-w-max max-h-max inline-block translate-y-[0rem] dark:translate-[0rem] bg-rose-600'>
-                      QuantHive
-                    </Badge>
-                  </div>
+
+                  <Badge className='font-semibold text-sm py-1 px-2 max-w-max max-h-max inline-block translate-y-[0rem] dark:translate-[0rem] bg-rose-600'>
+                    QuantHive
+                  </Badge>
                   {' '} where we're leveraging ML, Deep Learning, Signal Processing, and more to <span className='font-medium'>help Quant funds generate alpha</span>.
                 </p>
               </Card>
