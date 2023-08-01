@@ -39,7 +39,7 @@ export default async function IndexPage() {
                 Ben Everman
               </h1>
               <h3 className='text-base text-gray-600 dark:text-gray-400'>
-                Developer and Problem Solver
+                Developer, Problem Solver, MBA Student
               </h3>
             </div>
           </div>
@@ -51,7 +51,7 @@ export default async function IndexPage() {
               >
                 improves the lives of others
               </span>
-              . My unique skill set combines organizational management and software engineering to solve problems in business, medicine, and more.
+              . My unique skill set combines organizational management and software engineering to solve problems in business, medicine, and tech.
             </p>
             <div className='flex flex-col sm:flex-row gap-6 sm:gap-4 mt-6 justify-between px-2 sm:p-0 sm:items-center'>
               <div className='flex flex-col sm:flex-row gap-4'>
@@ -77,7 +77,7 @@ export default async function IndexPage() {
                   <Badge className='font-semibold text-sm py-1 px-2 max-w-max max-h-max inline-block translate-y-[0rem] dark:translate-[0rem] bg-rose-600'>
                     QuantHive
                   </Badge>
-                  {' '} where we're leveraging ML, Deep Learning, Signal Processing, and more to <span className='font-medium'>help Quant funds generate alpha</span>.
+                  {' '} where we're leveraging ML, Signal Processing, and more to <span className='font-medium'>help Quant funds generate alpha</span>.
                 </p>
               </Card>
               {/* <h3 className="font-semibold">Quotes I've Been Pondering:</h3> */}
@@ -96,7 +96,7 @@ export default async function IndexPage() {
                     Live in{' '}
                     <Badge className='font-semibold text-sm py-[.1rem] px-2 max-w-max max-h-max inline-block translate-y-[-0.1rem] dark:translate-y-[-0.1rem] bg-indigo-600'>
                       Atlanta
-                    </Badge>{' '}? My friends and I host a by-weekly{' '}
+                    </Badge>{' '}? My friends and I host a bi-weekly{' '}
                     <Badge className='font-semibold text-sm py-[.1rem] px-2 max-w-max max-h-max inline-block translate-y-[-0.1rem] dark:translate-y-[-0.1rem] bg-orange-600'>
                       Hack Night{' '}
                     </Badge>{' '} for tech and non-technical alike. Join our <ExternalLink href='https://leafboats.studio/invite'>Slack</ExternalLink> channel or reach out to get connected.
