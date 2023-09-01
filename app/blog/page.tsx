@@ -2,6 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { allPosts } from "contentlayer/generated"
 import { compareDesc } from "date-fns"
+import { cn } from "@/lib/utils"
 
 import { formatDate } from "@/lib/utils"
 
@@ -20,21 +21,23 @@ export default async function BlogPage() {
     <div className="container max-w-3xl py-6 lg:py-10">
       <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">
         <div className="flex-1 space-y-4">
-          <h1 className="inline-block text-4xl font-bold tracking-tight dark:text-white text-slate-800 lg:text-5xl">
-            Experiments
+          <h1 className={cn("inline-block text-4xl font-bold font-display",
+          "dark:text-white text-gray-800 lg:text-6xl"
+          )}>
+            Blog
           </h1>
-          <p className="text-xl text-slate-600 dark:text-slate-300">
-            Where I share my experiments with code.
+          <p className="text-xl text-gray-600 dark:text-gray-300 font-medium">
+            Code experiments, writing, thoughts.
           </p>
         </div>
       </div>
-      <hr className="my-8 border-slate-200" />
+      {/* <hr className="my-8 border-gray-200" /> */}
       {posts?.length ? (
-        <div className="flex gap-10 flex-col">
+        <div className="flex gap-4 flex-col mt-12">
           {posts.map((post, index) => (
             <article
               key={post._id}
-              className="group relative flex flex-col space-y-2"
+              className="group relative flex flex-col mt-1"
             >
               {/* {post.image && (
                 <Image
@@ -42,16 +45,16 @@ export default async function BlogPage() {
                   alt={post.title}
                   width={804}
                   height={452}
-                  className="rounded-md border border-slate-200 bg-slate-200 transition-colors group-hover:border-slate-900"
+                  className="rounded-md border border-gray-200 bg-gray-200 transition-colors group-hover:border-gray-900"
                   priority={index <= 1}
                 />
               )} */}
-              <h2 className="text-xl font-semibold">{post.title}</h2>
-              {post.description && (
-                <p className="text-slate-600 dark:text-slate-400">{post.description}</p>
-              )}
+              <h2 className="">{post.title}</h2>
+              {/* {post.description && (
+                <p className="text-gray-600 dark:text-gray-400">{post.description}</p>
+              )} */}
               {post.date && (
-                <p className="text-sm text-slate-600 dark:text-slate-400">
+                <p className="text-sm text-gray-600 dark:text-gray-400">
                   {formatDate(post.date)}
                 </p>
               )}

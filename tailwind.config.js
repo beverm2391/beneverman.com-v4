@@ -23,6 +23,7 @@ module.exports = {
     extend: {
       colors: {
         'gray-1000': '#050505',
+        'piano-black' : '#0a0a0a',
         'void' : '#161616',
         'cod-gray': {
           '50': '#f7f7f7',
@@ -40,6 +41,7 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-inter)", ...fontFamily.sans],
         serif: ["var(--font-merriweather)", ...fontFamily.serif],
+        display: ["var(--font-calsans)"],
       },
       keyframes: {
         "accordion-down": {

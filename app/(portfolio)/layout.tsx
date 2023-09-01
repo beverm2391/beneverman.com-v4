@@ -21,7 +21,7 @@ export default async function MarketingLayout({
     <div>
       <div className="flex min-h-screen mx-auto max-w-2xl flex-col">
         <header className="container sticky top-0 z-40">
-          <div className="flex h-16 items-center justify-between border-b-0 border-b-slate-200 dark:border-b-slate-800 py-4 mt-8">
+          <div className="flex h-16 items-center justify-between border-b-0 border-b-gray-200 dark:border-b-gray-800 py-4 mt-8">
             <MainNav items={portfolioConfig.mainNav} />
             <nav>
               {/* <Link
@@ -37,7 +37,9 @@ export default async function MarketingLayout({
         {/* <RollingMenu/> */}
         <main className="flex-1 min-h-[calc(100vh-4rem)]">{children}</main>
       </div>
-      <SiteFooter />
+      <div className="max-w-2xl mx-auto">
+        <SiteFooter />
+      </div>
     </div>
   )
 }

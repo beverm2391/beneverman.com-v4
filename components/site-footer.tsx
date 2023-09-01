@@ -4,12 +4,12 @@ import ExternalLink from "./ExternalLink"
 
 export function SiteFooter() {
   return (
-    <footer className="container text-slate-600 dark:text-slate-400">
-      <div className="flex  flex-col items-center justify-between gap-4 border-t border-t-slate-200 dark:border-t-slate-800 py-10 md:h-24 md:flex-row md:py-0">
+    <footer className="container text-neutral-700 dark:text-neutral-400">
+      <div className="flex  flex-col items-center justify-between gap-4 border-t border-t-gray-200 dark:border-t-neutral-700 py-10 md:h-24 md:flex-row md:py-0">
         <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-          <Icons.logo />
+          {/* <Icons.logo /> */}
           <p className="text-center text-sm leading-loose md:text-left">
-            &copy; {new Date().getFullYear()} Everman - Haygood
+            &copy; {new Date().getFullYear()} EverTech LLC
           </p>
         </div>
         <p className="text-center text-sm md:text-left">

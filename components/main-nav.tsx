@@ -23,7 +23,7 @@ export function MainNav({ items, children }: MainNavProps) {
     <div className="flex gap-6 md:gap-10">
       <Link href="/" className="hidden items-center space-x-2 md:flex">
         {/* <Icons.logo /> */}
-        <span className="hidden font-semibold sm:inline-block text-slate-800 dark:text-slate-100">
+        <span className="hidden font-semibold sm:inline-block text-gray-800 dark:text-gray-100">
           {siteConfig.name}
         </span>
       </Link>
@@ -34,8 +34,8 @@ export function MainNav({ items, children }: MainNavProps) {
               key={index}
               href={item.disabled ? "#" : item.href}
               className={cn(
-                "flex items-center text-lg font-medium text-slate-600 hover:text-slate-400 dark:text-slate-300 dark:hover:text-slate-600 sm:text-sm",
-                item.href.startsWith(`/${segment}`) && "text-slate-900 dark:text-slate-200",
+                "flex items-center text-lg font-medium text-gray-600 hover:text-gray-400 dark:text-gray-300 dark:hover:text-gray-600 sm:text-sm",
+                item.href.startsWith(`/${segment}`) && "text-gray-900 dark:text-gray-200",
                 item.disabled && "cursor-not-allowed opacity-80"
               )}
             >

@@ -17,15 +17,15 @@ export function Card({
   return (
     <div
       className={cn(
-        "group relative rounded-lg border-2 border-slate-200 dark:border-slate-400 bg-white dark:bg-neutral-900 p-6 shadow-md transition-shadow hover:shadow-lg",
-        "dark:hover:ring-1 dark:ring-slate-300",
+        "group relative rounded-lg border-2 border-gray-200 dark:border-gray-400 bg-white dark:bg-neutral-900 p-6",
+        "dark:hover:ring-1 dark:ring-gray-300",
         disabled && "cursor-not-allowed opacity-60 dark:hover:ring-0",
         className
       )}
       {...props}
     >
       <div className="flex flex-col justify-between space-y-4">
-        <div className="space-y-2 [&>p]:text-slate-600 dark:[&>p]:text-slate-300 [&>h4]:!mt-0 [&>h3]:!mt-0">
+        <div className="space-y-2 [&>p]:text-gray-600 dark:[&>p]:text-gray-300 [&>h4]:!mt-0 [&>h3]:!mt-0">
           {children}
         </div>
       </div>

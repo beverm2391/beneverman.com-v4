@@ -8,6 +8,7 @@ import { Analytics } from "@/components/analytics"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { Toaster } from "@/components/ui/toaster"
 import Providers from "@/components/providers"
+import LocalFont from "next/font/local";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -20,6 +21,11 @@ const fontSerif = FontSerif({
   variable: "--font-merriweather",
   display: "swap",
 })
+
+const calSans = LocalFont({
+	src: "../public/fonts/CalSans-SemiBold.ttf",
+	variable: "--font-calsans",
+});
 
 
 interface RootLayoutProps {
@@ -88,12 +94,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
         "font-sans antialiased",
         fontSans.variable,
         fontSerif.variable,
+        calSans.variable,
       )}
       suppressHydrationWarning
     >
       <head />
 
-      <body className="min-h-screen bg-white dark:bg-neutral-900 text-black dark:text-white motion-reduce:transform-none motion-reduce:transition-none">
+      <body className={cn("min-h-screen",
+        "bg-white text-black",
+        "dark:bg-gradient-to-br from-black via-zinc-900 to-black dark:text-white",
+        "motion-reduce:transform-none motion-reduce:transition-none"
+      )}>
         <Providers>
           {children}
           <Analytics />

@@ -137,6 +137,10 @@ export const Page = defineDocumentType(() => ({
     description: {
       type: "string",
     },
+    published: {
+      type: "boolean",
+      default: true,
+    },
   },
   computedFields,
 }))

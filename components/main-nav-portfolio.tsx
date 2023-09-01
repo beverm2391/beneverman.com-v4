@@ -34,8 +34,8 @@ export function MainNav({ items, children }: MainNavProps) {
               key={index}
               href={item.disabled ? "#" : item.href}
               className={cn(
-                "flex items-center text-sm font-medium text-slate-600 hover:text-slate-400 dark:text-slate-300 dark:hover:text-slate-600 sm:text-base",
-                item.href.startsWith(`/${segment}`) && "text-slate-900 dark:text-slate-200",
+                "flex items-center text-sm font-medium text-gray-700 hover:text-gray-400 dark:text-gray-200 dark:hover:text-gray-600 sm:text-base",
+                item.href.startsWith(`/${segment}`) && "text-gray-900 dark:text-gray-200",
                 item.disabled && "cursor-not-allowed opacity-80"
               )}
             >

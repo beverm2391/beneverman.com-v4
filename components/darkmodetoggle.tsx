@@ -10,7 +10,7 @@ export const Toggle = () => {
         <button
             aria-label="Toggle Dark Mode"
             type="button"
-            className="w-9 h-9 dark:bg-gray-800/50 rounded-lg text-gray-500 flex items-center justify-center border-2 border-slate-400 dark:border-slate-600 hover:ring-2 ring-slate-300 dark:ring-slate-700 transition-all"
+            className="w-9 h-9 dark:bg-neutral-900/50 rounded-lg text-neutral-600 dark:text-neutral-300 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-neutral-800 duration-1 transition-all"
             onClick={() =>
                 setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
             }
