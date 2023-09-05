@@ -25,6 +25,7 @@ module.exports = {
         'gray-1000': '#050505',
         'piano-black' : '#0a0a0a',
         'void' : '#161616',
+        'soft-black' : '#212121',
         'cod-gray': {
           '50': '#f7f7f7',
           '100': '#e3e3e3',

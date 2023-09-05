@@ -1,30 +1,72 @@
+"use client"
+
+import { cn } from "@/lib/utils"
 import { Card } from "@/components/card";
 import ExternalLink from "@/components/ExternalLink";
-import { Links } from "@/components/portfolio/contact"
+import { motion } from "framer-motion"
+import { FADE_UP_ANIMATION_VARIANTS } from "@/config/animations";
+import { Badge } from "@/components/badge";
+import ReadingListSimple from "@/components/ReadingListSimple";
+import Image from "next/image";
+import avatar from '@/public/images/avatar.jpg'
 
 export default function Home() {
     return (
         <section className="container max-w-2xl flex flex-col gap-6 pt-6 pb-8 md:pt-10 md:pb-12 lg:pt-12 lg:pb-12">
-            <div className='flex flex-col gap-8'>
-                <div className='flex flex-col'>
-                    <h2 className="text-7xl font-display bg-gradient-to-tr dark:from-white dark:via-zinc-200 dark:to-white from-black via-zinc-800 to-black bg-clip-text text-transparent">
+            <motion.div
+                className='flex flex-col gap-8'
+                initial="hidden"
+                animate="show"
+                // viewport={{ once: false }}
+                variants={{
+                    hidden: {},
+                    show: {
+                        transition: {
+                            staggerChildren: 0.02,
+                        },
+                    },
+                }}
+            >
+                <motion.div className='flex flex-row items-center'>
+                    <motion.h2
+                        className="text-7xl font-display bg-gradient-to-tr dark:from-white dark:via-zinc-200 dark:to-white from-black via-zinc-800 to-black bg-clip-text text-transparent"
+                        variants={FADE_UP_ANIMATION_VARIANTS}
+                    >
                         Ben Everman
-                    </h2>
-                    {/* <div className='flex flex-row gap-2 mt-4'>
-                        <Links
-                            size='md'
+                    </motion.h2>
+                    {/* <motion.div
+                        className='flex flex-col justify-center items-center ml-6'
+                        variants={FADE_UP_ANIMATION_VARIANTS}
+                    >
+                        <Image src={avatar} alt="Ben Everman" width={60} height={60}
+                            className={cn(
+                                'rounded-full',
+                                // 'border-[2px] ring-[1px] border-blue-500 ring-blue-300',
+                                'border-[0px] border-white dark:border-black',
+                            )}
                         />
-                    </div> */}
-                </div>
-                <div>
+                    </motion.div> */}
+                </motion.div>
+                <motion.div
+                    variants={FADE_UP_ANIMATION_VARIANTS}
+                >
+                    <p>
+                        {/* challenge - write a bio without mentioning what you do or projects you've worked on */}
+                        I currently live in Atlanta GA 
+                    </p>
+                </motion.div>
+                <motion.div
+                    variants={FADE_UP_ANIMATION_VARIANTS}
+                >
                     <ul className='list-disc ml-4 leading-8'>
-                        <li>See my public code <ExternalLink href="/" arrow={false}>here</ExternalLink>.</li>
+                        <li>See my public code <ExternalLink href="https://www.github.com/beverm2391" arrow={false}>here</ExternalLink>.</li>
                         <li>Read about my experiments <ExternalLink href="/blog" arrow={false}>here</ExternalLink>.</li>
-                        <li>Read my resume <ExternalLink href="/" arrow={false}>here</ExternalLink>.</li>
-                        {/* <li>Email me at <ExternalLink href="mailto:evermanben@gmail.com" arrow={false}>evermanben@gmail.com</ExternalLink>.</li> */}
+                        <li>View my resume <ExternalLink href="/" arrow={false}>here</ExternalLink>.</li>
+                        <li>Contact me <ExternalLink href="mailto:evermanben@gmail.com" arrow={false}>here</ExternalLink>.</li>
                     </ul>
-                </div>
-            </div>
+                </motion.div>
+                <ReadingListSimple />
+            </motion.div>
         </section>
     )
 }

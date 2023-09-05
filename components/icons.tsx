@@ -33,6 +33,17 @@ import {
   BsFillEnvelopeFill,
 } from 'react-icons/bs'
 
+import {
+  FaBook,
+  FaBookmark,
+  FaBookOpen,
+  FaFileAlt,
+} from 'react-icons/fa'
+
+import {
+  GrArticle
+} from 'react-icons/gr'
+
 export type Icon = LucideIcon
 
 export const Icons = {
@@ -66,4 +77,9 @@ export const Icons = {
   check: Check,
   Linkedin : BsLinkedin,
   Mail : BsFillEnvelopeFill,
+  FaBook : FaBook,
+  FaBookmark : FaBookmark,
+  FaBookOpen : FaBookOpen,
+  GrArticle : GrArticle,
+  FaFileAlt : FaFileAlt
 }

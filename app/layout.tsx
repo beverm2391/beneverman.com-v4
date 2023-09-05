@@ -102,7 +102,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
       <body className={cn("min-h-screen",
         "bg-white text-black",
-        "dark:bg-gradient-to-br from-black via-zinc-900 to-black dark:text-white",
+        // "text-black bg-gradient-to-br from-whit to-white",
+        "dark:bg-gradient-to-br dark:from-soft-black dark:via-zinc-900 dark:to-soft-black dark:text-white",
         "motion-reduce:transform-none motion-reduce:transition-none"
       )}>
         <Providers>
