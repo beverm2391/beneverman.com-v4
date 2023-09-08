@@ -22,3 +22,8 @@ export type Work = {
     url: string,
     type: "book" | "essay" | "journal" | "article",
 }
+
+export type List = {
+    lastUpdated: string,
+    data: Array<Work>
+}

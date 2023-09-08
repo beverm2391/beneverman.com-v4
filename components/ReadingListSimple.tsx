@@ -6,7 +6,8 @@ import { Icons } from "./icons"
 import { motion } from 'framer-motion'
 import { FADE_UP_ANIMATION_VARIANTS } from "@/config/animations"
 import { Work } from "@/types/reading-list"
-import { Works } from "@/config/reading-list"
+import { list } from "@/config/reading-list"
+import { formatDate } from "@/lib/utils"
 
 // !! =================================== Change Data in `config/reading-list` ===================================
 const GeneralCardSimple = ({ work }: { work: Work }) => {
@@ -29,6 +30,8 @@ const GeneralCardSimple = ({ work }: { work: Work }) => {
 
 
 export default function ReadingListSimple() {
+    const works = list.data
+    const lastUpdated = list.lastUpdated
     return (
         <div>
             {/* <motion.h3
@@ -37,17 +40,23 @@ export default function ReadingListSimple() {
             >
                 Recent Reads:
             </motion.h3> */}
-            <div className='flex flex-col gap-4'>
+            <div className='flex flex-col gap-0'>
                 <motion.h3
-                    className='text-2xl text-gray-800 dark:text-gray-200 font-display tracking-wide font-semibold'
+                    className='text-2xl text-gray-800 dark:text-gray-200 font-display tracking-wide font-semibold mb-1'
                     variants={FADE_UP_ANIMATION_VARIANTS}
                 >
                     Recent Reads:
                 </motion.h3>
+                <motion.p
+                    className='text-gray-500 dark:text-gray-400 text-sm mb-4 italic'
+                    variants={FADE_UP_ANIMATION_VARIANTS}
+                >
+                    last updated: {formatDate(lastUpdated)}
+                </motion.p>
                 <ul
                     className='flex flex-col gap-0'
                 >
-                    {Works.map((work, i) => {
+                    {works.map((work, i) => {
                         return (
                             <motion.li
                                 variants={FADE_UP_ANIMATION_VARIANTS}
