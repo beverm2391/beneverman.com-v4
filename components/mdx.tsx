@@ -65,18 +65,23 @@ const components = {
     />
   ),
   a: ({ className, ...props }) => (
-    // <a
-    //   className={cn(
-    //     "font-medium underline underline-offset-4 dark:text-white text-slate-800",
-    //     className
-    //   )}
-    //   {...props}
-    // />
-    <ExternalLink
-      children={undefined} href={""} className={cn(
-        "font-medium underline underline-offset-4 dark:text-white text-slate-800"
+    <a
+      className={cn(
+        "dark:text-blue-500 text-blue-600",
+        className
       )}
-      {...props}    />
+      {...props}
+      target="_blank"
+    />
+  ),
+  InternalLink : ({ className, ...props }) => (
+    <a
+      className={cn(
+        "underline underline-offset-4 dark:text-zinc-200 text-gray-800",
+        className
+      )}
+      {...props}
+    />
   ),
   p: ({ className, ...props }) => (
     <p
@@ -162,7 +167,8 @@ const components = {
   Image,
   Callout,
   Card,
-  Link
+  Link,
+  ExternalLink,
 }
 
 interface MdxProps {

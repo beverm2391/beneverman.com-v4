@@ -10,6 +10,12 @@ export const Works: Array<Work> = [
     //     type: "book",
     // },
     {
+        title: "Precision Agriculture",
+        author: "Various Authors",
+        url: "https://www.sciencedirect.com/topics/earth-and-planetary-sciences/precision-agriculture",
+        type: "article"
+    },
+    {
         title: "Advanced Time Series Analysis in Python: Seasonality and Trend Analysis (Decomposition), Autocorrelation",
         author: "Bex. T",
         url: "https://towardsdatascience.com/advanced-time-series-analysis-in-python-decomposition-autocorrelation-115aa64f475e",

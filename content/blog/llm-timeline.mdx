@@ -6,17 +6,15 @@ authors:
   - beneverman
 ---
 
-<Callout type='warning'>All code is [here](https://github.com/beverm2391). Want a quick read? <a className='font-medium underline underline-offset-4 dark:text-white text-slate-800' href='#level-3'>Skip to the coolest stuff</a>.</Callout>
+<Callout type='warning'>All code is [here](https://github.com/beverm2391). Want a quick read? <InternalLink href='#level-3'>Skip to the coolest stuff.</InternalLink></Callout>
 
-My first ever Python script was a cron job that periodically emailed me new PubMed articles related to a medicine I was on. My second was a script that sent me a push notification every time a piece of rare climbing gear was posted for sale on Mountain Project. In early 2022, I read GPT-3’s inaugural paper, Language Models Are Few Shot Learners (2020), and was awakened to the potential of leveraging Large Language Models (LLMs) to extend the complexity and capability of my projects. Here I’m going to lay out a timeline of the projects I’ve built using LLMs - their successes, limitations, and general usefulness today. Most of my code has been gradually built into a package called benlp which I’ll link (now) and again later. 
-
-All of these projects leverage OpenAI’s API. The nice thing about building on top of their models is that OpenAI is constantly innovating and improving model performance, which typically improves my project performance. See the <a className='font-medium underline underline-offset-4 dark:text-white text-slate-800' href='#oai-timeline'>OpenAI Release Timeline</a> for a list of major releases.
+My first ever Python script was a cron job that periodically emailed me new PubMed articles related to a medicine I was on. My second was a script that sent me a push notification every time a piece of rare climbing gear was posted for sale on Mountain Project. In early 2022, I read GPT-3’s inaugural paper, Language Models Are Few Shot Learners (2020), and was awakened to the potential of leveraging Large Language Models (LLMs) to extend the complexity and capability of my projects. Here I’m going to lay out a timeline of the projects I’ve built using LLMs - their successes, limitations, and general usefulness today. Most of my code has been gradually built into a package called `benlp` which I’ll link (now) and again later. 
 
 ## My Projects
 
 ### Level 1 - Out Of The Box
 
-Before GPT-3 was instruction tuned (figure out which model this would have been), the lowest hanging fruit in 2022 was using (model name) to assist in writing for my classes. At this point, the model was unable to write coherently out of the box, even with precise prompting. Then I wrote a script that would take a PDF or PowerPoint and generate bulleted notes. After I built this, I realized that I could code during all my lectures and just work off my generated summaries. Then I experimented with outputting notes in a format that I could batch import to Quizlet flashcards. At the time the best model was text-davinci-002, which used [supervised fine-tuning but not reinforcement learning](https://arxiv.org/abs/2303.10420) so getting a consistently formatted output was difficult. 
+Before GPT-3 was instruction tuned, the lowest hanging fruit in 2022 was using `text-davinci-002` to assist in writing. At this point, the model was unable to write coherently out of the box, even with precise prompting. Then I wrote a script that would take a PDF or PowerPoint and generate bulleted notes. After I built this, I realized that I could code during all my lectures and just work off my generated summaries. Then I experimented with outputting notes in a format that I could batch import to Quizlet flashcards. Since `text-davinci-002` was trained with [supervised fine-tuning but not reinforcement learning](https://arxiv.org/abs/2303.10420), getting a consistently formatted output was difficult. 
 
 ### Level 2 - Embedded Search
 
@@ -47,26 +45,14 @@ The open-source community has been doing some incredible work with LLMs. I’m n
 
 That’s a synopsis of my journey with LLMs. I have learned so much from reverse engineering other’s code, so if you decide you want to go through mine, (here is the link to my main repo) called `benlp`. Feel free to (reach out with questions).
 
-## Appendix 
-
-<span id="oai-timeline"/>
-### OpenAI Release Timeline
-**2020**
-- [Language Models are Few-Shot Learners](https://arxiv.org/abs/2005.14165)
-
-**2021**
-- [OpenAI’s API now available with no waitlist](https://openai.com/blog/api-no-waitlist)
-- [OpenAI Codex](https://openai.com/blog/openai-codex)
-
-**2022**
-- [Text and Code Embeddings by Contrastive Pre-Training](https://arxiv.org/abs/2201.10005)
-- [Training language models to follow instructions with human feedback](https://arxiv.org/abs/2203.02155)
-- [Introducing ChatGPT](https://openai.com/blog/chatgpt)
-- [New and improved embedding model](https://openai.com/blog/new-and-improved-embedding-model)
-
-**2023**
-- [Introducing ChatGPT and Whisper APIs](https://openai.com/blog/introducing-chatgpt-and-whisper-apis)
-- [GPT-4 Technical Report](https://arxiv.org/abs/2303.08774)
-- [GPT-4 API general availability](https://openai.com/blog/gpt-4-api-general-availability)
-
 ## References
+
+Brown, T. B., Mann, B., Ryder, N., Subbiah, M., Kaplan, J., Dhariwal, P., et al. (2020). Language Models are Few-Shot Learners. <a href="https://doi.org/10.48550/arXiv.2005.14165">arXiv:2005.14165</a>.
+
+OpenAI. (2023). GPT-4 Technical Report. <a href="https://doi.org/10.48550/arXiv.2303.08774">arXiv:2303.08774</a>.
+
+OpenAI’s API now available with no waitlist. <a href="https://openai.com/blog/api-no-waitlist">openai.com</a>.
+
+Ye, J., Chen, X., Xu, N., Zu, C., Shao, Z., Liu, S., et al. (2023). A Comprehensive Capability Analysis of GPT-3 and GPT-3.5 Series Models. <a href="https://doi.org/10.48550/arXiv.2303.10420">arXiv:2303.10420</a>.
+
+Zuckerbrot, R. A., Cheung, A., Jensen, P. S., Stein, R. E. K., Laraque, D., et al. (2018). Guidelines for Adolescent Depression in Primary Care (GLAD-PC): Part I. Practice Preparation, Identification, Assessment, and Initial Management. Pediatrics, 141(3). <a href="https://doi.org/10.1542/peds.2017-4081">doi:10.1542/peds.2017-4081</a>.
