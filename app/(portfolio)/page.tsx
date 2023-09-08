@@ -7,8 +7,10 @@ import { motion } from "framer-motion"
 import { FADE_UP_ANIMATION_VARIANTS } from "@/config/animations";
 import { Badge } from "@/components/badge";
 import ReadingListSimple from "@/components/ReadingListSimple";
+import PostList from "@/components/PostList"
 import Image from "next/image";
 import avatar from '@/public/images/avatar.jpg'
+import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
     return (
@@ -22,7 +24,7 @@ export default function Home() {
                     hidden: {},
                     show: {
                         transition: {
-                            staggerChildren: 0.02,
+                            staggerChildren: 0.03,
                         },
                     },
                 }}
@@ -47,24 +49,26 @@ export default function Home() {
                         />
                     </motion.div> */}
                 </motion.div>
-                <motion.div
+                {/* <motion.div
                     variants={FADE_UP_ANIMATION_VARIANTS}
                 >
                     <p>
-                        {/* challenge - write a bio without mentioning what you do or projects you've worked on */}
+                        challenge - write a bio without mentioning what you do or projects you've worked on
                         I currently live in Atlanta GA 
                     </p>
-                </motion.div>
+                </motion.div> */}
                 <motion.div
                     variants={FADE_UP_ANIMATION_VARIANTS}
                 >
                     <ul className='list-disc ml-4 leading-8'>
                         <li>See my public code <ExternalLink href="https://www.github.com/beverm2391" arrow={false}>here</ExternalLink>.</li>
-                        <li>Read about my experiments <ExternalLink href="/blog" arrow={false}>here</ExternalLink>.</li>
+                        <li>Read about my experiments <ExternalLink href="/blog" arrow={false} target="_self">here</ExternalLink>.</li>
                         <li>View my resume <ExternalLink href="/" arrow={false}>here</ExternalLink>.</li>
-                        <li>Contact me <ExternalLink href="mailto:evermanben@gmail.com" arrow={false}>here</ExternalLink>.</li>
+                        <li>Contact me <ExternalLink href="mailto:evermanben@gmail.com" arrow={false} target="_self">here</ExternalLink>.</li>
                     </ul>
                 </motion.div>
+                {/* <Separator/> */}
+                <PostList />
                 <ReadingListSimple />
             </motion.div>
         </section>

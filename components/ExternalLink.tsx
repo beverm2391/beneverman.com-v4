@@ -6,6 +6,7 @@ interface Props {
   className?: string;
   href: string;
   underline?: boolean;
+  target? : "_blank" | "_self"
 }
 
 export default function ExternalLink({
@@ -13,6 +14,7 @@ export default function ExternalLink({
   children,
   arrow = true,
   underline = true,
+  target = "_blank",
   className,
 }: Props) {
   return (
@@ -28,7 +30,7 @@ export default function ExternalLink({
         )}
         href={href}
         rel="noopener noreferrer"
-        target="_blank"
+        target={target}
       >
         {children}
       </a>

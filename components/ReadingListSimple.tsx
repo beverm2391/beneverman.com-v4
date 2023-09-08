@@ -42,17 +42,17 @@ export default function ReadingListSimple() {
             </motion.h3> */}
             <div className='flex flex-col gap-0'>
                 <motion.h3
-                    className='text-2xl text-gray-800 dark:text-gray-200 font-display tracking-wide font-semibold mb-1'
+                    className='text-2xl text-gray-800 dark:text-gray-200 font-display tracking-wide font-semibold mb-4'
                     variants={FADE_UP_ANIMATION_VARIANTS}
                 >
-                    Recent Reads:
+                    Recent Reading:
                 </motion.h3>
-                <motion.p
+                {/* <motion.p
                     className='text-gray-500 dark:text-gray-400 text-sm mb-4 italic'
                     variants={FADE_UP_ANIMATION_VARIANTS}
                 >
                     last updated: {formatDate(lastUpdated)}
-                </motion.p>
+                </motion.p> */}
                 <ul
                     className='flex flex-col gap-0'
                 >
@@ -62,7 +62,7 @@ export default function ReadingListSimple() {
                                 variants={FADE_UP_ANIMATION_VARIANTS}
                                 key={i}
                             >
-                                <GeneralCardSimple key={i} work={work} />
+                                <GeneralCardSimple work={work} />
                             </motion.li>
                         )
                     })}
