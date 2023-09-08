@@ -1,5 +1,5 @@
 ---
-title: Complex Summarization With AI
+title: Academic Writing With AI
 description: How I used AI to summarize complex text
 date: "2023-09-08"
 authors:
@@ -8,19 +8,41 @@ authors:
 
 ## Introduction
 
-I started playing with GPT-3 in November of 2021. I quickly realized I could leverage Natural Language Processing (NLP) to significantly speed up the pace of my schoolwork. Out of the box, the newest Large Language Models (LLMs) can do quite a bit out of the box. They can:
+The newest Large Language Models (LLMs) can do quite a bit out of the box. They can:
 1. Generate text
 2. Converse
 3. Answer open book questions (you provide the context in the prompt)
 4. Answer closed book questions (semi-accurately)
 
-They are essentially *complex data structures that can be queried with natural language*. When scaled up to billions of params, increased performance on un-trained benchmarks *emerges*, and we get these pseudo-intelligent feeling models like GPT-3. 
+Fundamentally, they are **deep neural networks trained on large datasets capable of generating natural language**. Stephen Wolfram wrote a great [technical intro](https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/) to LLMs, though I'll be focusing on the application layer - how to use them (as opposed to building them).
 
 ## Writing Literature Reviews With AI
 
-describe what I wanted to do, then segway into the problems with LLMs for summarization
+I had some grad school assignments where I had to write short (~1000 word) reviews of various literature. This led me to wonder if LLMs were capable of writing such a literature review. Turns out, they have some significant limitations - but they can be improved if used with **careful prompting, closed-book Q/A, data augmented retrieval, and Chain of Though (CoT) reasoning**. In this case, I was able to select a PDF article of interest, run a custom Python script, and get the following 500 word review in about 40 seconds.
 
+<Callout> Original Article: [Original Article]() </Callout>
 
-However, they have drawbacks. For summarization, there's a few significant limitations.
+<Card className='mt-4'>
+Cognitive-behavioral therapies (CBTs) serve as a beneficial treatment for symptoms of anxiety and depression. Research on CBT aims to identify the core mechanisms of change responsible for symptom improvement. There are two primary core mechanisms for CBTs for anxiety: fear extinction and threat reappraisal. Cognitive change is the most researched mechanism for CBTs for depression (Powers, 2017). Although these two theories may seem incompatible, they may represent differences in levels of analysis. Cognitive change is a critical factor in CBT for both anxiety and depression, regardless of how it is achieved.
 
-## Problems With LLMs for Summarization
+Powers' (2017) article, Core Mechanisms of Cognitive Behavioral Therapy for Anxiety and Depression, delves into the core mechanisms of cognitive behavioral therapy for treating mental health disorders like anxiety and depression. The article discusses various techniques such as fear extinction, threat reappraisal, exposure therapy, and cognitive restructuring, as well as newer techniques such as acceptance and mindfulness-based therapies, cognitive bias modification interventions, positive mood induction, exercise augmentation, and the importance of sudden gains and critical sessions. All these psychological processes are used to target faulty threat appraisals, which ultimately lead to symptom improvement and reduced anxiety.
+
+Cognitive change plays a crucial role in the success of CBT for both anxiety and depression. In CBT for anxiety, fear extinction and threat reappraisal are central mechanisms of change. Fear extinction involves reducing the fear response to a conditioned stimulus by exposing individuals to the feared stimulus repeatedly without any adverse consequences. Threat reappraisal is a cognitive process that aims to change an individual's perception of a stressor, ultimately leading to decreased anxiety. In contrast, cognitive changes are primarily responsible for symptom improvement in CBTs for depression. Research has revealed cognitive restructuring as the most researched psychological mechanism in CBT for depression, observed in both antidepressant and CBT interventions.
+
+Additionally, various methods have been suggested to enhance threat reappraisal. Mindfulness-based approaches and acceptance and commitment therapy are two such methods. The study by Alfei, Ferrer Monti, Molina, et al., (2015) emphasizes that prediction error and trace dominance are essential factors in determining the fate of fear memories after post-training manipulations. On the other hand, Julian, Beard, Schmidt, et al., (2012) study presents how attention training can reduce attention bias and social stressor reactivity, while Vittengl, Clark, & Jarrett (2005) discuss the validity of sudden gains in acute-phase treatment of depression.
+
+In conclusion, cognitive-behavioral therapies (CBTs) have proved effective in healing symptoms of anxiety and depression. Anxiety and depression have different core mechanisms for CBTs, but cognitive change is an integral factor in both. Fear extinction and threat reappraisal are two central mechanisms for CBT for anxiety, while cognitive restructuring is crucial for CBT for depression. Therapists can use various techniques, such as acceptance and mindfulness-based therapies, to enhance threat reappraisal. Therefore, understanding the core mechanisms of CBT encourages the development of future CBTs to improve mental health treatments.
+
+References:
+
+Powers, M. B. (2017). Core Mechanisms of Cognitive Behavioral Therapy for Anxiety and Depression. Psychiatric Clinics of North America, 40, 611-623. doi:10.1016/j.psc.2017.08.010
+
+</Card>
+
+It may not look that impressive, but it shouldn't. Out of the box, LLMs can easily generate academic-esq responses. But that's the key - the problem isn't getting an *academic sounding response*, it's getting an *academically accurate response*. And it's not enough to have 99% accuracy, because academic literature must be 100% accurate with 0% plagiarism.
+
+## The Problem With LLMs and Academic Writing
+
+The first problem is that LLMs are generally pre-trained only once. They can be later adapted to a specific task with fine-tuning or reinforcement learning, though the underlying model architecture is still the same. The relevance here is that after the model is initially pre-trained on a dataset - it's computationally and logistically expensive to pre-train the same model on *new data*. For example, if a LLM is pre-trained on 1/1/2022, and I ask it, "Who won the Super Bowl in 2023?", it won't know. The 2023 superbowl hasn't happened yet. Furthermore, the model might provide a believable answer, for example, "The New England Patriots won the Super Bowl in 2023." This is problematic, not only because it's inaccurate, but because it's actually plausible. In this situation - if you're a football fan - it's very clear that the answer is wrong, because you saw the Kansas City Chiefs beat the Philadelphia Eagles in the 2023 Super Bowl. If you're not a football fan, you'll think, *Oh yeah, I know the Patriots. They're usually pretty good, aren't they?* Then you'll move on.
+
+My point here is this: **when LLMs hallucinate, they will do so convincingly enough that you're at serious risk of believing it**. We're mostly accustomed to search engines, which are fundamentally different. In the case of an an academic literature review, it's clear how this could be problematic.
