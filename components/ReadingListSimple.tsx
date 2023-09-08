@@ -12,7 +12,7 @@ import { formatDate } from "@/lib/utils"
 // !! =================================== Change Data in `config/reading-list` ===================================
 const GeneralCardSimple = ({ work }: { work: Work }) => {
     return (
-        <a href={work.url} className='cursor-pointer'>
+        <a href={work.url} className='cursor-pointer' target="_blank">
             <div className='gap-2 mb-2 flex flex-row items-center hover:scale-[1.01] hover:translate-x-1 transition-all duration-1'>
                 {/* <Icons.FaFileAlt className='flex items-center justify-center text-gray-800 dark:text-gray-200 h-4 w-4' /> */}
                 <div>
