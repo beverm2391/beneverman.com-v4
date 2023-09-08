@@ -15,8 +15,10 @@ export const portfolioConfig: MarketingConfig = {
     //   href: "/docs",
     // },
     {
-      title: "Consulting",
+      title: "Contact",
       href: "/contact",
     },
   ],
 }
+
+export const contactEmail = "evermanben@gmail.com"

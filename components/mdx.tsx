@@ -8,6 +8,7 @@ import { Card } from "@/components/card"
 import { Code } from "@/components/code"
 import ExternalLink from "./ExternalLink"
 import Link from "next/link"
+import { Badge } from "@/components/badge"
 
 const components = {
   h1: ({ className, ...props }) => (
@@ -67,7 +68,7 @@ const components = {
   a: ({ className, ...props }) => (
     <a
       className={cn(
-        "dark:text-blue-500 text-blue-600",
+        "dark:text-blue-400 text-blue-600 hover:text-blue-400 dark:hover:text-blue-300",
         className
       )}
       {...props}
@@ -77,7 +78,7 @@ const components = {
   InternalLink : ({ className, ...props }) => (
     <a
       className={cn(
-        "underline underline-offset-4 dark:text-zinc-200 text-gray-800",
+        "underline underline-offset-4 dark:text-zinc-200 text-gray-800 hover:text-zinc-600 dark:hover:text-zinc-400",
         className
       )}
       {...props}
@@ -169,6 +170,7 @@ const components = {
   Card,
   Link,
   ExternalLink,
+  Badge,
 }
 
 interface MdxProps {
