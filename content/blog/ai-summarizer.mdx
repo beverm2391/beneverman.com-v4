@@ -18,7 +18,27 @@ Fundamentally, LLMs are **deep neural networks trained on large datasets capable
 
 ## Writing Literature Reviews With AI
 
-I had some grad school assignments where I had to write short (~1000 word) reviews of various literature. This led me to wonder if LLMs were capable of writing such a literature review. Turns out, they have some significant limitations - but they can be improved if used with **careful prompting, closed-book Q/A, data augmented retrieval, and Chain of Though (CoT) reasoning**. In this case, I was able to select a PDF article of interest, run a custom Python script, and get the following 500 word review in about 3 minutes.
+I had some grad school assignments where I had to write short (~1000 word) reviews of various literature. This led me to wonder if LLMs were capable of writing such a literature review. Turns out, they have some significant limitations - but they can be improved if used with **careful prompting, closed-book Q/A, data augmented retrieval, and Chain of Though (CoT) reasoning**.
+
+## The Problems With LLMs and Academic Writing
+
+### Hallucination
+
+The first problem is that LLMs are generally pre-trained only once. They can be later adapted to a specific task with fine-tuning or reinforcement learning, though the underlying model architecture is still the same. The relevance here is that after the model is initially pre-trained on a dataset - it's computationally and logistically expensive to pre-train the same model on *new data*. For example, if a LLM is pre-trained on 1/1/2022, and I ask it, "Who won the Super Bowl in 2023?", it won't know. When it was pre-trained, the 2023 superbowl hadn't happened yet, so it couldn't have been included in the pre-training dataset. Furthermore, the model might hallucinate a believable answer, for example, "The New England Patriots won the Super Bowl in 2023." This is problematic, not only because it's inaccurate, but because it's actually plausible. In this situation - if you're a football fan - it's very clear that the answer is wrong, because you saw the Kansas City Chiefs beat the Philadelphia Eagles in the 2023 Super Bowl. If you're not a football fan, you'll think, *Oh yeah, I know the Patriots. They're usually pretty good, aren't they?*, then move on.
+
+My point here is this: **when LLMs hallucinate, they will do so convincingly enough that you're at serious risk of believing it**. We're mostly accustomed to search engines, which are fundamentally different. In the case of an an academic literature review, it's clear how this could be problematic.
+
+### Inaccurate Citations
+
+The second problem is that LLMs are generally considered **black-box** technology - the inner workings are not easily observed or interpreted. Since LLMs are often stochastic (inherently random and probabilistic) in training and can be non-deterministic (variable or uncertain) during inference, If I ask a LLM a question, it's unknown what data it's using to answer that question. This is explored in a sub-field called [Explainable AI](https://cloud.google.com/explainable-ai#:~:text=Explainable%20AI%20is%20a%20set,others%20understand%20your%20models'%20behavior.) or XAI. The significance here is that the model can't cite its sources - which is paramount in academia.
+
+### Inability to Meaningfully Reason or Cognate
+
+Artificial Intelligence is designed to emulate human-like "understanding" by modeling complex latent variables. LLMs feel particularly compelling because they do this with natural language. As I mentioned earlier, we tend to be used to memorization, so when a LLM performs accurately on an out-of-sample test (something it has never seen), it feels like the model is actually *thinking* like a human would, more than just memorizing and regurgitating like a search engine would. And it is - kind of. There are differing perspectives on the relationship between AI and human cognition. 
+
+For this purpose, it's more practical to evaluate the model on a discrete, quasi-measurable benchmark (as opposed to its general "intelligence"). In this case, the benchmark is the ability to synthesize academic source material into a 
+
+## The Solution
 
 <Callout> Original Article: [An Examination of Automatic Tomato Detection with an Improved YOLOv8s Model](https://www.mdpi.com/2073-4395/13/7/1824) </Callout>
 
@@ -60,22 +80,3 @@ Yang, G., Wang, J., Nie, Z., Yang, H., & Yu, S. (2023). A Lightweight YOLOv8 Tom
 </Card>
 
 It may not look that impressive, as we're used to LLMs generating academic-esq responses out of the box. But that's the key - the problem isn't getting an *academic sounding response*, it's getting an *academically accurate response*. And it's not enough to have 99% accuracy, because academic literature must be fully factual, appropriately cited, and well reasoned.
-
-## The Problems With LLMs and Academic Writing
-
-### Hallucination
-
-The first problem is that LLMs are generally pre-trained only once. They can be later adapted to a specific task with fine-tuning or reinforcement learning, though the underlying model architecture is still the same. The relevance here is that after the model is initially pre-trained on a dataset - it's computationally and logistically expensive to pre-train the same model on *new data*. For example, if a LLM is pre-trained on 1/1/2022, and I ask it, "Who won the Super Bowl in 2023?", it won't know. When it was pre-trained, the 2023 superbowl hadn't happened yet, so it couldn't have been included in the pre-training dataset. Furthermore, the model might hallucinate a believable answer, for example, "The New England Patriots won the Super Bowl in 2023." This is problematic, not only because it's inaccurate, but because it's actually plausible. In this situation - if you're a football fan - it's very clear that the answer is wrong, because you saw the Kansas City Chiefs beat the Philadelphia Eagles in the 2023 Super Bowl. If you're not a football fan, you'll think, *Oh yeah, I know the Patriots. They're usually pretty good, aren't they?*, then move on.
-
-My point here is this: **when LLMs hallucinate, they will do so convincingly enough that you're at serious risk of believing it**. We're mostly accustomed to search engines, which are fundamentally different. In the case of an an academic literature review, it's clear how this could be problematic.
-
-### Inaccurate Citations
-
-The second problem is that LLMs are generally considered **black-box** technology - the inner workings are not easily observed or interpreted. Since LLMs are often stochastic (inherently random and probabilistic) in training and can be non-deterministic (variable or uncertain) during inference, If I ask a LLM a question, it's unknown what data it's using to answer that question. This is explored in a sub-field called [Explainable AI](https://cloud.google.com/explainable-ai#:~:text=Explainable%20AI%20is%20a%20set,others%20understand%20your%20models'%20behavior.) or XAI. The significance here is that the model can't cite its sources - which is paramount in academia.
-
-
-### Inability to Meaningfully Reason or Cognate
-
-The third problem 
-
-Artificial Intelligence is designed to emulate human-like "understanding" by modeling complex latent variables. LLMs feel particularly compelling because they do this with natural language. As I mentioned earlier, we tend to be used to memorization, so when a LLM performs accurately on an out-of-sample test (something it has never seen), it feels like the model is actually *thinking* like a human would, more than just memorizing and regurgitating like a search engine would. And it is - kind of. There are differing perspectives on the relationship between AI and human cognition. For this purpose, it's more pragmatical to focus on the model's ability to perform on a discrete, quasi-measurable benchmark. In this case, the benchmark is the ability to write a factually accurate, appropriately cited, and well reasoned academic literature review.
