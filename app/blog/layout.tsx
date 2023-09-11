@@ -37,7 +37,7 @@ export default async function MarketingLayout({
         {/* <RollingMenu/> */}
         <main className="flex-1 min-h-[calc(100vh-4rem)]">{children}</main>
       </div>
-      <div className="max-w-3xl mx-auto">
+      <div className="mx-auto">
         <SiteFooter />
       </div>
     </div>

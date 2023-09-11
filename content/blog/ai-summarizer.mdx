@@ -18,31 +18,64 @@ Fundamentally, they are **deep neural networks trained on large datasets capable
 
 ## Writing Literature Reviews With AI
 
-I had some grad school assignments where I had to write short (~1000 word) reviews of various literature. This led me to wonder if LLMs were capable of writing such a literature review. Turns out, they have some significant limitations - but they can be improved if used with **careful prompting, closed-book Q/A, data augmented retrieval, and Chain of Though (CoT) reasoning**. In this case, I was able to select a PDF article of interest, run a custom Python script, and get the following 500 word review in about 40 seconds.
+I had some grad school assignments where I had to write short (~1000 word) reviews of various literature. This led me to wonder if LLMs were capable of writing such a literature review. Turns out, they have some significant limitations - but they can be improved if used with **careful prompting, closed-book Q/A, data augmented retrieval, and Chain of Though (CoT) reasoning**. In this case, I was able to select a PDF article of interest, run a custom Python script, and get the following 500 word review in about 3 minutes.
 
-<Callout> Original Article: [Original Article]() </Callout>
+<Callout> Original Article: [An Examination of Automatic Tomato Detection with an Improved YOLOv8s Model](https://www.mdpi.com/2073-4395/13/7/1824) </Callout>
 
 <Card className='mt-4 text-sm sm:text-base'>
-Cognitive-behavioral therapies (CBTs) serve as a beneficial treatment for symptoms of anxiety and depression. Research on CBT aims to identify the core mechanisms of change responsible for symptom improvement. There are two primary core mechanisms for CBTs for anxiety: fear extinction and threat reappraisal. Cognitive change is the most researched mechanism for CBTs for depression (Powers, 2017). Although these two theories may seem incompatible, they may represent differences in levels of analysis. Cognitive change is a critical factor in CBT for both anxiety and depression, regardless of how it is achieved.
+# An Examination of Automatic Tomato Detection with an Improved YOLOv8s Model
 
-Powers' (2017) article, Core Mechanisms of Cognitive Behavioral Therapy for Anxiety and Depression, delves into the core mechanisms of cognitive behavioral therapy for treating mental health disorders like anxiety and depression. The article discusses various techniques such as fear extinction, threat reappraisal, exposure therapy, and cognitive restructuring, as well as newer techniques such as acceptance and mindfulness-based therapies, cognitive bias modification interventions, positive mood induction, exercise augmentation, and the importance of sudden gains and critical sessions. All these psychological processes are used to target faulty threat appraisals, which ultimately lead to symptom improvement and reduced anxiety.
+The rapid advancement of technology has opened up new paths in the realm of agriculture, leading to increased levels of automation in various farming activities. One such development is the use of automatic detection algorithms for identifying and picking tomatoes, a crucial step in tomato harvesting. This essay delves into the innovative work of Yang et al. (2023) in this area, who have proposed a lightweight YOLOv8 Tomato Detection Algorithm that combines feature enhancement and attention to enhance the efficiency of tomato harvesting.
 
-Cognitive change plays a crucial role in the success of CBT for both anxiety and depression. In CBT for anxiety, fear extinction and threat reappraisal are central mechanisms of change. Fear extinction involves reducing the fear response to a conditioned stimulus by exposing individuals to the feared stimulus repeatedly without any adverse consequences. Threat reappraisal is a cognitive process that aims to change an individual's perception of a stressor, ultimately leading to decreased anxiety. In contrast, cognitive changes are primarily responsible for symptom improvement in CBTs for depression. Research has revealed cognitive restructuring as the most researched psychological mechanism in CBT for depression, observed in both antidepressant and CBT interventions.
+## A Three-Component Solution
 
-Additionally, various methods have been suggested to enhance threat reappraisal. Mindfulness-based approaches and acceptance and commitment therapy are two such methods. The study by Alfei, Ferrer Monti, Molina, et al., (2015) emphasizes that prediction error and trace dominance are essential factors in determining the fate of fear memories after post-training manipulations. On the other hand, Julian, Beard, Schmidt, et al., (2012) study presents how attention training can reduce attention bias and social stressor reactivity, while Vittengl, Clark, & Jarrett (2005) discuss the validity of sudden gains in acute-phase treatment of depression.
+Yang et al.'s (2023) method addresses the low level of automation in tomato harvesting by incorporating three key components into an improved YOLOv8s model: the depthwise separable convolution (DSConv), the dual-path attention gate module (DPAG), and the feature enhancement module (FEM).
 
-In conclusion, cognitive-behavioral therapies (CBTs) have proved effective in healing symptoms of anxiety and depression. Anxiety and depression have different core mechanisms for CBTs, but cognitive change is an integral factor in both. Fear extinction and threat reappraisal are two central mechanisms for CBT for anxiety, while cognitive restructuring is crucial for CBT for depression. Therapists can use various techniques, such as acceptance and mindfulness-based therapies, to enhance threat reappraisal. Therefore, understanding the core mechanisms of CBT encourages the development of future CBTs to improve mental health treatments.
+The DSConv technique replaces the ordinary convolution, significantly reducing the computational complexity by generating numerous feature maps with minimal calculation. This not only reduces the computational burden but also improves the efficiency of the algorithm (Yang et al., 2023).
 
-References:
+The DPAG module is designed to enhance the model's detection precision in complex environments. It does this by improving the network’s ability to distinguish between tomatoes and the background, thereby improving the model's detection capability in complex environments (Yang et al., 2023).
 
-Powers, M. B. (2017). Core Mechanisms of Cognitive Behavioral Therapy for Anxiety and Depression. Psychiatric Clinics of North America, 40, 611-623. doi:10.1016/j.psc.2017.08.010
+Lastly, the FEM module is introduced to highlight target details and prevent the loss of effective features. This enhances the detection precision by ensuring that the important aspects of each image are effectively captured and analyzed (Yang et al., 2023).
+
+## Performance Evaluation
+
+The performance of Yang et al.'s (2023) proposed algorithm was evaluated against other well-established algorithms such as SSD, faster R-CNN, YOLOv4, YOLOv5, and YOLOv7. The evaluation metrics used included precision, recall rate, and mean average precision (mAP).
+
+The results of this comparative analysis demonstrated the superiority of the improved YOLOv8s network. The network exhibited a lower loss and 93.4% mAP on the tomato dataset, a 1.5% increase compared to the model before improvement. Furthermore, the precision increased by 2%, and the recall rate increased by 0.8% (Yang et al., 2023).
+
+Notably, the proposed algorithm significantly reduced the model size from 22 M to 16 M, while achieving a detection speed of 138.8 FPS, which meets the real-time detection requirement. This balance between model size and detection precision makes it highly suitable for the demands of agricultural tomato detection (Yang et al., 2023).
+
+## Conclusion and Future Implications
+
+Yang et al.'s (2023) innovative method offers a promising approach to improving the automation level in tomato harvesting. The improved YOLOv8s model not only enhances detection precision but also maintains a small model size and high detection speed, thereby meeting the requirements of agricultural tomato detection.
+
+The practical implication of this development is that it can provide technical support for a tomato picking robot, ensuring its fast and accurate operation. This advancement can significantly optimize the tomato harvesting process, leading to increased productivity and efficiency in agricultural production activities.
+
+There is no doubt that the research by Yang et al. (2023) marks a significant step forward in the field of agricultural automation. As technology continues to evolve, it is expected that such methods will become even more refined and effective, leading to even greater levels of automation and efficiency in agriculture.
+
+## References
+
+Yang, G., Wang, J., Nie, Z., Yang, H., & Yu, S. (2023). A Lightweight YOLOv8 Tomato Detection Algorithm Combining Feature Enhancement and Attention. pdfTeX-1.40.21.
 
 </Card>
 
-It may not look that impressive, but it shouldn't. Out of the box, LLMs can easily generate academic-esq responses. But that's the key - the problem isn't getting an *academic sounding response*, it's getting an *academically accurate response*. And it's not enough to have 99% accuracy, because academic literature must be 100% accurate with 0% plagiarism.
+It may not look that impressive, but it shouldn't at first glance. We're used to LLMs generating academic-esq responses out of the box. But that's the key - the problem isn't getting an *academic sounding response*, it's getting an *academically accurate response*. And it's not enough to have 99% accuracy, because academic literature must be fully factual, appropriately cited, and well reasoned.
 
-## The Problem With LLMs and Academic Writing
+## The Problems With LLMs and Academic Writing
 
-The first problem is that LLMs are generally pre-trained only once. They can be later adapted to a specific task with fine-tuning or reinforcement learning, though the underlying model architecture is still the same. The relevance here is that after the model is initially pre-trained on a dataset - it's computationally and logistically expensive to pre-train the same model on *new data*. For example, if a LLM is pre-trained on 1/1/2022, and I ask it, "Who won the Super Bowl in 2023?", it won't know. The 2023 superbowl hasn't happened yet. Furthermore, the model might provide a believable answer, for example, "The New England Patriots won the Super Bowl in 2023." This is problematic, not only because it's inaccurate, but because it's actually plausible. In this situation - if you're a football fan - it's very clear that the answer is wrong, because you saw the Kansas City Chiefs beat the Philadelphia Eagles in the 2023 Super Bowl. If you're not a football fan, you'll think, *Oh yeah, I know the Patriots. They're usually pretty good, aren't they?* Then you'll move on.
+### Hallucination
+
+The first problem is that LLMs are generally pre-trained only once. They can be later adapted to a specific task with fine-tuning or reinforcement learning, though the underlying model architecture is still the same. The relevance here is that after the model is initially pre-trained on a dataset - it's computationally and logistically expensive to pre-train the same model on *new data*. For example, if a LLM is pre-trained on 1/1/2022, and I ask it, "Who won the Super Bowl in 2023?", it won't know. The 2023 superbowl hasn't happened yet, so it couldn't have been included in the pre-training dataset. Furthermore, the model might hallucinate a believable answer, for example, "The New England Patriots won the Super Bowl in 2023." This is problematic, not only because it's inaccurate, but because it's actually plausible. In this situation - if you're a football fan - it's very clear that the answer is wrong, because you saw the Kansas City Chiefs beat the Philadelphia Eagles in the 2023 Super Bowl. If you're not a football fan, you'll think, *Oh yeah, I know the Patriots. They're usually pretty good, aren't they?* Then you'll move on.
 
 My point here is this: **when LLMs hallucinate, they will do so convincingly enough that you're at serious risk of believing it**. We're mostly accustomed to search engines, which are fundamentally different. In the case of an an academic literature review, it's clear how this could be problematic.
+
+### Inaccurate Citations
+
+The second problem is that LLMs are generally considered **black-box** technology - the inner workings are not easily observed or interpreted. LLMs are often stochastic (inherently random and probabilistic) in training and can be non-deterministic (variable or uncertain) during inference. This is explored in a sub-field called [Explainable AI](https://cloud.google.com/explainable-ai#:~:text=Explainable%20AI%20is%20a%20set,others%20understand%20your%20models'%20behavior.) or XAI.
+
+
+### Inability to Meaningfully Reason or Cognate
+
+The third problem 
+
+Artificial Intelligence is designed to emulate human-like "understanding" by modeling complex latent variables. LLMs feel particularly compelling because they do this with natural language. As I mentioned earlier, we tend to be used to memorization, so when a LLM performs accurately on an out-of-sample test (something it has never seen), it feels like the model is actually *thinking* like a human would, more than just memorizing and regurgitating like a search engine would. And it is - kind of. There are differing perspectives on the relationship between AI and human cognition. For this purpose, it's more pragmatical to focus on the model's ability to perform on a discrete, quasi-measurable benchmark. In this case, the benchmark is the ability to write a factually accurate, appropriately cited, and well reasoned academic literature review.

@@ -15,7 +15,7 @@ export default async function BlogPage() {
     })
 
   return (
-    <div className="container max-w-3xl py-6 lg:py-10">
+    <div className="container max-w-2xl py-6 lg:py-10">
       <PageContent posts={posts}/>
       {/* <hr className="my-8 border-gray-200" /> */}
     </div>
