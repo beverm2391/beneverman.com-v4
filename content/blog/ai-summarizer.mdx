@@ -30,15 +30,44 @@ My point here is this: **when LLMs hallucinate, they will do so convincingly eno
 
 ### Inaccurate Citations
 
-The second problem is that LLMs are generally considered **black-box** technology - the inner workings are not easily observed or interpreted. Since LLMs are often stochastic (inherently random and probabilistic) in training and can be non-deterministic (variable or uncertain) during inference, If I ask a LLM a question, it's unknown what data it's using to answer that question. This is explored in a sub-field called [Explainable AI](https://cloud.google.com/explainable-ai#:~:text=Explainable%20AI%20is%20a%20set,others%20understand%20your%20models'%20behavior.) or XAI. The significance here is that the model can't cite its sources - which is paramount in academia.
+The second problem is that LLMs are generally considered **black-box** technology - the inner workings are not easily observed or interpreted. Since LLMs are often stochastic (inherently random and probabilistic) in training and can be non-deterministic (variable or uncertain) during inference, if I ask a LLM a question, it's unknown what data it's using to answer that question. This is explored further in a sub-field called [Explainable AI](https://cloud.google.com/explainable-ai#:~:text=Explainable%20AI%20is%20a%20set,others%20understand%20your%20models'%20behavior.) or XAI. The significance here is that the model can't cite its sources - which is paramount in academia.
 
 ### Inability to Meaningfully Reason or Cognate
 
-Artificial Intelligence is designed to emulate human-like "understanding" by modeling complex latent variables. LLMs feel particularly compelling because they do this with natural language. As I mentioned earlier, we tend to be used to memorization, so when a LLM performs accurately on an out-of-sample test (something it has never seen), it feels like the model is actually *thinking* like a human would, more than just memorizing and regurgitating like a search engine would. And it is - kind of. There are differing perspectives on the relationship between AI and human cognition. 
+The third problem is that LLMs are unable to cognate. But what constitutes cognition, anyway?
 
-For this purpose, it's more practical to evaluate the model on a discrete, quasi-measurable benchmark (as opposed to its general "intelligence"). In this case, the benchmark is the ability to synthesize academic source material into a 
+Artificial Intelligence is designed to emulate human-like "understanding" by modeling complex latent relationships between variables. LLMs feel particularly compelling because they do this with natural language (via tokens). As I mentioned earlier, we tend to be used to retrieval as opposed to generation, so when a LLM performs accurately on an out-of-sample test (something it has never seen), it feels like the model is actually *thinking* like a human would, more than just memorizing (or indexing) and regurgitating like a search engine would. And it is - kind of. There are differing perspectives on the relationship between AI and human cognition.
 
-## The Solution
+The biggest practical breakthrough in LLM "cognition" has been that, **with specific prompts, we can facilitate reasoning and improve model performance on tasks that require cognition**. Yao et al. published a paper in 2022 entitled, [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629) in which they demonstrated a method for improving LLM performance on tasks that require reasoning known as the ReAct method (or Reason + Act). Later, in 2023, Yang et al. published a paper entitled [Large Language Models as Optimizers](https://arxiv.org/pdf/2309.03409.pdf) where they showed how certain instructions facilitated better performance on reasoning based tasks. All this is fairly intuitive, and the key takeaway is that **LLMs can be prompted to perform better on tasks that require reasoning**.
+
+## My Solution
+
+The original task was writing a short literature review, while attempting to circumvent or mitigate the problems mentioned above. My methodology for building a python script to do this was as follows:
+
+1. Always provide context in the prompt to mitigate the black-box problem
+2. Ask closed book questions to mitigate the hallucination problem
+3. Prompt the model to respond "X was not provided in the context", if it lacks information 
+4. Facilitate reasoning by modeling my typical chain of thought
+
+### The Chain
+Check out the code [here](https://github.com/beverm2391/ai-summarizer-v2).
+
+1. Take a journal and split it into chunks
+2. Operate on each chunk with a specific prompt, concurrently
+    1. List the main ideas
+    2. Identify 2-3 direct quotes
+    3. Identify potential weaknesses, strengths, of the author's argument
+    4. Optional - specific synthesis question(s)
+3. Take groups of model responses and aggregate them with a different prompt
+    1. Combine the material to create content
+    2. Optional - add additional instructions, do some sort of analysis, etc.
+4. Recursively combine sections until the input can be passed in a single prompt
+    1. Aggregate the content into a coherent paper with appropriate heading/subheadings
+    2. Optional - add an introduction and conclusion
+
+The appropriate citation is generated from the metadata in the PDF, then passed through each prompt along with a separate instruction on maintaining citations.
+
+Here's an example output from a single article.
 
 <Callout> Original Article: [An Examination of Automatic Tomato Detection with an Improved YOLOv8s Model](https://www.mdpi.com/2073-4395/13/7/1824) </Callout>
 
@@ -79,4 +108,25 @@ Yang, G., Wang, J., Nie, Z., Yang, H., & Yu, S. (2023). A Lightweight YOLOv8 Tom
 
 </Card>
 
-It may not look that impressive, as we're used to LLMs generating academic-esq responses out of the box. But that's the key - the problem isn't getting an *academic sounding response*, it's getting an *academically accurate response*. And it's not enough to have 99% accuracy, because academic literature must be fully factual, appropriately cited, and well reasoned.
+If you're used to working with LLMs, you'll notice that on the surface, this output is close to what you'd get out of the box. On further inspection, you'll notice that its factual, appropriately cited, and well reasoned.
+
+### Implications for My Writing
+
+At one point I was toying with the idea of automating a bigger review. To me, the idea of typing in a search topic, running a Python script, and trying to submit the fully-automated output to a journal seems like a fun challenge. 
+
+If that were my goal, I'd probably do something like this:
+1. Run a search on PubMed/ArXiv/JAMA/etc. for a specific topic
+2. Download the PDFs and embed them into vectors
+3. Generate a semantic schema of the ideas present in the literature
+    1. Run K-means clustering on the vectors
+    2. Run a topic model on the vectors
+    3. Generate a JSON schema of the literature with relevant content and citations nested under each topic
+4. Recursively iterate over the schema, generating content for the review
+5. Aggregate the content into a coherent paper with appropriate heading/subheadings
+6. Add an introduction and conclusion
+
+Something else I experimented with was getting an LLM to output in my own style of writing. I imagine that if I were to fine-tune an open source model like [Llama 2](https://ai.meta.com/llama/) on a corpus of my writing, I could get a pretty decent output. I think the main problem here would be collecting enough source material.
+
+Ultimately though, I think the best use of LLMs is to augment my writing, not automate it. I find myself most often using LLMs to rephrase/reword things, cultivate my scattered thoughts into coherent sentences, and to make my writing more concise. This is probably how I'll continue to use LLMs in the future. No neural network is going to replace my brain (the ultimate neural network)... for now.
+
+<Callout> Thanks for making it this far! You can see the code [here](https://github.com/beverm2391/ai-summarizer-v2). Feel free to reach out on [Twitter (X)](https://twitter.com/beneverman) or via [email](mailto:evermanben@gmail.com).</Callout>

@@ -61,7 +61,7 @@ export default function Home() {
                     variants={FADE_UP_ANIMATION_VARIANTS}
                 >
                     <ul className='list-disc ml-4 leading-8'>
-                        <li>See my public code <ExternalLink href="https://www.github.com/beverm2391" arrow={false}>here</ExternalLink>.</li>
+                        <li>See my code <ExternalLink href="https://www.github.com/beverm2391" arrow={false}>here</ExternalLink>.</li>
                         <li>Read about my experiments <ExternalLink href="/blog" arrow={false} target="_self">here</ExternalLink>.</li>
                         <li>View my resume <ExternalLink href="/" arrow={false}>here</ExternalLink>.</li>
                         <li>Contact me <ExternalLink href="mailto:evermanben@gmail.com" arrow={false} target="_self">here</ExternalLink>.</li>

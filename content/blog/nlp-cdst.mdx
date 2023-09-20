@@ -1,11 +1,85 @@
 ---
 title: Using AI To Help Pediatricians Screen For Depression
 description: A clinical decision support tool that uses AI to help pediatricians screen for depression.
-date: "2023-04-11"
+date: "2023-09-11"
 authors:
     - beneverman
 ---
+AKA: Natural Language Processing Clinical Decision Support Tool (NLP-CDST)
 
 <Callout>
     Source Code: [Google Colab](https://github.com/beverm2391/NLP-CDST/blob/main/NLP_CDST_v3.ipynb)
 </Callout>
+
+## Background
+
+This project is a proof of concept that highlights a potential application of Machine Learning (ML) and Artificial Intelligence (AI) in clinical mental healthcare.
+
+One of my biggest long term goals is to develop technology for clinical mental healthcare. My dad, a physician, keeps a close eye on the latest literature in medicine, and one day sent me a 2018 paper titled [Guidelines for Adolescent Depression in Primary Care (GLAD-PC): Part I](https://publications.aap.org/pediatrics/article/141/3/e20174081/37626/Guidelines-for-Adolescent-Depression-in-Primary?autologincheck=redirected) that he thought I might find interesting.
+
+## Adolescent Depression
+
+In the journal, published by the American Academy of Pediatrics, Zuckerbrot et al. outline the deficits in adolescent mental health treatment, quoting, "In primary care (PC), as many as 2 in 3 youth with depression are not identified by their PC clinicians and fail to receive any kind of care (Zuckerbrot et al., 2018)." Primary care physicians are not mental health professionals but may be the “first point of contact” for mental health patients within the larger mental healthcare system (Zuckerbrot et al., 2018).
+
+The apparent solution would be to educate providers, though Zuckerbrot et al. note, “simply providing PC providers with relevant information is not enough because passive education strategies are usually inadequate for producing lasting change in provider behavior (Zuckerbrot et al., 2018)." Instead, they propose, “hands-on, interactive, and basic science theory–driven training strategies for PC clinicians" (Zuckerbrot et al., 2018). This type of training can be costly and time intensive, and an overworked or overburdened physician may not see the benefit in additional intensive education for a condition that they may perceive as less relevant to their day-to-day clinical practice.
+
+## Overview of the Tool
+
+As an alternative to traditional methods, I designed a proof of concept tool that could be integrated into Clinical Decision Support Systems (CDSS). This tool aims to relieve the burden on primary care physicians and improve adolescent depression screening. It takes a short case note—ideally from an Electronic Health Record (EHR) system—as input. Using Natural Language Processing (NLP), the tool identifies relevant clinical criteria from the Diagnostic and Statistical Manual of Mental Disorders, Fifth Edition (DSM-5) and provides clinicians with actionable recommendations for further screening or intervention.
+
+**The process is simple:**
+1. Take a corpus of literature that's much larger than what a human could reasonably read
+2. Embed the corpus of literature into vectors to allow for semantic comparison
+3. At the point of care, take a case note as input and embed it into a vector
+4. Compare the case note vector to the literature vectors to identify semantically relevant sections of literature
+5. Optional: do some additional processing
+
+In this case, after the relevant sections of literature are identified, I run the case note and literature through a Large Language Model with a chain of thought prompt designed to produce a recommendation for the clinician to either: 1) screen further or 2) do not screen further.
+
+Since I'm using large sections from the DSM-5, the tool can theoretically be used to screen for any condition in the DSM-5, not just depression.
+
+If you want to learn more about the tool, check out the [source code](https://github.com/beverm2391/NLP-CDST/blob/main/NLP_CDST_v3.ipynb), which is well documented.
+
+## Example Usage
+A case note is passed as input. This is a short case note that I wrote to test the tool.
+
+>"John is a 15-year-old male who has been referred to the clinic for evaluation. He reports that he has been feeling worried for the past few months, and that his worry has been increasing in intensity. He describes feeling overwhelmed and unable to concentrate on tasks, and reports that he has been avoiding social situations and activities that he used to enjoy. He also reports having difficulty sleeping, and has been having frequent nightmares. He has been feeling irritable and has been having difficulty controlling his emotions. He has also been experiencing physical symptoms such as headaches, stomachaches, and muscle tension. He has been avoiding school and has been having difficulty focusing in class."
+
+**Example Recommendation:**
+
+>The patient meets enough criteria to warrant further screening for generalized anxiety disorder.
+
+**Example Debug Output:**
+
+```text copy
+Text ordered by similarity
+Prompt Constructed: 
+
+Answer as truthfully as possible using the provided context, and if the answer is not contained within the text below, say "I don't know."
+
+Context:
+
+* 192  Anxiety Disorders  individual’s separation anxiety (e.g., destruction of the family through fire, murder, or other catastrophe) (Criterion A7). Physical symptoms (e.g., headaches, abdominal complaints, nausea, vomiting).. end of page
+* 222  Anxiety Disorders  Generalized Anxiety Disorder  Diagnostic Criteria  300.02 (F41.1)  A. Excessive anxiety and worry  (apprehensive expectation),  occurring  more  days than not for at least 6 months... end of page
+
+Relevant Information:
+1. John, 15-year-old male
+2. feeling worried, overwhelmed, unable to concentrate, avoiding social situations, difficulty sleeping, nightmares, irritability, difficulty controlling emotions, headaches, stomachaches, muscle tension, feeling hopeless and helpless
+3. school avoidance, difficulty focusing in class
+
+Question:
+1. Does the patient meet any diagnostic criteria?
+2. Does the patient meet enough criteria to warrant further screening for anything. If so, specify what they should be screened for."
+
+Answer:
+1. The patient meets the diagnostic criteria for generalized anxiety disorder.
+2. The patient meets enough criteria to warrant further screening for generalized anxiety disorder.
+```
+
+## Limitations
+
+This tool is in its early stages and should not be considered a substitute for professional medical advice. This tool has not been validated for accuracy or efficacy - it's purely conceptual. If I ever find a dataset of labeled case notes, I'd love to develop a more robust version. Taking something like this to production in a clinical setting would clearly require a significant effort. There are a number of startups playing in the AI Healthcare space doing similar things, and I'm excited to see how the field develops.
+
+## References
+
+Rachel A. Zuckerbrot, Amy Cheung, Peter S. Jensen, Ruth E.K. Stein, Danielle Laraque, GLAD-PC STEERING GROUP, Anthony Levitt, Boris Birmaher, John Campo, Greg Clarke, Graham Emslie, Miriam Kaufman, Kelly J. Kelleher, Stanley Kutcher, Michael Malus, Diane Sacks, Bruce Waslick, Barry Sarvet; Guidelines for Adolescent Depression in Primary Care (GLAD-PC): Part I. Practice Preparation, Identification, Assessment, and Initial Management. Pediatrics March 2018; 141 (3): e20174081. 10.1542/peds.2017-4081

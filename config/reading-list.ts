@@ -24,6 +24,18 @@ export const list: List = {
         //     type: "article"
         // },
         {
+            title: "Risk Factors for Suicidal Thoughts and Behaviors: A Meta-Analysis of 50 Years of Research",
+            author: "Franklin, et al.",
+            url: "https://psycnet.apa.org/doiLanding?doi=10.1037%2Fbul0000084",
+            type: "journal",
+        },
+        {
+            title: "Graph Neural Networks for Forecasting Multivariate Realized Volatility with Spillover Effects",
+            author: "Zhang et al.",
+            url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4375165",
+            type: "journal",
+        },
+        {
             title: "Advanced Time Series Analysis in Python: Seasonality and Trend Analysis (Decomposition), Autocorrelation",
             author: "Bex. T",
             url: "https://towardsdatascience.com/advanced-time-series-analysis-in-python-decomposition-autocorrelation-115aa64f475e",
