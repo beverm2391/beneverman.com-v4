@@ -13,6 +13,7 @@ import LocalFont from "next/font/local";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-inter",
+  fallback: ['Inter var', "Inter", "sans-serif"],
 })
 
 const fontSerif = FontSerif({
