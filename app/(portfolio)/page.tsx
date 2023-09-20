@@ -19,7 +19,7 @@ export default function Home() {
                 className='flex flex-col gap-8'
                 initial="hidden"
                 animate="show"
-                viewport={{ once: true }}
+                // viewport={{ once: true }}
                 variants={{
                     hidden: {},
                     show: {
