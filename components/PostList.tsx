@@ -28,7 +28,7 @@ const GeneralCardSimple = ({ post }: { post: Post }) => {
 }
 
 export default function PostList() {
-    const days = 90
+    const days = 180
     const cutoff = new Date();
     cutoff.setDate(cutoff.getDate() - days);
 
@@ -37,7 +37,7 @@ export default function PostList() {
         return compareDesc(new Date(a.date), new Date(b.date))
     }).filter((post) => {
         const postDate = new Date(post.date);
-        return postDate >= cutoff;
+        return postDate >= cutoff && post.published;
     })
 
     return (

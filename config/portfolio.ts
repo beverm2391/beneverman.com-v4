@@ -14,10 +14,10 @@ export const portfolioConfig: MarketingConfig = {
     //   title: "Projects",
     //   href: "/docs",
     // },
-    {
-      title: "Contact",
-      href: "/contact",
-    },
+    // {
+    //   title: "Contact",
+    //   href: "/contact",
+    // },
   ],
 }
 

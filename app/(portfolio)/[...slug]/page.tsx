@@ -1,12 +1,12 @@
 import { notFound } from "next/navigation"
 import { allPages } from "contentlayer/generated"
 
-import { Mdx } from "@/components/mdx"
-import "@/styles/mdx.css"
+
 import { Metadata } from "next"
 
 import { siteConfig } from "@/config/site"
 import { absoluteUrl } from "@/lib/utils"
+import Page from "@/components/pages/general-page"
 
 interface PageProps {
   params: {
@@ -81,17 +81,8 @@ export default async function PagePage({ params }: PageProps) {
   }
 
   return (
-    <article className="container max-w-2xl py-6 lg:py-10">
-      <div className="space-y-4">
-        <h1 className="inline-block text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white lg:text-5xl">
-          {page.title}
-        </h1>
-        {page.description && (
-          <p className="text-xl text-slate-600 dark:text-slate-300">{page.description}</p>
-        )}
-      </div>
-      <hr className="my-4 border-color" />
-      <Mdx code={page.body.code} />
-    </article>
+    <Page 
+      page={page}
+    />
   )
 }
