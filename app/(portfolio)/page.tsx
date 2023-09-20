@@ -64,6 +64,7 @@ export default function Home() {
                         <li>See my code <ExternalLink href="https://www.github.com/beverm2391" arrow={false}>here</ExternalLink>.</li>
                         <li>Read about my experiments <ExternalLink href="/blog" arrow={false} target="_self">here</ExternalLink>.</li>
                         {/* <li>View my resume <ExternalLink href="/" arrow={false}>here</ExternalLink>.</li> */}
+                        <li>Connect with me on <ExternalLink href="https://www.linkedin.com/in/beneverman/" arrow={false}>LinkedIn</ExternalLink></li>
                         <li>Contact me <ExternalLink href="mailto:evermanben@gmail.com" arrow={false} target="_self">here</ExternalLink>.</li>
                     </ul>
                 </motion.div>
