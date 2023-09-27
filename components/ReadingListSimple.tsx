@@ -32,6 +32,7 @@ const GeneralCardSimple = ({ work }: { work: Work }) => {
 export default function ReadingListSimple() {
     const works = list.data
     const lastUpdated = list.lastUpdated
+    const recent = works.slice(0, 6)
     return (
         <div>
             {/* <motion.h3
@@ -56,7 +57,7 @@ export default function ReadingListSimple() {
                 <ul
                     className='flex flex-col gap-0'
                 >
-                    {works.map((work, i) => {
+                    {recent.map((work, i) => {
                         return (
                             <motion.li
                                 variants={FADE_UP_ANIMATION_VARIANTS}

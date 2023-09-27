@@ -24,6 +24,18 @@ export const list: List = {
         //     type: "article"
         // },
         {
+            title: "Copulas: An Essential Guide & Applications in Time Series Forecasting",
+            author: "Nikos Kafritsas",
+            url: "https://towardsdatascience.com/copulas-an-essential-guide-applications-in-time-series-forecasting-f5c93dcd6e99",
+            type: "article",
+        }, 
+        {
+            title: "Deep GPVAR: Upgrading DeepAR For Multi-Dimensional Forecasting",
+            author: "Nikos Kafritsas",
+            url: "https://towardsdatascience.com/deep-gpvar-upgrading-deepar-for-multi-dimensional-forecasting-e39204d90af3",
+            type: "article",
+        },
+        {
             title: "Risk Factors for Suicidal Thoughts and Behaviors: A Meta-Analysis of 50 Years of Research",
             author: "Franklin, et al.",
             url: "https://psycnet.apa.org/doiLanding?doi=10.1037%2Fbul0000084",
