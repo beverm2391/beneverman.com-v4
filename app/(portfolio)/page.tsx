@@ -53,8 +53,7 @@ export default function Home() {
                     variants={FADE_UP_ANIMATION_VARIANTS}
                 >
                     <p>
-                        challenge - write a bio without mentioning what you do or projects you've worked on
-                        I currently live in Atlanta GA 
+                        I’m an MBA student set to graduate in Spring 2024. After graduation, I’d like to contribute to a company leveraging ML as a data scientist or software engineer. I’d do well in a high-ambiguity environment, such as a startup trying to go 0 to 1 with new technology.
                     </p>
                 </motion.div> */}
                 <motion.div

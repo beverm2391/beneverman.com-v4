@@ -1,0 +1,60 @@
+---
+title: Volatile Markets, Deep Neural Networks, and a Startup that Never Took Off
+description: The story of a startup that we couldn't quite get off the ground, using deep learning to forecast intra-day volatility.
+date: "2023-10-04"
+authors:
+    - beneverman
+---
+
+## The Context
+
+This is the story of a startup that we couldn't quite get off the ground. I learned a lot from the experience, about volatility forecasting, about deep learning, and about what it takes to turn an idea into a business.
+
+Earlier this year my friend Phillip, an experienced engineer in Big Tech, came to recruit me for a project. Months before, he had built a tool for backtesting trading strategies which he had built as a personal project. Through a series of events, he had connected with ___, ___ and ___.
+
+how did phillip get connected with people after this??
+
+what was learned?
+1. Some small (100-500AUM) hedge funds are much less sophisticated than I thought
+
+## The Task
+
+## The Technical Challenges
+
+One thing I wish I had realized from the beginning of this experience is the complexity of going 0 to 1 in ML. Up and to this point, most of my ML experience had been in a well-defined context. For example, training a simple image classifier on a well-known dataset like MNIST or CIFAR-10. The underlying architecture is pre-defined and well understood, and the task is discrete. The data is also well understood and easily accessible. 
+
+As soon as I started working on this project, I realized that the task was much more open-ended. Early on, gaps in my knowledge became exposed. Such questions arose:
+
+1. What data should we use? What data is available?
+2. How does time series data leakage work? How do we avoid it?
+3. How should the data be preprocessed?
+    1. What measure of volatility should we use? Regular returns, log returns, squared returns, or something else?
+    2. After using lossful (or stateful) preprocessing methods, how do we de-process predictions after inference without the needed states?
+4. What other parameters should we include? How can we develop a representative feature set?
+5. Should we train the model on multiple assets at a time, or one at a time?
+6. What model architecture should we use? What hyperparameters?
+7. How should we validate the model? What model performance (loss) equates to a model that a hedge fund would buy?
+
+Early on, I became aware of my lack of understanding of ML/DL. Yes, I could train a basic model on a well-known dataset, following instructions from a textbook or documentation, but I had never truly built a model from scratch, with little to no guidance. I quickly recognized the difference between my understanding of ML/DL and someone like [Andrej Karpathy](https://karpathy.ai/)
+
+## Learning and Progressing
+
+- read as much research as possible
+- reverse engineer code, whenever possible
+- elect for "good enough" as to not waste time
+- don't move past the point you can explain, just because "it works" or "that's how other people do it". Figure out what's happening under the hood before moving on.
+
+
+In other cases, like ML Research, the task is less defined. The models are experimental and the data collection and preprocessing are more involved, leading to a much more iterative process.
+
+
+
+## validating the codebase
+
+## building from scrath
+
+## issues we encountered
+
+## what I learned
+
+## 
