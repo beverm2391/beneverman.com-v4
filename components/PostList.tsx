@@ -14,14 +14,16 @@ const GeneralCardSimple = ({ post }: { post: Post }) => {
         <a href={post.slug} className='cursor-pointer'>
             <div className='mb-2 flex flex-col sm:flex-row sm:items-center hover:scale-[1.01] hover:translate-x-1 transition-all duration-1'>
                 {/* <Icons.FaFileAlt className='flex items-center justify-center text-gray-800 dark:text-gray-200 h-4 w-4' /> */}
-                <p className='inline text-black dark:text-white font-[400]'>
-                    {post.title}
-                </p>
-                {post.date && (
-                    <p className="inline text-sm text-gray-600 dark:text-gray-400 sm:ml-2">
-                        {formatDate(post.date)}
+                <div>
+                    <p className='inline text-black dark:text-white font-[400]'>
+                        {post.title}
                     </p>
-                )}
+                    {post.date && (
+                        <p className="inline text-sm text-gray-600 dark:text-gray-400 sm:ml-2">
+                            {formatDate(post.date)}
+                        </p>
+                    )}
+                </div>
             </div>
         </a>
     )
