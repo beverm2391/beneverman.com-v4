@@ -19,7 +19,7 @@ interface PostPageProps {
 
 async function getPostFromParams(params) {
   const slug = params?.slug?.join("/")
-  const post = allPosts.find((post) => post.slugAsParams === slug)
+  const post = allPosts.filter((post) => post.published).find((post) => post.slugAsParams === slug)
 
   if (!post) {
     null

@@ -24,6 +24,12 @@ export const list: List = {
         //     type: "article"
         // },
         {
+            title: "Factor Zoo",
+            author: "Swade et al.",
+            url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4605976",
+            type: "journal",
+        },
+        {
             title: "Superlinear Returns",
             author: "Paul Graham",
             url: "http://paulgraham.com/superlinear.html",
