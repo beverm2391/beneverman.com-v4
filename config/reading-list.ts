@@ -24,6 +24,24 @@ export const list: List = {
         //     type: "article"
         // },
         {
+            title: "Superlinear Returns",
+            author: "Paul Graham",
+            url: "http://paulgraham.com/superlinear.html",
+            type: "article",  
+        },
+        {
+            title: "How To Ask Questions The Smart Way",
+            author: "Eric Raymond",
+            url: "http://www.catb.org/~esr/faqs/smart-questions.html",
+            type: "article",
+        },
+        {
+            title: "What is -1 to 0? A Philosophy of Ideation.",
+            author: "Ruchi Sanghvi",
+            url: "https://blog.southparkcommons.com/what-is-negative-1-to-0/",
+            type: "article",
+        },  
+        {
             title: "Copulas: An Essential Guide & Applications in Time Series Forecasting",
             author: "Nikos Kafritsas",
             url: "https://towardsdatascience.com/copulas-an-essential-guide-applications-in-time-series-forecasting-f5c93dcd6e99",
