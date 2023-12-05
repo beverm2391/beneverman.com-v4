@@ -11,18 +11,24 @@ export const list: List = {
         //     url: "https://www.amazon.com/Stopping-Noise-Your-Head-Techniques/dp/0757319068",
         //     type: "book",
         // },
-        // {
-        //     title: "Understanding Automatic Differentiation in 30 lines of Python",
-        //     author: "Victor Martin",
-        //     url: "https://vmartin.fr/understanding-automatic-differentiation-in-30-lines-of-python.html",
-        //     type: "article",
-        // },
-        // {
-        //     title: "Precision Agriculture",
-        //     author: "Various Authors",
-        //     url: "https://www.sciencedirect.com/topics/earth-and-planetary-sciences/precision-agriculture",
-        //     type: "article"
-        // },
+        {
+            title: "AI as a Mental Health Therapist for Adolescents",
+            author: "Douglas, et al.",
+            url: "https://jamanetwork.com/journals/jamapediatrics/article-abstract/2810490",
+            type: "journal",
+        },
+        {
+            title: "Understanding Automatic Differentiation in 30 lines of Python",
+            author: "Victor Martin",
+            url: "https://vmartin.fr/understanding-automatic-differentiation-in-30-lines-of-python.html",
+            type: "article",
+        },
+        {
+            title: "Precision Agriculture",
+            author: "Various Authors",
+            url: "https://www.sciencedirect.com/topics/earth-and-planetary-sciences/precision-agriculture",
+            type: "article"
+        },
         {
             title: "Factor Zoo",
             author: "Swade et al.",
