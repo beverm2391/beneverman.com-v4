@@ -3,7 +3,7 @@ import { SiteConfig } from "types"
 export const siteConfig: SiteConfig = {
   name: "Ben Everman",
   description:
-    "The personal website of Ben Everman, a software engineer and writer.",
+    "Reading, Writing, Links. Hopefully, you'll leave with more neurons than you came with.",
   url: "https://beneverman.com",
   ogImage: "https://beneverman.com/og.jpg",
   links: {

@@ -12,6 +12,12 @@ export const list: List = {
         //     type: "book",
         // },
         {
+            title: "Signed Distance Functions",
+            author: "Theia Vogel",
+            url: "https://vgel.me/posts/donut/",
+            type: "article"
+        },
+        {
             title: "Fast Multidimensional Matrix Multiplication on CPU from Scratch",
             author: "Simon Bohem",
             url: "https://siboehm.com/articles/22/Fast-MMM-on-CPU",
