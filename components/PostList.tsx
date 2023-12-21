@@ -19,7 +19,7 @@ const GeneralCardSimple = ({ post }: { post: Post }) => {
                         {post.title}
                     </p>
                     {post.date && (
-                        <p className="inline text-sm text-gray-600 dark:text-gray-400 sm:ml-2">
+                        <p className="inline text-sm text-gray-600 dark:text-gray-400 ml-2">
                             {formatDate(post.date)}
                         </p>
                     )}

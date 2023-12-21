@@ -32,7 +32,7 @@ const GeneralCardSimple = ({ work }: { work: Work }) => {
 export default function ReadingListSimple() {
     const works = list.data
     const lastUpdated = list.lastUpdated
-    const recent = works.slice(0, 6)
+    const recent = works.slice(0, -1)
     return (
         <div>
             {/* <motion.h3

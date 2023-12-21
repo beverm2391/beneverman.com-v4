@@ -2,7 +2,7 @@ import { List } from "@/types/reading-list"
 
 
 export const list: List = {
-    lastUpdated : "2023-09-08",
+    lastUpdated : "2023-12-21",
     data : [
         // {
         //     title: "Stopping the Noise in Your Head",
@@ -11,6 +11,24 @@ export const list: List = {
         //     url: "https://www.amazon.com/Stopping-Noise-Your-Head-Techniques/dp/0757319068",
         //     type: "book",
         // },
+        {
+            title: "Fast Multidimensional Matrix Multiplication on CPU from Scratch",
+            author: "Simon Bohem",
+            url: "https://siboehm.com/articles/22/Fast-MMM-on-CPU",
+            type: "article"
+        },
+        {
+            title: "Beautiful Code - Multidimensional Iterators in NumPy",
+            author: "Andy Oram and Greg Wilson",
+            url: "https://books.google.co.uk/books?id=gJrmszNHQV4C&lpg=PA307&ots=rNXYsuY4rb&dq=numpy%20beautiful%20code&pg=PA303#v=onepage&q&f=false",
+            type: "book",
+        }, 
+        {
+            title: "An Illustrated Guide to Shape and Strides",
+            author: "Alex (ajcr)",
+            url: "https://ajcr.net/stride-guide-part-1/",
+            type: "article"
+        },
         {
             title: "AI as a Mental Health Therapist for Adolescents",
             author: "Douglas, et al.",
