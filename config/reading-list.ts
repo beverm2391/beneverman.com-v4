@@ -12,6 +12,12 @@ export const list: List = {
         //     type: "book",
         // },
         {
+            title: "A friendly introduction to machine learning compilers and optimizers",
+            author: "Chip Huyen",
+            url: "https://huyenchip.com/2021/09/07/a-friendly-introduction-to-machine-learning-compilers-and-optimizers.html",
+            type: "article",
+        },
+        {
             title: "Signed Distance Functions",
             author: "Theia Vogel",
             url: "https://vgel.me/posts/donut/",
