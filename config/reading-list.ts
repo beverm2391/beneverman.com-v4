@@ -12,6 +12,18 @@ export const list: List = {
         //     type: "book",
         // },
         {
+            title: "How To Be Successful",
+            author: "Sam Altman",
+            url: "https://blog.samaltman.com/how-to-be-successful",
+            type: "article",
+        },
+        {
+            title: "What I Wish Someone Had Told Me",
+            author: "Sam Altman",
+            url: "https://blog.samaltman.com/what-i-wish-someone-had-told-me",
+            type: "article",
+        },
+        {
             title: "Brain Organoid Computing for Artificial Intelligence",
             author: "Cai, et al.",
             url: "https://www.biorxiv.org/content/10.1101/2023.02.28.530502v1.full.pdf",
