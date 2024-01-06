@@ -12,6 +12,18 @@ export const list: List = {
         //     type: "book",
         // },
         {
+            title: "Brain Organoid Computing for Artificial Intelligence",
+            author: "Cai, et al.",
+            url: "https://www.biorxiv.org/content/10.1101/2023.02.28.530502v1.full.pdf",
+            type: "journal",
+        },
+        {
+            title: "Disrupt The Government",
+            author: "George Hotz",
+            url: "https://geohot.github.io/blog/jekyll/update/2023/11/04/disrupt-the-government.html",
+            type: "article",
+        },
+        {
             title: "Imitation Learning",
             author: "George Hotz",
             url: "https://geohot.github.io/blog/jekyll/update/2023/11/18/imitation-learning.html",
