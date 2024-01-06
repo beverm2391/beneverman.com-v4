@@ -2,7 +2,7 @@ import { List } from "@/types/reading-list"
 
 
 export const list: List = {
-    lastUpdated : "2023-12-21",
+    lastUpdated : "2024-01-06",
     data : [
         // {
         //     title: "Stopping the Noise in Your Head",
@@ -11,6 +11,12 @@ export const list: List = {
         //     url: "https://www.amazon.com/Stopping-Noise-Your-Head-Techniques/dp/0757319068",
         //     type: "book",
         // },
+        {
+            title: "Imitation Learning",
+            author: "George Hotz",
+            url: "https://geohot.github.io/blog/jekyll/update/2023/11/18/imitation-learning.html",
+            type: "article",
+        },
         {
             title: "A friendly introduction to machine learning compilers and optimizers",
             author: "Chip Huyen",
