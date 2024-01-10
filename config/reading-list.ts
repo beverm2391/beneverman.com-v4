@@ -12,6 +12,12 @@ export const list: List = {
         //     type: "book",
         // },
         {
+            title: "The Strength of Being Misunderstood",
+            author: "Sam Altman",
+            url: "https://blog.samaltman.com/the-strength-of-being-misunderstood",
+            type: "article",
+        },
+        {
             title: "How To Be Successful",
             author: "Sam Altman",
             url: "https://blog.samaltman.com/how-to-be-successful",
