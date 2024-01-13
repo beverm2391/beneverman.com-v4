@@ -3,21 +3,10 @@ import { DBItem, ParsedResult } from '@/types/reading-list'
 
 // ! Env Vars ==================================
 
-// console.log(process.env)
-// console.log(process.env.NOTION_TOKEN)
 const apiKey = process.env.NOTION_TOKEN
-const READING_LIST_DB_ID = process.env.READING_LIST_DB_ID 
-
 if (!apiKey) {
-    throw new Error('Missing NOTION_TOKEN environment variable.')
+    throw new Error('Please set your NOTION_TOKEN in your .env file.')
 }
-if (!READING_LIST_DB_ID) {
-    throw new Error('Missing READING_LIST_DB_ID environment variable.')
-}
-
-// ? sanity.... wish I had it
-// console.log(apiKey)
-// console.log(READING_LIST_DB_ID)
 
 // ! Setup ==================================
 const notion = new Client({ auth: apiKey })
@@ -42,7 +31,7 @@ export const queryDB = async (database_id: string) => {
     }
 }
 
-export async function queryDBPagination(): Promise<any[]> {
+export async function queryDBPagination(database_id: string): Promise<any[]> {
     let allResults: DBItem[] = [];
     let hasMore = true;
     let startCursor: string | undefined = undefined;
@@ -50,7 +39,7 @@ export async function queryDBPagination(): Promise<any[]> {
     while (hasMore) {
         try {
             const response = await notion.databases.query({
-                database_id: READING_LIST_DB_ID as string, // shoulnt be undefined because of the error throw earlier
+                database_id: database_id,
                 start_cursor: startCursor,
                 sorts: [{ property: 'Created time', direction: 'descending' }],
             })
@@ -62,8 +51,7 @@ export async function queryDBPagination(): Promise<any[]> {
             startCursor = response.next_cursor ?? undefined;
             hasMore = response.has_more;
         } catch (error) {
-            console.error(error);
-            throw new Error(`Error querying database with ID: ${READING_LIST_DB_ID}: ${error}`);
+            throw new Error(`Error querying database with ID: ${database_id}: ${error}`);
         }
     }
 
@@ -74,8 +62,9 @@ export function parseResponse(results: DBItem[]): ParsedResult[] {
     return results.map((page: DBItem) => ({
         name: page.properties['Name']?.title?.[0]?.plain_text || '',
         author: page.properties['Author']?.rich_text?.[0]?.plain_text,
-        createdTime: new Date(page.properties['Created time']?.created_time ?? new Date()),
+        createdTime: page.properties['Created time'].created_time || '',
         type: page.properties['Type']?.select?.name,
         url: page.properties['URL']?.url,
+        comments: page.properties['Comments']?.rich_text?.[0]?.plain_text,
     }));
 }

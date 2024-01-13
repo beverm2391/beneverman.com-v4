@@ -7,7 +7,6 @@ import { motion } from "framer-motion"
 import { FADE_UP_ANIMATION_VARIANTS } from "@/config/animations";
 import { Badge } from "@/components/badge";
 import ReadingListSimple from "@/components/ReadingListSimple";
-import ReadingListData from "@/components/ReadingListData";
 import PostList from "@/components/PostList"
 import Image from "next/image";
 import avatar from '@/public/images/avatar.jpg'
@@ -70,7 +69,7 @@ export default function Home() {
                 </motion.div>
                 {/* <Separator/> */}
                 <PostList />
-                <ReadingListData />
+                <ReadingListSimple />
             </motion.div>
         </section>
     )

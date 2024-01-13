@@ -7,9 +7,13 @@ export const portfolioConfig: MarketingConfig = {
       href: "/",
     },
     {
-      title: "Experiments",
+      title: "Writing",
       href: "/blog",
     },
+    {
+      title: "Reading List",
+      href: "/reading-list",
+    }
     // {
     //   title: "Projects",
     //   href: "/docs",

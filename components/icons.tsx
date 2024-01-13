@@ -23,6 +23,7 @@ import {
   Twitter,
   User,
   X,
+  Star,
   type Icon as LucideIcon,
 } from "lucide-react"
 
@@ -38,6 +39,7 @@ import {
   FaBookmark,
   FaBookOpen,
   FaFileAlt,
+  FaCommentAlt,
 } from 'react-icons/fa'
 
 import {
@@ -81,5 +83,8 @@ export const Icons = {
   FaBookmark : FaBookmark,
   FaBookOpen : FaBookOpen,
   GrArticle : GrArticle,
-  FaFileAlt : FaFileAlt
+  FaFileAlt : FaFileAlt,
+  FaCommentAlt : FaCommentAlt,
+  Star: Star
 }
+

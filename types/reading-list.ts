@@ -94,7 +94,8 @@ export type DBItem = {
 export type ParsedResult = {
     name: string,
     author: string | undefined,
-    createdTime: Date,
+    createdTime: string,
     type: string | undefined,
     url: string | undefined,
+    comments: string | undefined,
 }
