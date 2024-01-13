@@ -143,7 +143,7 @@ export default function ReadingListData({ works }: { works: ParsedResult[] }) {
                         Reading List
                     </motion.h3>
                     <motion.p
-                        className='text-gray-800 dark:text-gray-200 text-base mb-4'
+                        className='mb-8 text-xl text-gray-600 dark:text-gray-300 font-medium'
                         variants={FADE_UP_ANIMATION_VARIANTS}
                     >
                         The books, articles, journals, and essays that I've read recently, organized by month. Ocassionally I'll include a comment or two about the work - those are usually my favorite reads.

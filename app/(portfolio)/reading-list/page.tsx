@@ -26,7 +26,7 @@ export default async function Page() {
     console.log('data', data)
 
     return (
-        <section className="container max-w-2xl flex flex-col gap-6 pt-6 pb-8 md:pt-10 md:pb-12 lg:pt-12 lg:pb-12">
+        <section className="container max-w-3xl flex flex-col gap-6 pt-6 pb-8 md:pt-10 md:pb-12 lg:pt-12 lg:pb-12">
            <ReadingListData works={data} />
         </section>
     )
