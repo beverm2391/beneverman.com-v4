@@ -1,11 +1,11 @@
-import { Client } from "@notionhq/client"
 import { queryDBPagination, parseResponse } from "@/lib/fetch-works"
-import ReadingListData from "@/components/ReadingListData"
+import { ReadingListData } from "@/components/ReadingListData"
 import { ParsedResult } from "@/types/reading-list"
+import { cache } from 'react'
 
-// export const revalidate = 3600 // 1 hour
+export const revalidate = 3600 // 1 hour
 
-async function getData() {
+const getData = cache(async () => {
 
     const READING_LIST_DB_ID = process.env.READING_LIST_DB_ID 
     if (!READING_LIST_DB_ID) {
@@ -19,11 +19,11 @@ async function getData() {
     const response = await queryDBPagination(READING_LIST_DB_ID)
     const parsedResponse = parseResponse(response)
     return parsedResponse
-}
+})
 
 export default async function Page() {
     const data: ParsedResult[] = await getData()
-    console.log('data', data)
+    // console.log('data', data)
 
     return (
         <section className="container max-w-3xl flex flex-col gap-6 pt-6 pb-8 md:pt-10 md:pb-12 lg:pt-12 lg:pb-12">

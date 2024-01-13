@@ -1,27 +1,23 @@
 'use client'
 
 import Link from "next/link"
-import { Icons } from "./icons"
 import { motion } from 'framer-motion'
 import { FADE_UP_ANIMATION_VARIANTS } from "@/config/animations"
 import { formatDate } from "@/lib/utils"
-import { queryDBPagination, parseResponse } from "@/lib/fetch-works"
 import { ParsedResult } from "@/types/reading-list"
 import { cn } from "@/lib/utils"
 import { FaStarOfLife } from "react-icons/fa";
-import { TbMathGreater } from "react-icons/tb";
-import { FaRegStar } from "react-icons/fa";
+import { ArrowRight } from "lucide-react"
 
 // !! =================================== CARD  ===================================
 const GeneralCardSimple = ({ work }: { work: ParsedResult }) => {
     return (
         <a
             href={work.url}
-            className='cursor-pointer'
+            className='cursor-pointer text-black dark:text-white hover:text-blue-600 dark:hover:text-gray-400'
             target="_blank"
         >
             <div className={cn('gap-2 mb-[2px] flex flex-row items-center',
-                'text-black dark:text-white hover:text-blue-600 dark:hover:text-gray-400',
                 // 'hover:scale-[1.01] hover:translate-x-1 transition-all duration-1',
             )}>
                 {/* <Icons.FaFileAlt className='flex items-center justify-center text-gray-800 dark:text-gray-200 h-4 w-4' /> */}
@@ -41,9 +37,11 @@ const GeneralCardSimple = ({ work }: { work: ParsedResult }) => {
                 </div>
             </div>
             {work.comments &&
-                <div className='mb-4 bg-transparent justify-center items-center mt-4 text-sm border border-gray-300 dark:border-gray-400 rounded-md p-2 shadow-sm'>
+                <div className={cn('mb-4 bg-transparent justify-center items-center mt-4 text-sm border border-gray-300 dark:border-gray-400 rounded-md p-2 shadow-sm',
+                'text-black dark:text-white',
+                )}>
                     {/* <FaStarOfLife className='h-3 w-3 inline rotate-[-5deg] text-gray-700 dark:text-gray-300' /> */}
-                    <p className='inline ml-[4px] dark:text-gray-200'>{work.comments}</p>
+                    <p className='inline ml-[4px]'>{work.comments}</p>
                 </div>
             }
         </a>
@@ -76,9 +74,61 @@ export function Badge({ children, ...props }: any) {
     )
 }
 
+// !! =================================== ReadingListFeatured (for homepage)  ===================================
+export function ReadingListFeatured({ works }: { works: ParsedResult[] }) {
+    const hasComments = works.filter(work => work.comments && work.comments.length > 0 && formatDate(work.createdTime).split(' ')[0] === formatDate(new Date().toString()).split(' ')[0])
+    const currentMonthAndYear = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(new Date())
+
+    return (
+        <motion.div
+            variants={FADE_UP_ANIMATION_VARIANTS}
+            className="flex flex-col mb-4"
+        >
+            <motion.h3
+                className={cn('text-4xl text-gray-800 dark:text-gray-200 mb-2',
+                    'font-display font-semibold tracking-wide',
+                    // 'font-bold'
+                )}
+                variants={FADE_UP_ANIMATION_VARIANTS}
+            >
+                Featured Reading:
+            </motion.h3>
+            <p className='italic mb-4'>
+                (from {currentMonthAndYear})
+            </p>
+            {hasComments.length === 0 ?
+                <p className='mt-4 text-gray-600 dark:text-gray-300'>
+                    No featured reads this month.
+                </p>
+                :
+                <ul className='flex flex-col gap-2' >
+                    {hasComments.map((work, i) => {
+                        return (
+                            <motion.li
+                                variants={FADE_UP_ANIMATION_VARIANTS}
+                                key={i}
+                            >
+                                <GeneralCardSimple work={work} />
+                            </motion.li>
+                        )
+                    })}
+                </ul>
+            }
+            <motion.p
+                className='mt-4 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-gray-400'
+                variants={FADE_UP_ANIMATION_VARIANTS}
+            >
+                <Link href="/reading-list">
+                    See the full list here{' '}
+                    <ArrowRight className='inline h-4 w-4' />
+                </Link>
+            </motion.p>
+        </motion.div>
+    )
+}
 
 // ! =================================== Component  ===================================
-export default function ReadingListData({ works }: { works: ParsedResult[] }) {
+export function ReadingListData({ works }: { works: ParsedResult[] }) {
 
     const byMonth = works.reduce((acc, work) => {
         const month = formatDate(work.createdTime).split(' ')[0]
@@ -89,7 +139,7 @@ export default function ReadingListData({ works }: { works: ParsedResult[] }) {
         return acc
     }, {} as { [key: string]: ParsedResult[] })
 
-    console.log('byMonth', byMonth)
+    // console.log('byMonth', byMonth)
 
     const countThisMonth = (month: string, works: ParsedResult[]) => {
         works = works.filter(work => {
@@ -136,7 +186,7 @@ export default function ReadingListData({ works }: { works: ParsedResult[] }) {
                 <div className="flex flex-col mb-4">
                     <motion.h3
                         className={cn('text-5xl sm:text-6xl text-gray-800 dark:text-gray-200 mb-8',
-                        'font-display font-semibold tracking-wide',
+                            'font-display font-semibold tracking-wide',
                         )}
                         variants={FADE_UP_ANIMATION_VARIANTS}
                     >
