@@ -26,7 +26,7 @@ const GeneralCardSimple = ({ work }: { work: ParsedResult }) => {
             )}>
                 {/* <Icons.FaFileAlt className='flex items-center justify-center text-gray-800 dark:text-gray-200 h-4 w-4' /> */}
                 <div>
-                    {work.comments && <FaStarOfLife className='h-3 w-3 mr-2 inline rotate-[-5deg] text-gray-700 dark:text-gray-300' />}
+                    {work.comments && <FaStarOfLife className='h-3 w-3 mr-2 inline rotate-[-5deg] translate-y-[-1px]' />}
                     <p className='inline font-[400]'>
                         {work.name}
                     </p>
@@ -41,11 +41,9 @@ const GeneralCardSimple = ({ work }: { work: ParsedResult }) => {
                 </div>
             </div>
             {work.comments &&
-                <div className='mb-4 bg-transparent justify-center items-center mt-4 text-sm border border-gray-300 dark:border-gray-600 rounded-md p-2 shadow-sm'>
+                <div className='mb-4 bg-transparent justify-center items-center mt-4 text-sm border border-gray-300 dark:border-gray-400 rounded-md p-2 shadow-sm'>
                     {/* <FaStarOfLife className='h-3 w-3 inline rotate-[-5deg] text-gray-700 dark:text-gray-300' /> */}
-                    <p className='inline ml-[4px] dark:text-gray-200'>
-                        {work.comments}
-                    </p>
+                    <p className='inline ml-[4px] dark:text-gray-200'>{work.comments}</p>
                 </div>
             }
         </a>
@@ -135,11 +133,11 @@ export default function ReadingListData({ works }: { works: ParsedResult[] }) {
             }}
         >
             <div className='flex flex-col gap-0'>
-                <div
-                    className="flex flex-col mb-4"
-                >
+                <div className="flex flex-col mb-4">
                     <motion.h3
-                        className='text-5xl sm:text-6xl text-gray-800 dark:text-gray-200 font-display tracking-wide font-semibold mb-8'
+                        className={cn('text-5xl sm:text-6xl text-gray-800 dark:text-gray-200 mb-8',
+                        'font-display font-semibold tracking-wide',
+                        )}
                         variants={FADE_UP_ANIMATION_VARIANTS}
                     >
                         Reading List
@@ -148,21 +146,10 @@ export default function ReadingListData({ works }: { works: ParsedResult[] }) {
                         className='text-gray-800 dark:text-gray-200 text-base mb-4'
                         variants={FADE_UP_ANIMATION_VARIANTS}
                     >
-                        The books, articles, journals, and essays that I've read recently, organized by month. Ocassionally I'll include a comment or two about the work - those are usually my favorite reads (marked with <FaStarOfLife className='h-3 w-3 inline text-gray-700 dark:text-gray-300 rotate-[-5deg]'/>).
+                        The books, articles, journals, and essays that I've read recently, organized by month. Ocassionally I'll include a comment or two about the work - those are usually my favorite reads.
+                        {/* (marked with <FaStarOfLife className='h-3 w-3 inline text-gray-700 dark:text-gray-300 rotate-[-5deg]'/>) */}
                     </motion.p>
                 </div>
-                {/* <ul className='flex flex-col gap-0'>
-                    {works ? works.map((work, i) => {
-                        return (
-                            <motion.li
-                                variants={FADE_UP_ANIMATION_VARIANTS}
-                                key={i}
-                            >
-                                <GeneralCardSimple work={work} />
-                            </motion.li>
-                        )
-                    }) : <li>Loading...</li>}
-                </ul> */}
                 <div className='flex flex-col gap-0'>
                     {Object.keys(byMonth).map((month, i) => {
                         return (
@@ -174,9 +161,9 @@ export default function ReadingListData({ works }: { works: ParsedResult[] }) {
                                     className='flex flex row items-center gap-2 font-medium'
                                     variants={FADE_UP_ANIMATION_VARIANTS}
                                 >
-                                    <hr className='w-1/2 border-gray-300 dark:border-gray-700' />
+                                    <hr className='w-1/2 border-gray-300 dark:border-gray-400' />
                                     <p className='text-sm text-gray-800 dark:text-gray-200'>{month}</p>
-                                    <hr className='w-1/2 border-gray-300 dark:border-gray-700' />
+                                    <hr className='w-1/2 border-gray-300 dark:border-gray-400' />
                                 </motion.div>
                                 {/* <div className='flex flex-row p-0 mb-2'>
                                     <Badge className='inline ml-0' type='book'>Books: {countThisMonth(month, works).books}</Badge>
