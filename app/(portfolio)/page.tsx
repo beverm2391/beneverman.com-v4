@@ -3,7 +3,7 @@ import { queryDBPagination, parseResponse } from "@/lib/fetch-works"
 import { ParsedResult } from "@/types/reading-list"
 import { cache } from 'react'
 
-export const revalidate = 3600 // 1 hour
+export const revalidate = 0 // every request will fetch new data
 
 const getData = cache(async () => {
 
