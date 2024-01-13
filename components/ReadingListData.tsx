@@ -26,6 +26,7 @@ const GeneralCardSimple = ({ work }: { work: ParsedResult }) => {
             )}>
                 {/* <Icons.FaFileAlt className='flex items-center justify-center text-gray-800 dark:text-gray-200 h-4 w-4' /> */}
                 <div>
+                    {work.comments && <FaStarOfLife className='h-3 w-3 mr-2 inline rotate-[-5deg] text-gray-700 dark:text-gray-300' />}
                     <p className='inline font-[400]'>
                         {work.name}
                     </p>
@@ -41,8 +42,8 @@ const GeneralCardSimple = ({ work }: { work: ParsedResult }) => {
             </div>
             {work.comments &&
                 <div className='mb-4 bg-transparent justify-center items-center mt-4 text-sm border border-gray-300 dark:border-gray-600 rounded-md p-2 shadow-sm'>
-                    <FaStarOfLife className='h-3 w-3 inline rotate-[-5deg] text-gray-700 dark:text-gray-300' />
-                    <p className='inline ml-[4px] italic dark:text-gray-200'>
+                    {/* <FaStarOfLife className='h-3 w-3 inline rotate-[-5deg] text-gray-700 dark:text-gray-300' /> */}
+                    <p className='inline ml-[4px] dark:text-gray-200'>
                         {work.comments}
                     </p>
                 </div>
