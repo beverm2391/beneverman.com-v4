@@ -86,7 +86,7 @@ export function ReadingListFeatured({ works }: { works: ParsedResult[] }) {
         >
             <motion.h3
                 className={cn('text-4xl text-gray-800 dark:text-gray-200 mb-2',
-                    'font-display font-semibold tracking-wide',
+                    'font-display tracking-wide',
                     // 'font-bold'
                 )}
                 variants={FADE_UP_ANIMATION_VARIANTS}
@@ -186,7 +186,7 @@ export function ReadingListData({ works }: { works: ParsedResult[] }) {
                 <div className="flex flex-col mb-4">
                     <motion.h3
                         className={cn('text-5xl sm:text-6xl text-gray-800 dark:text-gray-200 mb-8',
-                            'font-display font-semibold tracking-wide',
+                            'font-display tracking-wide',
                         )}
                         variants={FADE_UP_ANIMATION_VARIANTS}
                     >

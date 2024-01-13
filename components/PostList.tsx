@@ -49,7 +49,7 @@ export default function PostList() {
             <motion.h3
                 className={cn(
                     'text-4xl text-gray-800 dark:text-gray-200 mb-4',
-                    'font-display tracking-wide font-semibold'
+                    'font-display tracking-wide'
                 )}
                 variants={FADE_UP_ANIMATION_VARIANTS}
             >
