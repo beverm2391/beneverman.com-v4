@@ -33,8 +33,9 @@ export default function PageContent({ posts }) {
             <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">
                 <div>
                     <motion.h1
-                        className={cn("inline-block text-4xl font-bold font-display",
-                            "dark:text-white text-gray-800 lg:text-6xl mb-4"
+                        className={cn("inline-block text-4xl",
+                            "dark:text-white text-gray-800 lg:text-6xl mb-4",
+                            "heading-text"
                         )}variants={FADE_UP_ANIMATION_VARIANTS}
                         
                     >

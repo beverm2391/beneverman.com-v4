@@ -27,8 +27,9 @@ export default function HomePage({ works } : { works: ParsedResult[] }) {
             <motion.div className='flex flex-row items-center'>
                 <motion.h2
                     className={cn("text-5xl sm:text-7xl",
-                     'font-display',
-                    "tracking-normal",
+                    //  'font-display',
+                    // "font-helvetica font-semibold tracking-tight",
+                    "heading-text",
                      "bg-gradient-to-tr dark:from-white dark:via-zinc-200 dark:to-white from-black via-zinc-800 to-black bg-clip-text text-transparent"
                     )}
                     variants={FADE_UP_ANIMATION_VARIANTS}

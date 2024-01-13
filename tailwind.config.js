@@ -43,6 +43,7 @@ module.exports = {
         sans: ["var(--font-inter)", ...fontFamily.sans],
         serif: ["var(--font-merriweather)", ...fontFamily.serif],
         display: ["var(--font-calsans)"],
+        helvetica: ["var(--font-helvetica)"],
       },
       keyframes: {
         "accordion-down": {

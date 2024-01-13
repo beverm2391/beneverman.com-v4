@@ -69,3 +69,11 @@ a {
 .internal-link {
   @apply hover:text-slate-600 dark:hover:text-slate-400 underline underline-offset-2
 }
+
+@layer components {
+  .heading-text {
+    /* @apply font-helvetica font-bold tracking-tight
+     */
+     @apply font-display tracking-wide
+  }
+}

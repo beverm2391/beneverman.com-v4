@@ -16,6 +16,12 @@ const fontSans = FontSans({
   fallback: ['Inter var', "Inter", "sans-serif"],
 })
 
+const helvetica = FontSans({
+  subsets: ["latin"],
+  variable: "--font-helvetica",
+  fallback: ['Helvetica Neue', "Helvetica", "sans-serif"],
+})
+
 const fontSerif = FontSerif({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -96,6 +102,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         fontSans.variable,
         fontSerif.variable,
         calSans.variable,
+        helvetica.variable,
       )}
       suppressHydrationWarning
     >
