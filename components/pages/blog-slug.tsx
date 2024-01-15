@@ -43,7 +43,7 @@ export default function PageContent({ post, authors }: { post: any, authors: any
                             Published on {formatDate(post.date)}
                         </time>
                     )}
-                    <h1 className="font-display mt-2 inline-block text-4xl font-extrabold leading-tight text-slate-800 dark:text-white lg:text-5xl">
+                    <h1 className="heading-text mt-2 inline-block text-4xl leading-tight text-slate-800 dark:text-white lg:text-5xl">
                         {post.title}
                     </h1>
                     {authors?.length ? (

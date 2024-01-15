@@ -37,7 +37,6 @@ export default function PageContent({ posts }) {
                             "dark:text-white text-gray-800 lg:text-6xl mb-4",
                             "heading-text"
                         )}variants={FADE_UP_ANIMATION_VARIANTS}
-                        
                     >
                         Blog
                     </motion.h1>
