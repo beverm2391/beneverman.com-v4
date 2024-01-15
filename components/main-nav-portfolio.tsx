@@ -8,7 +8,7 @@ import { MainNavItem } from "types"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
-import { MobileNav } from "@/components/mobile-nav"
+import MobileNav from "@/components/mobile-nav-drawer"
 
 interface MainNavProps {
   items?: MainNavItem[]
@@ -44,16 +44,21 @@ export function MainNav({ items, children }: MainNavProps) {
           ))}
         </nav>
       ) : null}
-      <button
+      {items && (
+        <MobileNav items={items}>
+          {children}
+        </MobileNav>
+      )}
+      {/* <button
         className="flex space-x-2 md:hidden"
         onClick={() => setShowMobileMenu(!showMobileMenu)}
       >
         {showMobileMenu && <Icons.close />}
         <span className="font-medium">Menu</span>
-      </button>
-      {showMobileMenu && items && (
+      </button> */}
+      {/* {showMobileMenu && items && (
         <MobileNav items={items} setShowMobileMenu={setShowMobileMenu}>{children}</MobileNav>
-      )}
+      )} */}
     </div>
   )
 }
