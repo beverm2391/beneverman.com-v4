@@ -1,3 +1,11 @@
+export type Work = {
+    title: string,
+    desc?: string,
+    author: string
+    url: string,
+    type: "book" | "essay" | "journal" | "article",
+}
+
 type SelectProperty = {
     id: string;
     name: string;
