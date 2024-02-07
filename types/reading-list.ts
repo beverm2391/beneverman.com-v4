@@ -6,6 +6,11 @@ export type Work = {
     type: "book" | "essay" | "journal" | "article",
 }
 
+export type List = {
+    lastUpdated: string,
+    data: Array<Work>
+}
+
 type SelectProperty = {
     id: string;
     name: string;
