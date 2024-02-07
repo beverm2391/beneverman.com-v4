@@ -6,7 +6,7 @@ import { FADE_UP_ANIMATION_VARIANTS } from "@/config/animations"
 import { formatDate } from "@/lib/utils"
 import { ParsedResult } from "@/types/reading-list"
 import { cn } from "@/lib/utils"
-import { FaStarOfLife } from "react-icons/fa";
+import { FaStarOfLife, FaStar } from "react-icons/fa";
 import { ArrowRight } from "lucide-react"
 
 // !! =================================== CARD  ===================================
@@ -22,7 +22,7 @@ const GeneralCardSimple = ({ work }: { work: ParsedResult }) => {
             )}>
                 {/* <Icons.FaFileAlt className='flex items-center justify-center text-gray-800 dark:text-gray-200 h-4 w-4' /> */}
                 <div>
-                    {work.comments && <FaStarOfLife className='h-3 w-3 mr-2 inline rotate-[-5deg] translate-y-[-1px]' />}
+                    {(work.comments && work.status == 'Done') && <FaStar className='h-3 w-3 mr-2 inline rotate-[-5deg] translate-y-[-1px]' />}
                     <p className='inline font-[400]'>
                         {work.name}
                     </p>
@@ -38,9 +38,9 @@ const GeneralCardSimple = ({ work }: { work: ParsedResult }) => {
             </div>
             {work.comments &&
                 <div className={cn('mb-4 bg-transparent justify-center items-center mt-4 text-sm border border-gray-300 dark:border-gray-400 rounded-md p-2 shadow-sm',
-                'text-black dark:text-white',
+                    'text-black dark:text-white',
                 )}>
-                    {/* <FaStarOfLife className='h-3 w-3 inline rotate-[-5deg] text-gray-700 dark:text-gray-300' /> */}
+                    {/* <FaStar className='h-3 w-3 inline rotate-[-5deg] text-gray-700 dark:text-gray-300' /> */}
                     <p className='inline ml-[4px]'>{work.comments}</p>
                 </div>
             }
@@ -76,8 +76,13 @@ export function Badge({ children, ...props }: any) {
 
 // !! =================================== ReadingListFeatured (for homepage)  ===================================
 export function ReadingListFeatured({ works }: { works: ParsedResult[] }) {
-    const hasComments = works.filter(work => work.comments && work.comments.length > 0 && formatDate(work.createdTime).split(' ')[0] === formatDate(new Date().toString()).split(' ')[0])
-    const currentMonthAndYear = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(new Date())
+    // Assuming "date" is in "YYYY-MM-DD" format
+    const currentMonthAndYear = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(new Date());
+    const currentYearMonth = new Date().toISOString().slice(0, 7); // "YYYY-MM"
+
+    const hasComments = works.filter(work => {
+        return work.comments && work.comments.length > 0 && work.date && work.date.startsWith(currentYearMonth);
+    });
 
     return (
         <motion.div
@@ -85,11 +90,7 @@ export function ReadingListFeatured({ works }: { works: ParsedResult[] }) {
             className="flex flex-col mb-4"
         >
             <motion.h3
-                className={cn('text-4xl text-gray-800 dark:text-gray-200 mb-2',
-                    // 'font-display tracking-wide',
-                    "heading-text",
-                    // 'font-bold'
-                )}
+                className={cn('text-4xl text-gray-800 dark:text-gray-200 mb-2', "heading-text")}
                 variants={FADE_UP_ANIMATION_VARIANTS}
             >
                 Featured Reading:
@@ -103,16 +104,14 @@ export function ReadingListFeatured({ works }: { works: ParsedResult[] }) {
                 </p>
                 :
                 <ul className='flex flex-col gap-2' >
-                    {hasComments.map((work, i) => {
-                        return (
-                            <motion.li
-                                variants={FADE_UP_ANIMATION_VARIANTS}
-                                key={i}
-                            >
-                                <GeneralCardSimple work={work} />
-                            </motion.li>
-                        )
-                    })}
+                    {hasComments.map((work, index) => (
+                        <motion.li
+                            variants={FADE_UP_ANIMATION_VARIANTS}
+                            key={index}
+                        >
+                            <GeneralCardSimple work={work} />
+                        </motion.li>
+                    ))}
                 </ul>
             }
             <motion.p
@@ -125,48 +124,105 @@ export function ReadingListFeatured({ works }: { works: ParsedResult[] }) {
                 </Link>
             </motion.p>
         </motion.div>
-    )
+    );
+}
+
+export function ReadingListInProgress({ works }: { works: ParsedResult[] }) {
+    const inProgress = works.filter(work => work.status === 'In progress');
+    return (
+        <motion.div
+            variants={FADE_UP_ANIMATION_VARIANTS}
+            className="flex flex-col mb-4"
+        >
+            <motion.h3
+                className={cn('text-4xl text-gray-800 dark:text-gray-200 mb-2', "heading-text")}
+                variants={FADE_UP_ANIMATION_VARIANTS}
+            >
+                Currently Reading:
+            </motion.h3>
+            {inProgress.length === 0 ?
+                <p className='mt-4 text-gray-600 dark:text-gray-300'>
+                    Nothing! Giving the brain a break.
+                </p>
+                :
+                <ul className='flex flex-col gap-2 mt-4' >
+                    {inProgress.map((work, index) => (
+                        <motion.li
+                            variants={FADE_UP_ANIMATION_VARIANTS}
+                            key={index}
+                        >
+                            <GeneralCardSimple work={work} />
+                        </motion.li>
+                    ))}
+                </ul>
+            }
+            <motion.p
+                className='mt-4 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-gray-400'
+                variants={FADE_UP_ANIMATION_VARIANTS}
+            >
+                <Link href="/reading-list">
+                    See past reads on the bookshelf{' '}
+                    <ArrowRight className='inline h-4 w-4' />
+                </Link>
+            </motion.p>
+        </motion.div>
+    );
+}
+
+function getMonthName(dateString: string): string {
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"];
+    const dateParts = dateString.split('-'); // Splits the dateString into [YYYY, MM, DD]
+    const monthIndex = parseInt(dateParts[1], 10) - 1; // Converts MM to a zero-based index
+    return monthNames[monthIndex]; // Returns the month name
 }
 
 // ! =================================== Component  ===================================
 export function ReadingListData({ works }: { works: ParsedResult[] }) {
 
-    const byMonth = works.reduce((acc, work) => {
-        const month = formatDate(work.createdTime).split(' ')[0]
-        if (!acc[month]) {
-            acc[month] = []
+    const byMonth = works.filter(work => work.status !== 'In progress').reduce((acc, work) => {
+        // Extracts the year and month as 'YYYY-MM' format then converts month number to month name
+        const yearMonth = work.date ? work.date.split('-').slice(0, 2) : ['Unknown', '01']; // ['YYYY', 'MM']
+        const monthName = getMonthName(yearMonth.join('-')); // Converts 'YYYY-MM' to month name
+        const yearMonthName = `${yearMonth[0]} ${monthName}`; // Combines year and month name
+
+        if (!acc[yearMonthName]) {
+            acc[yearMonthName] = [];
         }
-        acc[month].push(work)
-        return acc
-    }, {} as { [key: string]: ParsedResult[] })
+        acc[yearMonthName].push(work);
+        return acc;
+    }, {} as { [key: string]: ParsedResult[] });
 
-    // console.log('byMonth', byMonth)
-
-    const countThisMonth = (month: string, works: ParsedResult[]) => {
+    const countThisMonth = (targetMonthName: string, works: ParsedResult[]) => {
+        // Filter works for the specified month name
         works = works.filter(work => {
-            return formatDate(work.createdTime).split(' ')[0] === month
-        })
+            if (!work.date) return false;
+            const yearMonth = work.date.split('-').slice(0, 2).join('-'); // 'YYYY-MM'
+            const monthName = getMonthName(yearMonth); // Get month name from 'YYYY-MM'
+            const year = work.date.split('-')[0]; // Extract year
+            return `${year} ${monthName}` === targetMonthName; // Match against 'Year MonthName'
+        });
 
         const count = {
             books: 0,
             articles: 0,
             journals: 0,
             essays: 0,
-        }
+        };
 
         works.forEach(work => {
             if (work.type === 'book') {
-                count.books++
+                count.books++;
             } else if (work.type === 'article') {
-                count.articles++
+                count.articles++;
             } else if (work.type === 'journal') {
-                count.journals++
+                count.journals++;
             } else if (work.type === 'essay') {
-                count.essays++
+                count.essays++;
             }
-        })
-        return count
-    }
+        });
+        return count;
+    };
 
     return (
         <motion.div
@@ -192,10 +248,10 @@ export function ReadingListData({ works }: { works: ParsedResult[] }) {
                         )}
                         variants={FADE_UP_ANIMATION_VARIANTS}
                     >
-                        Reading List
+                        Bookshelf
                     </motion.h3>
                     <motion.p
-                        className='mb-8 text-xl text-gray-600 dark:text-gray-300 font-medium'
+                        className='mb-8 text-gray-600 dark:text-gray-300'
                         variants={FADE_UP_ANIMATION_VARIANTS}
                     >
                         The books, articles, journals, and essays that I've read recently, organized by month. Ocassionally I'll include a comment or two about the work - those are usually my favorite reads.
@@ -210,11 +266,11 @@ export function ReadingListData({ works }: { works: ParsedResult[] }) {
                                 key={i}
                             >
                                 <motion.div
-                                    className='flex flex row items-center gap-2 font-medium'
+                                    className='flex flex-row items-center gap-2 font-medium'
                                     variants={FADE_UP_ANIMATION_VARIANTS}
                                 >
                                     <hr className='w-1/2 border-gray-300 dark:border-gray-400' />
-                                    <p className='text-sm text-gray-800 dark:text-gray-200'>{month}</p>
+                                    <p className='text-sm text-gray-800 dark:text-gray-200'>{month.split(" ")[1]}</p>
                                     <hr className='w-1/2 border-gray-300 dark:border-gray-400' />
                                 </motion.div>
                                 {/* <div className='flex flex-row p-0 mb-2'>

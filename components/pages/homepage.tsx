@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 import { FADE_UP_ANIMATION_VARIANTS } from "@/config/animations";
 import PostList from "@/components/PostList"
 import { ParsedResult } from "@/types/reading-list";
-import { ReadingListFeatured } from "../ReadingListData";
+import { ReadingListFeatured, ReadingListInProgress } from "../ReadingListData";
 import { cn } from "@/lib/utils";
 
 export default function HomePage({ works } : { works: ParsedResult[] }) {
@@ -70,7 +70,7 @@ export default function HomePage({ works } : { works: ParsedResult[] }) {
             {/* <Separator/> */}
             <PostList />
             {/* <ReadingListSimple /> */}
-            <ReadingListFeatured works={works} />
+            <ReadingListInProgress works={works} />
         </motion.div>
     )
 }

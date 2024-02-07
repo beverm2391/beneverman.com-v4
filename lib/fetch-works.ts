@@ -20,17 +20,6 @@ export const fetchDB = async (database_id: string) => {
     }
 }
 
-export const queryDB = async (database_id: string) => {
-    try {
-        return await notion.databases.query({ 
-            database_id: database_id,
-            sorts: [{ property: 'Created time', direction: 'descending'}], // newest first
-        })
-    } catch (error) {
-        throw new Error(`Error querying database with ID: ${database_id}. Message: ${error}`)
-    }
-}
-
 export async function queryDBPagination(database_id: string): Promise<any[]> {
     let allResults: DBItem[] = [];
     let hasMore = true;
@@ -41,7 +30,7 @@ export async function queryDBPagination(database_id: string): Promise<any[]> {
             const response = await notion.databases.query({
                 database_id: database_id,
                 start_cursor: startCursor,
-                sorts: [{ property: 'Created time', direction: 'descending' }],
+                sorts: [{ property: 'Date', direction: 'descending' }],
             })
 
             if (response.results.length > 0) {
@@ -62,9 +51,10 @@ export function parseResponse(results: DBItem[]): ParsedResult[] {
     return results.map((page: DBItem) => ({
         name: page.properties['Name']?.title?.[0]?.plain_text || '',
         author: page.properties['Author']?.rich_text?.[0]?.plain_text,
-        createdTime: page.properties['Created time'].created_time || '',
         type: page.properties['Type']?.select?.name,
         url: page.properties['URL']?.url,
         comments: page.properties['Comments']?.rich_text?.[0]?.plain_text,
+        status: page.properties['Status']?.status?.name,
+        date: page.properties['Date']?.date?.start,
     }));
 }

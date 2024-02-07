@@ -11,7 +11,7 @@ export const portfolioConfig: MarketingConfig = {
       href: "/blog",
     },
     {
-      title: "Reading List",
+      title: "Bookshelf",
       href: "/reading-list",
     }
     // {

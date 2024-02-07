@@ -1,35 +1,3 @@
-export type Book = {
-    title: string,
-    desc?: string,
-    author: string,
-    url: string,
-    date: Date,
-    finished?: boolean
-}
-
-export type Article = {
-    title: string,
-    desc?: string,
-    author: string,
-    url: string,
-    date: Date,
-}
-
-export type Work = {
-    title: string,
-    desc?: string,
-    author: string
-    url: string,
-    type: "book" | "essay" | "journal" | "article",
-}
-
-export type List = {
-    lastUpdated: string,
-    data: Array<Work>
-}
-
-//! NEW TYPES 1-12-2024
-//  for notion db responee
 type SelectProperty = {
     id: string;
     name: string;
@@ -59,9 +27,13 @@ type Property = {
     type: string;
     select?: SelectProperty;
     rich_text?: RichText[];
-    created_time?: string;
+    date?: {
+        start: string;
+        end?: string | null;
+    };
     url?: string;
     title?: RichText[];
+    status?: SelectProperty;
 };
 
 type User = {
@@ -90,12 +62,12 @@ export type DBItem = {
     public_url: string | null;
 };
 
-// for parsed result
 export type ParsedResult = {
-    name: string,
-    author: string | undefined,
-    createdTime: string,
-    type: string | undefined,
-    url: string | undefined,
-    comments: string | undefined,
-}
+    name: string;
+    author: string | undefined;
+    type: string | undefined;
+    url: string | undefined;
+    comments: string | undefined;
+    status: string | undefined;
+    date: string | undefined;
+};
