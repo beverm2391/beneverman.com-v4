@@ -22,7 +22,8 @@ const GeneralCardSimple = ({ work }: { work: ParsedResult }) => {
             )}>
                 {/* <Icons.FaFileAlt className='flex items-center justify-center text-gray-800 dark:text-gray-200 h-4 w-4' /> */}
                 <div>
-                    {(work.comments && work.status == 'Done') && <FaStar className='h-3 w-3 mr-2 inline rotate-[-5deg] translate-y-[-1px]' />}
+                    {/* {(work.comments && work.status == 'Done') && <FaStar className='h-3 w-3 mr-2 inline rotate-[-5deg] translate-y-[-1px]' />} */}
+                    {work.comments && <FaStar className='h-3 w-3 mr-2 inline rotate-[-5deg] translate-y-[-1px]' />}
                     <p className='inline font-[400]'>
                         {work.name}
                     </p>
