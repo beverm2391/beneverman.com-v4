@@ -41,8 +41,7 @@ const GeneralCardSimple = ({ work }: { work: ParsedResult }) => {
                 <div className={cn('mb-4 bg-transparent justify-center items-center mt-4 text-sm border border-gray-300 dark:border-gray-400 rounded-md p-2 shadow-sm',
                     'text-black dark:text-white',
                 )}>
-                    {/* <FaStar className='h-3 w-3 inline rotate-[-5deg] text-gray-700 dark:text-gray-300' /> */}
-                    <p className='inline ml-[4px]'>{work.comments}</p>
+                    <p className='inline'>{work.comments}</p>
                 </div>
             }
         </a>
